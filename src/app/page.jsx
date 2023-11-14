@@ -1,10 +1,10 @@
 "use client"
-
+import { useState } from "react";
 
 import style from "../styles/homepage.module.css"
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 import { FaBars, FaUser, FaShoppingCart, FaStar, FaArrowRight, FaArrowLeft, FaRegWindowClose } from 'react-icons/fa';
 import { FaFacebookF, FaGooglePlusG, FaSkype, FaTwitter } from "react-icons/fa";
 import { FiCheck } from 'react-icons/fi';
@@ -29,7 +29,7 @@ function Homepage() {
     const [display,setdisplay] = useState("none");
 
     const SidemenuAction = () =>{
-        console.log("sudh",display)
+     
         display=='none' ? setdisplay('block') : setdisplay('none')
         
     }
@@ -40,59 +40,52 @@ function Homepage() {
 
             <section className={style.header}>
                 <nav className={style.nav}>
-                    <div>
-                        <Link href="#"><Image src="/homepage/logo.png" height={50} width={200} className={style.logo} alt="logo" /></Link>
-                    </div>
-                    <div className={style.nav_icon}>
+                    <div className="container">
+                        <div className="row align-items-center">
+                       <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-4"> <Link href="#"><Image src="/homepage/logo.png" height={50} width={200} className={style.logo} alt="logo" /></Link></div>
+                  
+                    <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9`}>
 
                         <Link href="#"><FaShoppingCart /></Link>
                         <Link href="#"><FaUser /></Link>
                         <Link href="#" onClick={SidemenuAction}><FaBars onClick={SidemenuAction}/></Link>
-                    </div>
+                    </div>  </div> </div>
                 </nav>
-
+               
                 <div className={style.banner_items}>
+                <div className="container"> 
+                <div className="row align-items-center">
+                <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4"> 
                     <div className={style.banner_text}>
                         <h1>Quality Home Services <span>on Demand.</span></h1>
                         <p>Experienced,Hand-picked Professionals to serve you at your Doorstep.</p>
                         <div className={style.banner_input}>
-                            <div className={style.banner_input1}>
-                                <input type="text" placeholder="Current Locaction" />
-                                <MdLocationPin />
+                            <div className={style.banner_input1}>  <MdLocationPin />
+                                <input type="text" placeholder="Current Locaction" />                              
                             </div>
-                            <div className={style.banner_input2}>
-                                <input type="text" placeholder="Search for Services" />
-                                <AiOutlineSearch />
+                            <div className={style.banner_input2}>  <AiOutlineSearch />
+                                <input type="text" placeholder="Search for Services" />                              
                             </div>
                         </div>
                         <div className={style.banner_text_div}>
-                            <div className={style.banner_text_div1}>
-                                <span>25% DISCOUNT</span>
-                            </div>
-                            <div className={style.banner_text_div2}>
-                                <span>ON YOUR FIRST SERVICES</span>
-                            </div>
+                            <h3><span>25% DISCOUNT</span> ON YOUR FIRST SERVICES </h3>                           
                         </div>
 
-                    </div>
-                    <div className={style.slider1}>
-                        <div>
+                        </div></div>
+                        <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">                                          
                             <Swiper1 />
-                        </div>
-
-
+                            {/* <div className={style.slider1}> </div> */}
+                            </div> </div>
                     </div>
                 </div>
             </section>
             <section className={style.section2}>
-                <div>
-                    <h1>Quality of Home Services.</h1>
-                </div>
-                <div>
+            <div className="container"> 
+                    <h1>Quality of Home Services.</h1>               
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                </div>
+                
                 <div className={style.section2_slider}>
-                    <div>
+                   
                     <Swiper
                         slidesPerView={5}
                         spaceBetween={15}
@@ -104,7 +97,7 @@ function Homepage() {
                         navigation={true}
                         // Navigation={{ nextE1: '.review-swiper-button-next', prevE1: '.review-swiper-button-prev' }}
 
-                        className="mySwiper"
+                        className="mySwiper sliderbox"
                     // style={{
                     //     "--swiper-pagination-color": "yellow",
                     //     "--swiper-pagination-bullet-inactive-color": "lightyellow",
@@ -116,7 +109,7 @@ function Homepage() {
                     >
                         <SwiperSlide className={style.slider2_background}>
                             <Link href="#" target="_blank">
-                                <div >
+                                <div>
                                     <Image src="/homepage/plumber.png" height={60} width={60} alt='img' />
                                     <span>Plumbers</span>
                                 </div>
@@ -124,7 +117,7 @@ function Homepage() {
                         </SwiperSlide>
                         <SwiperSlide className={style.slider2_background}>
                             <Link href="#" target="_blank">
-                                <div >
+                                <div>
                                     <Image src="/homepage/electric.png" height={60} width={60} alt='img' />
                                     <span>Elelctricians</span>
                                 </div>
@@ -178,26 +171,22 @@ function Homepage() {
                                 </div>
                             </Link>
                         </SwiperSlide>
-
-
-
-
-
-
-
                     </Swiper>
                     {/* <div>
                         <div className="swiper-button-prev"><FaArrowLeft /></div>
                         <div className="swiper-button-next"><FaArrowRight /></div>
                     </div> */}
+                 
                     </div>
-                </div>
+                    </div>
             </section>
             <section className={style.section3}>
-                <div>
-                    <Image src="/homepage/couple.png" height={0} width={500} alt="img" />
+            <div className="container-fluid"> 
+                <div className="row align-items-center">
+                <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">
+                    <Image src="/homepage/couple.png" height={766} width={640} alt="img" />
                 </div>
-                <div className={style.section3_div2}>
+                <div className={`${style.section3_div2} col-xxl-6 col-xl-6 col-lg-4`}>
                     <h1>Sit at Home<br /><span>We Will Take Care</span></h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     <div>
@@ -230,11 +219,12 @@ function Homepage() {
                     <div>
                         <Link href="#">Read More</Link>
                     </div>
-                </div>
+                    </div></div></div>
 
             </section>
             <section className={style.section4}>
-
+            <div className="container"> 
+                <div className="row align-items-center">
                 <div className={style.section4_div1}>
                     <div className={style.section4_div1_div1}>
                         <div>
@@ -276,9 +266,11 @@ function Homepage() {
                         <Image src="/homepage/Layer_33.png" height={300} width={200} alt="img" />
                         <Link href="#">BOOK SERVICES</Link>
                     </div>
-                </div>
+                </div> </div> </div>
             </section>
             <section className={style.section5}>
+            <div className="container"> 
+                <div className="row align-items-center">
                 <div className={style.section5_div1}>
                     <Image src="/homepage/layer_38.png" height={700} width={550} alt="img" />
                 </div>
@@ -327,15 +319,17 @@ function Homepage() {
                         </div>
                     </div>
                 </div>
-
+                </div> </div>
             </section>
             <section className={style.section6}>
                 <iframe width="100%" height="740px" src="https://www.youtube.com/embed/D0UnqGm_miA?si=FhxubZNN8DF8AAkT" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;" ></iframe>
 
             </section>
             <section className={style.section7}>
-                <div><h1>Good Reviews By Customers</h1></div>
-                <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></div>
+                 <div className="container"> 
+                <div className="row align-items-center">
+                <div><h1>Good Reviews By Customers</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p></div>
                 <div className={style.section7_commentsection1}>
                     <div className={style.section7_testmonial}>
                         <h4>"#The best usefull website"</h4>
@@ -432,11 +426,11 @@ function Homepage() {
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>    </div>   
+                     </div>
             </section>
-            <Subescribe />
             
-            <section className={style.sidemenu} style={{display:`${display}`,transitionDelay:"500ms"}}>
+            <section className={style.sidemenu} style={{display:`${display}`}}>
                 <div className={style.sidemenu_div}>
                 <div className={style.sidemenu_logo}>
 
@@ -472,6 +466,9 @@ function Homepage() {
 
                 </div>
             </section>
+            <Subescribe />
+            
+            
             <MainFooter />
 
 
