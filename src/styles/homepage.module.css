@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap');
 .nav {
 
     display: flex;
@@ -7,10 +8,13 @@
     align-items: center;
 }
 
+
 .header {
-    background-image: url("../../public/homepage/Home_banner.png");
+    background: #a19d97 url("../../public/homepage/Home_banner.png");
     background-size: cover;
-    background-position: fixed;
+    min-height: 721px;
+    background-position: -116px center;
+    background-repeat: no-repeat;
 }
 
 .logo {
@@ -19,13 +23,15 @@
 
 .nav_icon {
     font-size: 2rem;
-    color: ghostwhite;
+  /*  color: ghostwhite;
     margin: 10px 25px;
     width: 10%;
-
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center;*/text-align: right;
+}
+.nav_icon a {
+    margin: 0 12px;
 }
 .nav_icon>a>svg{
     color:ghostwhite;
@@ -39,35 +45,35 @@
 .banner_items {
     display: flex;
     justify-content: space-evenly;
+    padding-top: 55px;
 }
 
 .banner_text {
-
-
     display: grid;
     align-content: center;
 }
 
-.slider1 {
+/* .slider1 {
 
     width: 40%;
     text-align: center;
     padding: 50px 0px;
-}
+} */
 
 .banner_text>h1,
 .banner_text>h1>span {
-    font-weight: 900;
-    font-size: 35px;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    font-size: 35px; 
+    margin-bottom: 22px;
 }
 
 .banner_text>h1>span {
-    color: yellow;
+    color: yellow;font-family: 'Rubik', sans-serif;
 }
 
 
 .banner_text>p {
-
     font-size: 17px;
     margin-top: -22px;
     font-weight: 600;
@@ -78,7 +84,7 @@
     justify-content: space-between;
 }
 .banner_input1{
-    
+    position: relative;    
     width:34%;
 }
 
@@ -93,7 +99,7 @@
 .banner_input1>svg{
     color:#6c6c68;
     position:absolute;
-    left:85px;
+    left:0;
     font-size: 30px;
         /* margin-top: 2px; */
         padding-top: 3px;
@@ -101,12 +107,12 @@
 .banner_input2>svg{
     color:#6c6c68;
     position:absolute;
-    left: 289px;
+    left: 0;
     font-size: 30px;
     padding-top: 3px;
 }
 .banner_input2{
-    
+    position: relative;    
     width:64%;
 }
 
@@ -121,32 +127,25 @@
 
 
 .banner_text_div {
-
     display: flex;
     justify-content: flex-start;
     margin: 5px 5px;
     font-weight: 600;
 
 }
-
-.banner_text_div1 {
-
+.banner_text_div h3{
+    font-size: medium;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+}
+.banner_text_div h3 span{
     padding: 0px 5px;
     background-color: yellow;
     border-radius: 10px;
-
-}
-
-.banner_text_div2 {
-
-    padding: 0px 5px;
-
-}
-
-.banner_text_div2>span,
-.banner_text_div1>span {
     font-weight: 500;
+
 }
+
 
 .section2 {
 
@@ -161,7 +160,8 @@
     text-align: center;
 }
 .section2_slider{
-    width:75vw;
+    margin: 0 auto;
+    /* overflow: hidden; */
 }
 
 .slider2_background {
@@ -221,11 +221,6 @@
     color: white;
 }
 
-.section3>div {
-    width: 50%;
-
-
-}
 
 .section3>div>img {
     width: 100%;
@@ -355,13 +350,13 @@
 }
 
 .section4_div1_div1>div>div>div>a {
-
+    color: #000 !important;
     background-color: white;
     padding: 10px 20px;
     border-radius: 30px;
     font-weight: 600;
     border: none;
-    font-size: 20px;
+    font-size: 20px;text-decoration: none;
 }
 .section4_div1_div1>div>div>div>a:hover{
     color:black;
@@ -413,12 +408,14 @@
 }
 
 .section4_div1_div2>div>div>div>div>a {
+    color: #000 !important;
     background-color: white;
     padding: 10px 20px;
     border-radius: 30px;
     font-weight: 600;
     border: none;
     font-size: 20px;
+    text-decoration: none;
 }
 .section4_div1_div2>div>div>div>div>a:hover{
     color:black;
@@ -464,13 +461,14 @@
 }
 
 .section4_div2>div>a {
+    color: #000 !important;
     background-color: white;
     padding: 10px 20px;
     border-radius: 30px;
     font-weight: 600;
     border: none;
     font-size: 20px;
-    color:black;
+    color:black;text-decoration: none;
 }
 .section4_div2>div>a:hover{
         background-color: yellow;
@@ -682,6 +680,7 @@
 /* .sidemenu{
     display:none;
 } */
+
 .sidemenu>div{
     
     position: fixed;
