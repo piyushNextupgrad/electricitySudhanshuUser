@@ -36,22 +36,22 @@ export default function Slider(){
       >
         <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img1.png" height={400} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img1.png" height={531} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img2.png" height={400} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img2.png" height={531} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img1.png" height={400} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img1.png" height={531} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img2.png" height={400} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img2.png" height={531} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           
