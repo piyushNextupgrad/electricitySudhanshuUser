@@ -28522,7 +28522,7 @@ a.app-sidebar__toggle svg {
   /* right: 142px !important; */
   border-radius: 100%;
   /* top: 170px !important; */
-  padding: 20px;
+  padding: 20px 22px;
   background-color: #e0e0e0;
 }
 
@@ -28539,7 +28539,7 @@ a.app-sidebar__toggle svg {
    font-weight: 600;
     /* position: fixed !important; */
     /* left: 143px !important; */
-    padding: 20px;
+    padding: 20px 22px;
     /* top: 172px !important; */
   }
   
