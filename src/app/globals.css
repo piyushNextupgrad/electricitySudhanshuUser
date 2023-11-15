@@ -1,21 +1,62 @@
-
 /* .swiper {
     overflow:initial !important;
     padding: 0px 60px !IMPORTANT;
 } */
 .homepage_section2_slider__ZjCNH .swiper {
-    padding: 0 60px !IMPORTANT;
+  padding: 0 60px !important;
 }
-img{
-    max-width: fit-content;
+img {
+  max-width: fit-content;
 }
 .subscribe-box h1 {
-    color: #fff;
-    font-weight: 700;
-    font-size: 56px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 56px;
 }
 .subscribe-box p {
-    color: #fff;
-    font-size: 22px;
-    padding: 0 13%;
+  color: #fff;
+  font-size: 22px;
+  padding: 0 13%;
+}
+/* =============================================sudh */
+.homepage_slider1__k3wO0 > div > div > div > .swiper-wrapper {
+  min-height: 430px !important;
+}
+
+.homepage_slider1__k3wO0 > div > div > div > .swiper-pagination {
+  top: 95% !important;
+}
+
+.swiper-button-next {
+  background-image: url(../../public/homepage/right_arrow.png);
+  background-repeat: no-repeat;
+  /* position:fixed !important; */
+  background-size: 50% auto;
+  background-position: center;
+  /* right: 142px !important; */
+  border-radius: 100%;
+  /* top: 170px !important; */
+  padding: 20px 22px;
+  background-color: #e0e0e0;
+}
+
+.swiper-button-next::after {
+  display: none;
+}
+.swiper-button-prev {
+  background-image: url(../../public/homepage/left_arrow.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e0e0e0;
+  border-radius: 100%;
+  background-size: 50% auto;
+  font-weight: 600;
+  /* position: fixed !important; */
+  /* left: 143px !important; */
+  padding: 20px 22px;
+  /* top: 172px !important; */
+}
+
+.swiper-button-prev::after {
+  display: none;
 }
