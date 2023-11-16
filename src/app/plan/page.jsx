@@ -13,21 +13,51 @@ import { FiCheck } from 'react-icons/fi';
 const Plan = () => {
     return (<>
         <section className={style.section1}>           
-                <nav>
-                    <div className={style.section1_NavLogo}>
-                        <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
-                    </div>
-                    <div className={style.section1_NavSearch}>
+               <nav className={style.nav}>
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-4">
+                {" "}
+                <Link href="#">
+                  <Image
+                    src="/homepage/logo.png"
+                    height={50}
+                    width={200}
+                    className={style.logo}
+                    alt="logo"
+                  />
+                </Link>
+              </div>
+              <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9`}>
+
+                     <div className="col-xxl-6 col-xl-6 col-lg-6">
+                          <div className={style.section1_NavSearch}>
                         <div className={style.section1_NavSearchbox}>
                             <input type="search" placeholder="Search for services" />
                             <FaSearch />
                         </div>
-                        <div className={style.section1_NavIcons}>
-                            <FaUser />
-                            <FaBars />
+                               <div className={style.section1_NavSearch}>
+                        <div className={style.section1_NavSearchbox}>
+                            <input type="search" placeholder="Search for services" />
+                            <FaSearch />
                         </div>
-                    </div>
-                </nav>
+                   </div>
+                     <div className="col-xxl-6 col-xl-6 col-lg-6">
+                          <Link href="#">
+                  <FaShoppingCart />
+                </Link>
+                <Link href="#">
+                  <FaUser />
+                </Link>
+                <Link href="#" onClick={SidemenuAction}>
+                  <FaBars onClick={SidemenuAction} />
+                </Link>
+                   </div>
+                 
+              </div>{" "}
+            </div>{" "}
+          </div>
+        </nav>
                 <div>
                     <h1>Plan</h1>
                 </div>           
