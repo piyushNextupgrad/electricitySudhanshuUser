@@ -1,26 +1,33 @@
 .footer{
+    display: flex;
+    justify-content:center;
+}
+
+.footer>div{
     border:1px solid #282932;
     background-color: #282932;
     color:white;
     padding:0 5% ;
+    max-width: 1400px;
+    width:100%;
 }
 
-.footer>div>div>ul>li{
+.footer>div>div>div>ul>li{
     
     padding:5px;
     
 }
-.footer>div>div>ul>li>a{
+.footer>div>div>div>ul>li>a{
     cursor:pointer;
     color:white;
 }
-.footer>div>div>ul>li>a:hover{
+.footer>div>div>div>ul>li>a:hover{
     color:#fdef00;
     transition-duration: 1000ms;
 
 }
 
-.footer>hr{
+.footer>div>hr{
     margin:1% 0;
 }
 .footer_div1{
