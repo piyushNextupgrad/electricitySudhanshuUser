@@ -1,11 +1,12 @@
 .footer{
     display: flex;
     justify-content:center;
+    background-color: #282932;
 }
 
 .footer>div{
     border:1px solid #282932;
-    background-color: #282932;
+  
     color:white;
     padding:0 5% ;
     max-width: 1400px;
@@ -15,11 +16,14 @@
 .footer>div>div>div>ul>li{
     
     padding:5px;
+    list-style-type: none;
+    
     
 }
 .footer>div>div>div>ul>li>a{
     cursor:pointer;
     color:white;
+    text-decoration:  none;
 }
 .footer>div>div>div>ul>li>a:hover{
     color:#fdef00;
@@ -64,6 +68,7 @@
 .footer_div2>div>a{
     color:white;
     margin:10px;
+    text-decoration:  none;
 }
 .footer_div2>div>a:hover{
     color:#fdef00;
