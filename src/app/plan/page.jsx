@@ -12,8 +12,7 @@ import { FiCheck } from 'react-icons/fi';
 
 const Plan = () => {
     return (<>
-        <section className={style.section1}>
-            <div>
+        <section className={style.section1}>           
                 <nav>
                     <div className={style.section1_NavLogo}>
                         <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
@@ -32,8 +31,7 @@ const Plan = () => {
                 </nav>
                 <div>
                     <h1>Plan</h1>
-                </div>
-            </div>
+                </div>           
         </section>
         <section className={style.section2}>
             <div>
