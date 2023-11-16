@@ -1,6 +1,6 @@
 "use client"
 
-import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype, FaTwitter, FaChevronRight } from "react-icons/fa"
+import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype,FaShoppingCart, FaTwitter, FaChevronRight } from "react-icons/fa"
 import { AiOutlineSearch, AiOutlineDribbble } from "react-icons/ai"
 import { MdLocationPin } from "react-icons/md";
 import Image from "next/image";
@@ -29,7 +29,7 @@ const Plan = () => {
               <FaSearch />
             </div>
             <div className={style.section1_NavIcons}>
-
+              <FaShoppingCart/>
               <FaUser />
               <FaBars />
             </div>
