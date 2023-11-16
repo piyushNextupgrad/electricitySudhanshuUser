@@ -56,7 +56,7 @@ const Plan = () => {
                  
               </div>{" "}
             </div>{" "}
-          </div>
+          </div> </div> </div>
         </nav>
                 <div>
                     <h1>Plan</h1>
