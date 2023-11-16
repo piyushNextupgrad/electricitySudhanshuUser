@@ -23,7 +23,6 @@ const Plan = () => {
                             <FaSearch />
                         </div>
                         <div className={style.section1_NavIcons}>
-
                             <FaUser />
                             <FaBars />
                         </div>
