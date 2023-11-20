@@ -7,7 +7,6 @@ import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG,
 
 const Navbar = () => {
     return ( <nav className={style.nav}>
-          <div className="container">
             <div className="row align-items-center">
               <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-4">
                 {" "}
@@ -21,19 +20,22 @@ const Navbar = () => {
                   />
                 </Link>
               </div>
-              <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9`}>
-				   <div className={style.banner_input}>
-                    <div className={style.banner_input1}>
+              <div className="col-xxl-9 col-xl-9 col-lg-9">
+              <div className="row align-items-center">
+				   <div className="col-xxl-9 col-xl-9 col-lg-9">
+           <div className="row align-items-center">
+           <div className={`col-xxl-6 col-xl-6 col-lg-6 ${style.innersearch}` }>
                       {" "}
                       <MdLocationPin />
                       <input type="text" placeholder="Current Locaction" />
                     </div>
-                    <div className={style.banner_input2}>
+                    <div className={`col-xxl-6 col-xl-6 col-lg-6 ${style.innersearch}` }>
                       {" "}
                       <AiOutlineSearch />
                       <input type="text" placeholder="Search for Services" />
                     </div>
-                  </div>
+                  </div>  </div>
+                  <div className={`col-xxl-3 col-xl-3 col-lg-3 ${style.innerhomeicon}` }>
                 <Link href="#">
                   <FaShoppingCart />
                 </Link>
@@ -43,9 +45,10 @@ const Navbar = () => {
                 <Link href="#">
                   <FaBars/>
                 </Link>
+                </div>{" "}
               </div>{" "}
+              </div>
             </div>{" "}
-          </div>
         </nav>);
 }
 
