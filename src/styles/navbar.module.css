@@ -51,3 +51,30 @@
     margin: 0 15px;
     cursor:pointer;
 }
+
+.innersearch input {
+    border: none;
+    padding: 7px 0 7px 35px;
+    width: 100%;
+}
+.innersearch {
+    position: relative;
+}
+.innersearch svg {
+    color: #6c6c68;
+    position: absolute;
+    left: 15px;
+    font-size: 30px;
+    padding-top: 3px;
+    top: 2px;
+}
+.innerhomeicon {
+    font-size: 2rem;
+    text-align: right;
+}
+.innerhomeicon a {
+    margin: 0 12px;
+}
+.innerhomeicon a svg {
+    color: #f8f8ff;
+}
