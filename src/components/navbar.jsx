@@ -39,8 +39,8 @@ const Navbar = () => {
                 <Link href="#">
                   <FaUser />
                 </Link>
-                <Link href="#" onClick={SidemenuAction}>
-                  <FaBars onClick={SidemenuAction} />
+                <Link href="#">
+                  <FaBars/>
                 </Link>
               </div>{" "}
             </div>{" "}
