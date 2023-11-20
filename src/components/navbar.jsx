@@ -10,7 +10,7 @@ const Navbar = () => {
             <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
         </div>
         <div className={'{style.section1_NavSearch} col-xxl-9 col-xl-9 col-lg-9'} >
-            <div className={style.row}>
+            <div className="row">
             <div className={'{style.section1_NavSearchbox} col-xxl-5 col-xl-5 col-lg-5'} >
                 <input type="search" placeholder="Current Location" />
                 <MdLocationPin />
