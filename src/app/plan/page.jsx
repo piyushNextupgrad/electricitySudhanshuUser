@@ -19,7 +19,7 @@ const Plan = () => {
      <div className="container">
        <div className="row align-items-center">       
         <Navbar />               
-          <h1 className="innerheading">Planxx</h1>        
+          <h1 className="innerheading">Plan</h1>        
         </div>
           </div>
     </section>
