@@ -18,13 +18,10 @@ const Plan = () => {
       
      <div className="container">
        <div className="row align-items-center">       
-        <Navbar /> 
-       </div>
-          </div>
-        <div>
-          <h1>Planxx</h1>
+        <Navbar />               
+          <h1 className="innerheading">Plan</h1>        
         </div>
-    
+          </div>
     </section>
     <section className={style.section2}>
       <div>
