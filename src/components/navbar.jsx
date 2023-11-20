@@ -12,7 +12,7 @@ const Navbar = () => {
                 {" "}
                 <Link href="#">
                   <Image
-                    src="/homepage/logo.png"
+                    src="/services/logo.png"
                     height={50}
                     width={200}
                     className={style.logo}
