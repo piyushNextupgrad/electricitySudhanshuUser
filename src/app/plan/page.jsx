@@ -17,30 +17,9 @@ const Plan = () => {
     <section className={style.section1}>
       
      <div className="container">
-       <div className="row align-items-center">
-        <nav>
-          <div className={style.section1_NavLogo}>
-            <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
-          </div>
-          <div className={style.section1_NavSearch}>
-            <div className={style.section1_NavSearchbox}>
-              <input type="search" placeholder="Current Location" />
-              <MdLocationPin />
-            </div>
-            <div className={style.section1_NavSearchbox}>
-              <input type="search" placeholder="Search for services" />
-              <FaSearch />
-            </div>
-            <div className={style.section1_NavIcons}>
-              <FaShoppingCart/>
-              <FaUser />
-              <FaBars />
-            </div>
-          </div>
-        
-        <Navbar />
-
-        </nav> </div>
+       <div className="row align-items-center">       
+        <Navbar /> 
+       </div>
           </div>
         <div>
           <h1>Planxx</h1>
