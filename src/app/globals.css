@@ -60,3 +60,9 @@ img {
 .swiper-button-prev::after {
   display: none;
 }
+.innerheading {
+  text-align: center;
+  margin: 0 0;
+  padding: 5% 0 5% 0;
+  color: #fff;
+}
