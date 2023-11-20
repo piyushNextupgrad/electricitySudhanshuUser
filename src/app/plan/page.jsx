@@ -38,7 +38,7 @@ const Plan = () => {
         </nav> </div>
           </div>
         <div>
-          <h1>Plan</h1>
+          <h1>Planxx</h1>
         </div>
       </div>
     </section>
