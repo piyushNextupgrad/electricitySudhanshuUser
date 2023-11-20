@@ -15,9 +15,15 @@ import { FiCheck } from 'react-icons/fi';
 const Plan = () => {
   return (<>
     <section className={style.section1}>
+<<<<<<< HEAD
     
       <div>
         {/* <nav>
+=======
+     <div className="container">
+       <div className="row align-items-center">
+        <nav>
+>>>>>>> 534c9cbdb6d09d079e5fb83c9b31fa6767bb2fbd
           <div className={style.section1_NavLogo}>
             <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
           </div>
@@ -36,12 +42,17 @@ const Plan = () => {
               <FaBars />
             </div>
           </div>
+<<<<<<< HEAD
         </nav> */}
         <Navbar />
+=======
+        </nav> </div>
+          </div>
+>>>>>>> 534c9cbdb6d09d079e5fb83c9b31fa6767bb2fbd
         <div>
-          <h1>Plan</h1>
+          <h1>Planxx</h1>
         </div>
-      </div>
+    
     </section>
     <section className={style.section2}>
       <div>
