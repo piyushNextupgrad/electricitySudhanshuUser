@@ -1,11 +1,12 @@
 "use client"
 
-import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype,FaShoppingCart, FaTwitter, FaChevronRight } from "react-icons/fa"
+import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype, FaShoppingCart, FaTwitter, FaChevronRight } from "react-icons/fa"
 import { AiOutlineSearch, AiOutlineDribbble } from "react-icons/ai"
 import { MdLocationPin } from "react-icons/md";
 import Image from "next/image";
 import Subescribe from "@/components/subscribe";
 import CommonFooter from "@/components/commomfooter";
+import Navbar from "@/components/navbar";
 import Link from "next/link";
 import { useState } from "react";
 import style from "@/styles/plan.module.css"
@@ -14,8 +15,9 @@ import { FiCheck } from 'react-icons/fi';
 const Plan = () => {
   return (<>
     <section className={style.section1}>
+    
       <div>
-        <nav>
+        {/* <nav>
           <div className={style.section1_NavLogo}>
             <Link href="/"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
           </div>
@@ -34,7 +36,8 @@ const Plan = () => {
               <FaBars />
             </div>
           </div>
-        </nav>
+        </nav> */}
+        <Navbar />
         <div>
           <h1>Plan</h1>
         </div>
