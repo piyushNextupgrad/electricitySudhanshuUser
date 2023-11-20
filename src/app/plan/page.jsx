@@ -40,7 +40,7 @@ const Plan = () => {
         <div>
           <h1>Planxx</h1>
         </div>
-      </div>
+    
     </section>
     <section className={style.section2}>
       <div>
