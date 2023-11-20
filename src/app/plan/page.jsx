@@ -19,13 +19,15 @@ const Plan = () => {
      <div className="container">
        <div className="row align-items-center">       
         <Navbar />               
-          <h1 className="innerheading">Plan</h1>        
+          <h1 className="innerheading">Planxx</h1>        
         </div>
           </div>
     </section>
     <section className={style.section2}>
-      <div>
-        <div className={style.basicplan}>
+    <div className="container plancolumbox">
+    <div className="row align-items-center">
+        <div className="col-xxl-4 col-xl-4 col-lg-4">
+        <div className="planbox">
           <h1>Basic Plan</h1>
           <p className={style.basic_para1}>$99<span>/month</span></p>
           <span className={style.basic_para2}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
@@ -37,12 +39,12 @@ const Plan = () => {
             <li><FiCheck />Lorem ipsum is Simply</li>
             <li><FiCheck />Lorem ipsum is Simply</li>
 
-          </ul>
-          <div>
-            <Link href="#">Start Now <FaChevronRight /></Link>
-          </div>
+          </ul>        
+            <Link href="#">Start Now <FaChevronRight /></Link>          
         </div>
-        <div className={style.center}>
+        </div>
+        <div className="col-xxl-4 col-xl-4 col-lg-4">
+        <div className="planbox premiumplan">
           <h1>Standard Plan</h1>
           <p className={style.standard_para1}>$199<span>/month</span></p>
           <span className={style.standard_para2}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
@@ -55,11 +57,11 @@ const Plan = () => {
             <li><FiCheck />Lorem ipsum is Simply</li>
 
           </ul>
-          <div>
             <Link href="#">Start Now <FaChevronRight /></Link>
-          </div>
         </div>
-        <div className={style.basicplan}>
+        </div>
+        <div className="col-xxl-4 col-xl-4 col-lg-4">
+        <div className="planbox">
           <h1>Premium Plan</h1>
           <p className={style.premium_para1}>$149<span>/month</span></p>
           <span className={style.premium_para2}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
@@ -72,10 +74,10 @@ const Plan = () => {
             <li><FiCheck />Lorem ipsum is Simply</li>
 
           </ul>
-          <div>
             <Link href="#">Start Now <FaChevronRight /></Link>
-          </div>
         </div>
+        </div>
+      </div>
       </div>
 
     </section>
