@@ -7,18 +7,8 @@
    
 }
 
-/* .section1>div{
-   
-    
-    
-    max-width: 1400px;
-    width:100%;
-    min-width: 360px;
-} */
-/* .section1>div>nav{
-   
-   
-} */
+
+
 .section1_NavLogo{
     /* border:1px solid black; */
     padding:5px 10px;
@@ -82,14 +72,7 @@
     display:flex;
     justify-content: center;
 }
-/* .section2>div{
-   
-    display:flex;
-    justify-content: space-evenly;
-    text-align: center;
-    padding: 100px 100px;
-    max-width: 1400px;
-} */
+
 .section2>div>div{
    
     padding:10px 15px;
