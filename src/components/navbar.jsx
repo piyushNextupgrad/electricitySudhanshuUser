@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import style from "@/styles/navbar.module.css"
 import { MdLocationPin } from "react-icons/md";
+import { AiOutlineSearch, AiOutlineDribbble } from "react-icons/ai";
 import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype, FaShoppingCart, FaTwitter, FaChevronRight } from "react-icons/fa"
 
 const Navbar = () => {
