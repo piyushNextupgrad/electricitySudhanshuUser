@@ -1,6 +1,7 @@
 import style from "@/styles/services.module.css"
 import { FaSearch, FaUser, FaBars } from "react-icons/fa"
 import Image from "next/image";
+import Navbar from "@/components/navbar";
 import Subescribe from "@/components/subscribe";
 import CommonFooter from "@/components/commomfooter";
 import Link from "next/link";
@@ -8,27 +9,15 @@ import Link from "next/link";
 const Services = () => {
     return (
         <>
-            <section className={style.section1}>
-                <nav>
-                    <div className={style.section1_NavLogo}>
-                        <Link href="#"><Image src="/services/logo.png" height={50} width={200} alt="img" /></Link>
-                    </div>
-                    <div className={style.section1_NavSearch}>
-                        <div className={style.section1_NavSearchbox}>
-                            <input type="search" placeholder="Search for services" />
-                            <FaSearch />
-                        </div>
-                        <div className={style.section1_NavIcons}>
-
-                            <FaUser />
-                            <FaBars />
-                        </div>
-                    </div>
-                </nav>
-                <div>
-                    <h1>Services</h1>
-                </div>
-            </section>
+             <section className={style.section1}>
+      
+      <div className="container">
+        <div className="row align-items-center">       
+         <Navbar />               
+           <h1 className="innerheading">Services</h1>        
+         </div>
+           </div>
+     </section>
             <section className={style.section2}>
                   <div className="container"> 
                 <div className="row align-items-center">
