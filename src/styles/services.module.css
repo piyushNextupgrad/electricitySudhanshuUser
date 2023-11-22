@@ -57,12 +57,7 @@
     margin: 0 15px;
     cursor:pointer;
 }
-.section1>div{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding:4%;
-}
+
 .section1>div>h1{
     color:white;
     font-size: 3rem;
