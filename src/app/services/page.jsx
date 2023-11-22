@@ -59,7 +59,9 @@ const Services = () => {
                 </div>
             </section>
             <section className={style.section3}>
-                <div>
+            <div className="container"> 
+                <div className="row align-items-center">
+                <div className="col-xxl-8 col-xl-8 col-lg-8">
                     <h3>FEATURES</h3>
                     <p>OUR WORK FLOW</p>
                     <div className={style.section3_designs}>
@@ -85,8 +87,10 @@ const Services = () => {
                     </div>
 
                 </div>
-                <div>
+                <div className="col-xxl-4 col-xl-4 col-lg-4">
                     <Image src="/services/Layer_63.png" height={550} width={500} alt="img" />
+                </div>
+                </div>
                 </div>
             </section>
             <section>
