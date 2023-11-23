@@ -53,11 +53,11 @@
     /* border:1px solid black; */
     margin: 0 15px;
     cursor:pointer;
-<<<<<<< HEAD
+
    
 }
-=======
-}
+
+
 
 .innersearch input {
     border: none;
@@ -85,4 +85,4 @@
 .innerhomeicon a svg {
     color: #f8f8ff;
 }
->>>>>>> 5e1128b1a8675eaa32638c848cb598c35faf52f7
+

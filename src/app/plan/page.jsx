@@ -15,7 +15,7 @@ import { FiCheck } from 'react-icons/fi';
 const Plan = () => {
   return (<>
     <section className={style.section1}>
-<<<<<<< HEAD
+
     
       <div>
         {/* <nav>
@@ -43,7 +43,7 @@ const Plan = () => {
           <h1>Plan</h1>
         </div>
       </div>
-=======
+
       
      <div className="container">
        <div className="row align-items-center">       
@@ -51,7 +51,7 @@ const Plan = () => {
           <h1 className="innerheading">Plan</h1>        
         </div>
           </div>
->>>>>>> 5e1128b1a8675eaa32638c848cb598c35faf52f7
+
     </section>
     <section className={style.section2}>
     <div className="container plancolumbox">
