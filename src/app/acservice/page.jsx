@@ -10,7 +10,7 @@ import Navbar from "@/components/navbar";
 import Link from "next/link";
 const ACservices = () => {
     return (<>
-        <section className={`${style.section1} container-fluid`}>
+        <section className={`${style.section1} container`}>
             <div>
                 <Navbar />
                 <h1>AC Services & Repair</h1>
