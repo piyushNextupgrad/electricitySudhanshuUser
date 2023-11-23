@@ -7,18 +7,8 @@
    
 }
 
-.section1>div{
-   
-    
-    
-    max-width: 1400px;
-    width:100%;
-    min-width: 360px;
-}
-/* .section1>div>nav{
-   
-   
-} */
+
+
 .section1_NavLogo{
     /* border:1px solid black; */
     padding:5px 10px;
@@ -66,35 +56,12 @@
     margin: 0 15px;
     cursor:pointer;
 }
-.section1>div>div{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding:4%;
-}
-.section1>div>div>h1{
-    color:white;
-    font-size: 3rem;
-    margin-top: 30px;
-    letter-spacing: -1px;
-}
+
 .section2{
     display:flex;
     justify-content: center;
 }
-.section2>div{
-   
-    display:flex;
-    justify-content: space-evenly;
-    text-align: center;
-    padding: 100px 100px;
-    max-width: 1400px;
-}
-.section2>div>div{
-   
-    padding:10px 15px;
-    width:30%;
-}
+
 .basicplan{
     background-color: white;
   
