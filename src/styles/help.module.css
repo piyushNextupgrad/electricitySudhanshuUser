@@ -1,72 +1,83 @@
-.section1{
-    border:1px solid black;
+.section1 {
+    border: 1px solid black;
     background-image: url("/checkout/Rectangle_1.png");
     background-size: cover;
-    
+
 }
-.section1>div{
+
+.section1>div {
     max-width: 1400px;
-    
+
 }
-.section1>div>h1{
-    color:white;
+
+.section1>div>h1 {
+    color: white;
     text-align: center;
-    padding:78px;
+    padding: 78px;
 
 }
+
 .section2{
-   
-    padding:100px 0;
-    border:1px solid black;
-}
-.section2>div{
-    border:1px solid black;
+
+    /* padding: 100px 0; */
+    border: 1px solid black;
+    padding-top:100px;
+    padding-bottom:100px;
 }
 
-.helpbttn{
-   
+.section2>div {
+    border: 1px solid black;
+}
+
+.helpbttn {
+
     padding: 20px 100px;
-    border:1px solid black;
+    border: 1px solid black;
 
 }
 
-.helpbttn>div{
- 
-    margin:10px;
+.helpbttn>div {
+
+    margin: 10px;
 }
-.helpbttn>div>button{
-    width:100%;
+
+.helpbttn>div>button {
+    width: 100%;
     /* background-color:#ff9571; */
     /* color:white; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:10px;
+    padding: 10px;
     border-radius: 10px;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
     background-color: white;
     font-weight: 600;
 }
-.helpbttn>div>button>svg{
-    color:white;
+
+.helpbttn>div>button>svg {
+    color: white;
 }
-.helpbttn>div>button:hover{
-    color:white;
-    background-color:#ff9571;
+
+.helpbttn>div>button:hover {
+    color: white;
+    background-color: #ff9571;
 }
-.contactUs{
-    border:1px solid black;
-    
-   
+
+/* .contactUs {
+    border: 1px solid black;
+
+
     background-position: right top;
     width: 60%;
     margin: 20px 20%;
     background-image: url("/help/contact.jpg");
-    background-size:auto;
+    background-size: auto;
     max-height: 400px;
-    
-}
-.overlayback{
+
+} */
+
+/* .overlayback{
     
 }
 .overlayfront{
@@ -80,4 +91,91 @@
 .overtext{
     position:relative;
     top:0px;
+} */
+.content {
+    width: 100%;
+    border:1px solid black;
+}
+
+.photos {
+    width: 95%;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.thumbnails {
+   width:65%;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s;
+}
+
+.thumbnails img {
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+}
+
+.black {
+    text-align: center;
+    background: #ff9571;
+    background-blend-mode: multiply;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: .8;
+}
+
+.title {
+    color: #fff;
+    /* font-size: 2em; */
+    align-self: center;
+    position: absolute;
+    z-index: 10;
+    height:100%;
+    text-align: center;
+    padding:5px;
+}
+.title>svg{
+    font-size: 5rem;
+}
+.title>p{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom:0;
+}
+.title>span{
+    font-size: 15px;
+    font-weight: 500;
+}
+.title>div>a{
+   
+    padding:10px;
+    background-color: white;
+    color:#ff9571;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+}
+.title>div{
+    padding:25px 0;
+   
+}
+
+.black,
+.title {
+    transition: opacity .3s;
+}
+
+
+
+.compont{
+    border:1px solid black;
+    padding-top:25px;
+    
 }
