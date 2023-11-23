@@ -1,0 +1,83 @@
+.section1{
+    border:1px solid black;
+    background-image: url("/checkout/Rectangle_1.png");
+    background-size: cover;
+    
+}
+.section1>div{
+    max-width: 1400px;
+    
+}
+.section1>div>h1{
+    color:white;
+    text-align: center;
+    padding:78px;
+
+}
+.section2{
+   
+    padding:100px 0;
+    border:1px solid black;
+}
+.section2>div{
+    border:1px solid black;
+}
+
+.helpbttn{
+   
+    padding: 20px 100px;
+    border:1px solid black;
+
+}
+
+.helpbttn>div{
+ 
+    margin:10px;
+}
+.helpbttn>div>button{
+    width:100%;
+    /* background-color:#ff9571; */
+    /* color:white; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px;
+    border-radius: 10px;
+    border:1px solid lightgray;
+    background-color: white;
+    font-weight: 600;
+}
+.helpbttn>div>button>svg{
+    color:white;
+}
+.helpbttn>div>button:hover{
+    color:white;
+    background-color:#ff9571;
+}
+.contactUs{
+    border:1px solid black;
+    
+   
+    background-position: right top;
+    width: 60%;
+    margin: 20px 20%;
+    background-image: url("/help/contact.jpg");
+    background-size:auto;
+    max-height: 400px;
+    
+}
+.overlayback{
+    
+}
+.overlayfront{
+    background-color: #ff9571;
+    z-index: 1;
+    width:100%;
+    min-height: 400px;
+    opacity: 0.40;
+    position:relative;
+}
+.overtext{
+    position:relative;
+    top:0px;
+}
