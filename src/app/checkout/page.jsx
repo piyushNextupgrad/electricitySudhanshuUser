@@ -14,12 +14,13 @@ import Subescribe from "@/components/subscribe";
 const Checkout = () => {
     return (
         <>
-            <section className={style.section1}>
-                <div>
-                    <Navbar />
-
-                    <h1>Checkout</h1>
-
+          
+             <section className={style.section1}>
+                <div className="container">
+                    <div className="row align-items-center">
+                        <Navbar />
+                        <h1 className="innerheading">Checkout</h1>
+                    </div>
                 </div>
             </section>
             <section className={`${style.section2} container`}>
