@@ -10,12 +10,16 @@ import Navbar from "@/components/navbar";
 import Link from "next/link";
 const ACservices = () => {
     return (<>
-      <section className={style.section1}>
-                <div>
-                    <Navbar />
-                    <h1>AC Services & Repair</h1>
+    
+ <section className={style.section1}>
+                <div className="container">
+                    <div className="row align-items-center">
+                        <Navbar />
+                        <h1 className="innerheading">AC Services & Repair</h1>
+                    </div>
                 </div>
             </section>
+        
         <section className={`${style.section2} container`} >
             <div >
                 <div>
