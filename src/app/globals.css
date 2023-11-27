@@ -147,3 +147,7 @@ img {
   background-color: #ffa07f;
   color: #ffffff;
 }
+/* for sidemenu background color */
+.offcanvas{
+  background-color: yellow !important;
+}

@@ -37,7 +37,7 @@
     color:ghostwhite;
 }
 .nav_icon>a>svg:hover{
-    rotate:10deg;
+   
     color:#282932;
     transition-duration: 500ms;
 }
@@ -620,23 +620,9 @@
 
 
 
-/* .sidemenu{
-    display:none;
-} */
 
-.sidemenu>div{
-    
-    position: fixed;
-    top:0;
-    right:0;
-    background-color:#fdef00;
-    display: grid;
-    align-items: baseline;
-    width:20%;  
-    z-index: 999;
-    height:100vh;
-    display: block;
-}
+
+
 .sidemenu_logo{
    
     display:flex;
@@ -650,19 +636,51 @@
     min-height: 10%;
 
 }
+.sidemenu_nav>ul>li>a{
+    color:black;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+.sidemenu_nav>ul{
+    margin-right:10px;
+}
 .sidemenu_nav>ul>li>a:hover{
     
     color:white;
-    transition-duration: 500ms;
+    /* border-bottom:2px solid white; */
+    transition-duration: 400ms;
+    
 }
+.sidemenu_nav>ul>li>a{
+    display: inline-block;
+  color: #000;
+  text-decoration: none;
+}
+.sidemenu_nav>ul>li>a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background: #fff;
+    transition: width .3s ease-in;
+  }
+  .sidemenu_nav>ul>li>a:hover::after {
+    width: 100%;
+  }
+
 .sidemenu_logo>div>svg:hover{
     color:white;
-    transition-duration: 500ms;
+    transition-duration: 400ms;
 }
 .sidemenu_icons>a:hover{
         color:white;
-        font-size: 35px;
-        transition-duration: 100ms;
+        font-size: 30px;
+        /* margin-left: 5px; */
+        transition-duration: 300ms;
+}
+
+.sidemenu_icons>a{
+    color:black;
 }
 .sidemenu_logo>div>svg{
     font-size: 30px;
@@ -670,16 +688,29 @@
 }
 .sidemenu_nav>ul>li{
    
-    text-align: center;
+    text-align: left;
     font-size:20px;
     font-weight: 500;
     padding:10px;
+    list-style-type: none;
+    margin:15px 0;
+    /* border:1px solid black; */
+   
+    
+}
+.sidemenu_nav>ul>li>svg{
+    
+    margin-right: 10px;
     
 }
 .sidemenu_icons{
     display:flex;
     justify-content: space-around;
     font-size: 25px;
-    margin-top: 100%;
+   
+    
 
+}
+.sidemenu_nav>hr{
+    margin:0;
 }

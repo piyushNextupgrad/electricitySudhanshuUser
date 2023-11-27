@@ -3,26 +3,38 @@
 import { HiChatAlt2 } from "react-icons/hi";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
+
 import style from "@/styles/help.module.css"
 import Navbar from "@/components/navbar";
 import Link from "next/link";
 import Image from "next/image";
 
+
+
 import CommonFooter from "@/components/commomfooter";
 import Subescribe from "@/components/subscribe";
 
 import Comp1 from "@/components/HelpComponents/comp1"
+import Comp2 from "@/components/HelpComponents/comp2"
+import Comp3 from "@/components/HelpComponents/comp3"
+import Comp4 from "@/components/HelpComponents/comp4"
+import Comp5 from "@/components/HelpComponents/comp5"
+import { useState } from "react";
 
 
 const Help = () => {
+
+    const [comp, setComp] = useState(1);
+
+
     return (
         <>
             <section className={style.section1}>
-                <div>
-                    <Navbar />
-
-                    <h1>Help & Support</h1>
-
+                <div className="container">
+                    <div className="row align-items-center">
+                        <Navbar />
+                        <h1 className="innerheading">Help & Support</h1>
+                    </div>
                 </div>
             </section>
             <section className={`${style.section2} container`}>
@@ -30,25 +42,14 @@ const Help = () => {
                     <div className='col-md-4'>
                         <div className={style.helpbttn}>
 
-                            <div><button>Help with Services<FaArrowRightLong /></button></div>
-                            <div><button>FAQ<FaArrowRightLong /></button></div>
-                            <div><button>Leagal, Terms and Conditions<FaArrowRightLong /></button></div>
-                            <div><button>Ticket generate<FaArrowRightLong /></button></div>
-                            <div><button>Chat<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(3) }}><button>Help with Services<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(1) }}><button>FAQ<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(5) }}><button>Leagal, Terms and Conditions<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(2) }}><button>Ticket generate<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(4) }}><button>Chat<FaArrowRightLong /></button></div>
 
                         </div>
-                        {/* <div className={style.contactUs}>
-                            <div className={style.overlayback}></div>
-                            <div className={style.overlayfront}></div>
-                            <div className={style.overtext}>
-                                <HiChatAlt2 />
-                                <h2>Do You Need Any Help?</h2>
-                                <hr />
-                                <p>+91-1234567890</p>
-                                <span>info@support.com</span>
-                                <Link href="#">CONTACT US</Link>
-                            </div>
-                        </div> */}
+                      
                         <div className={style.content}>
                             <div className={style.photos}>
 
@@ -70,21 +71,16 @@ const Help = () => {
                         </div>
                     </div>
                     <div className={`${style.compont} col-md-8`}>
-                        {/* <ul>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                            <li>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae, cum!<FaRegPlusSquare /></li>
-                        </ul> */}
+
+                        {
+                            comp == 1 ? <Comp1 /> :
+                                comp == 2 ? <Comp2 /> :
+                                    comp == 3 ? <Comp3 /> :
+                                        comp == 4 ? <Comp4 /> :
+                                            comp == 5 ? <Comp5 /> : "No comp"
+                        }
                         
-                        <Comp1/>
-                       
+
                     </div>
                 </div>
             </section >
