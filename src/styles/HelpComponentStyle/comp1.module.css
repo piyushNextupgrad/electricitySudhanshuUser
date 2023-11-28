@@ -1,0 +1,3 @@
+.accordion-button::after{
+    border:1px solid black;
+}

@@ -5,6 +5,11 @@ import style from "../styles/homepage.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.css";
+
+
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+// import Sidemenu from "@/components/sidemenu";
 import {
   FaBars,
   FaUser,
@@ -31,13 +36,12 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 function Homepage() {
-  const [display, setdisplay] = useState("none");
 
-  const SidemenuAction = () => {
-    display == "none" ? setdisplay("block") : setdisplay("none");
-  };
+  const [show, setShow] = useState(false);
 
-  const swiper = useSwiper();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div>
       <section className={style.header}>
@@ -63,8 +67,8 @@ function Homepage() {
                 <Link href="#">
                   <FaUser />
                 </Link>
-                <Link href="#" onClick={SidemenuAction}>
-                  <FaBars onClick={SidemenuAction} />
+                <Link href="#" onClick={handleShow}>
+                  <FaBars />
                 </Link>
               </div>{" "}
             </div>{" "}
@@ -130,14 +134,14 @@ function Homepage() {
               // Navigation={{ nextE1: '.review-swiper-button-next', prevE1: '.review-swiper-button-prev' }}
 
               className="mySwiper sliderbox"
-              // style={{
-              //     "--swiper-pagination-color": "yellow",
-              //     "--swiper-pagination-bullet-inactive-color": "lightyellow",
-              //     "--swiper-pagination-bullet-inactive-opacity": "1",
-              //     "--swiper-pagination-bullet-size": "10px",
-              //     "--swiper-pagination-bullet-horizontal-gap": "6px",
-              //     "--swiper-pagination-bullet-border-radius": "0px"
-              // }}
+            // style={{
+            //     "--swiper-pagination-color": "yellow",
+            //     "--swiper-pagination-bullet-inactive-color": "lightyellow",
+            //     "--swiper-pagination-bullet-inactive-opacity": "1",
+            //     "--swiper-pagination-bullet-size": "10px",
+            //     "--swiper-pagination-bullet-horizontal-gap": "6px",
+            //     "--swiper-pagination-bullet-border-radius": "0px"
+            // }}
             >
               <SwiperSlide className={style.slider2_background}>
                 <Link href="#" target="_blank">
@@ -658,8 +662,10 @@ function Homepage() {
         </div>
       </section>
 
-      <section className={style.sidemenu} style={{ display: `${display}` }}>
-        <div className={style.sidemenu_div}>
+      {/* ================================off canvas================================= */}
+
+      <section className={style.sidemenu} >
+        {/* <div className={style.sidemenu_div}>
           <div className={style.sidemenu_logo}>
             <div>
               <Link href="#">
@@ -671,9 +677,7 @@ function Homepage() {
                 />
               </Link>
             </div>
-            <div onClick={SidemenuAction}>
-              <FaRegWindowClose />
-            </div>
+           
           </div>
           <div className={style.sidemenu_nav}>
             <ul>
@@ -711,8 +715,80 @@ function Homepage() {
               <FaTwitter />
             </Link>
           </div>
-        </div>
+        </div> */}
+
+        <Offcanvas show={show} onHide={handleClose} placement='end'>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>
+              <div className={style.sidemenu_head}>
+                <Link href="#">
+                  <Image
+                    src="/homepage/logo.png"
+                    height={50}
+                    width={200}
+                    alt="img"
+                  />
+                </Link>
+              </div>
+
+
+
+            </Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            <div className={style.sidemenu_nav}>
+              <hr />
+              <ul>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/">HOME</Link>
+                </li>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/services">SERVICES</Link>
+                </li>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/checkout">CHECKOUT</Link>
+                </li>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/plan">PLAN</Link>
+                </li>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/help">HELP</Link>
+                </li>
+                <li>
+                  <MdKeyboardDoubleArrowRight />
+                  <Link href="/acservice">AC SERVICE</Link>
+                </li>
+              </ul>
+            </div>
+            <hr />
+            <div className={style.sidemenu_icons}>
+
+              <Link href="#">
+                <FaFacebookF />
+              </Link>
+              <Link href="#">
+                <AiOutlineDribbble />
+              </Link>
+              <Link href="#">
+                <FaGooglePlusG />
+              </Link>
+              <Link href="#">
+                <FaSkype />
+              </Link>
+              <Link href="#">
+                <FaTwitter />
+              </Link>
+            </div>
+          </Offcanvas.Body>
+        </Offcanvas>
       </section>
+
+
       <Subescribe />
 
       <MainFooter />
