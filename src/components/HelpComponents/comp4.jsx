@@ -6,7 +6,7 @@ const Comp4 = () => {
     return (
         <>
             <div className={style.message}>
-                <div>
+                <div className={style.message1}>
                     <div className={style.ques}>
                         <div>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, commodi?</p>

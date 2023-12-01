@@ -256,6 +256,7 @@ function Homepage() {
         </div>
       </section>
       <section className={style.section3}>
+        <div >
         <div className="container-fluid">
           <div className="row align-items-center">
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">
@@ -343,6 +344,7 @@ function Homepage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
       <section className={style.section4}>
@@ -490,6 +492,7 @@ function Homepage() {
         </div>
       </section>
       <section className={style.section6}>
+        
         <iframe
           width="100%"
           height="740px"
@@ -665,57 +668,7 @@ function Homepage() {
       {/* ================================off canvas================================= */}
 
       <section className={style.sidemenu} >
-        {/* <div className={style.sidemenu_div}>
-          <div className={style.sidemenu_logo}>
-            <div>
-              <Link href="#">
-                <Image
-                  src="/homepage/logo.png"
-                  height={50}
-                  width={200}
-                  alt="img"
-                />
-              </Link>
-            </div>
-           
-          </div>
-          <div className={style.sidemenu_nav}>
-            <ul>
-              <li>
-                <Link href="#">Home</Link>
-              </li>
-              <li>
-                <Link href="#">Services</Link>
-              </li>
-              <li>
-                <Link href="#">About Us</Link>
-              </li>
-              <li>
-                <Link href="#">Contact Us</Link>
-              </li>
-              <li>
-                <Link href="#">Help</Link>
-              </li>
-            </ul>
-          </div>
-          <div className={style.sidemenu_icons}>
-            <Link href="#">
-              <FaFacebookF />
-            </Link>
-            <Link href="#">
-              <AiOutlineDribbble />
-            </Link>
-            <Link href="#">
-              <FaGooglePlusG />
-            </Link>
-            <Link href="#">
-              <FaSkype />
-            </Link>
-            <Link href="#">
-              <FaTwitter />
-            </Link>
-          </div>
-        </div> */}
+      
 
         <Offcanvas show={show} onHide={handleClose} placement='end'>
           <Offcanvas.Header closeButton>

@@ -1,4 +1,4 @@
-
+'use client'
 import { AiOutlineSearch, AiOutlineDribbble } from "react-icons/ai";
 import { FaLocationCrosshairs } from "react-icons/fa6";
 import { FiCheck } from "react-icons/fi";
@@ -9,13 +9,16 @@ import Link from "next/link";
 import Image from "next/image";
 import CommonFooter from "@/components/commomfooter";
 import Subescribe from "@/components/subscribe";
+import { useState } from "react";
+
 
 
 const Checkout = () => {
+    const [highlight, setHighlight] = useState(0)
+    const [highlight2, setHighlight2] = useState(0)
     return (
         <>
-          
-             <section className={style.section1}>
+            <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
                         <Navbar />
@@ -75,21 +78,21 @@ const Checkout = () => {
                             <h3>When Should the proffesional arrive?</h3>
                             <p>Your service will take approx <span>40</span>mins</p>
                             <div className={style.timeslot_day}>
-                                <div>Fri <br /> <span>29</span></div>
-                                <div>Sat <br /> <span>30</span></div>
-                                <div>Sun  <br /> <span>01</span></div>
+                                <div onClick={() => { setHighlight(1) }} className={highlight === 1 ? "checkout_highlight" : ""}>Fri <br /> <span>29</span></div>
+                                <div onClick={() => { setHighlight(2) }} className={highlight === 2 ? "checkout_highlight" : ""}>Sat <br /> <span>30</span></div>
+                                <div onClick={() => { setHighlight(3) }} className={highlight === 3 ? "checkout_highlight" : ""}>Sun  <br /> <span>01</span></div>
                             </div>
                             <span>Select start time of service</span>
                             <div className={style.timeslot_time}>
                                 <div>
-                                    <div>8:00AM</div>
-                                    <div>8:30AM</div>
-                                    <div>9:00AM</div>
+                                    <div onClick={() => { setHighlight2(4) }} className={highlight2 === 4 ? "checkout_highlight" : ""}>8:00AM</div>
+                                    <div onClick={() => { setHighlight2(5) }} className={highlight2 === 5 ? "checkout_highlight" : ""}>8:30AM</div>
+                                    <div onClick={() => { setHighlight2(6) }} className={highlight2 === 6 ? "checkout_highlight" : ""}>9:00AM</div>
                                 </div>
                                 <div>
-                                    <div>9:30AM</div>
-                                    <div>10:00AM</div>
-                                    <div>10:30AM</div>
+                                    <div onClick={() => { setHighlight2(7) }} className={highlight2 === 7 ? "checkout_highlight" : ""}>9:30AM</div>
+                                    <div onClick={() => { setHighlight2(8) }} className={highlight2 === 8 ? "checkout_highlight" : ""}>10:00AM</div>
+                                    <div onClick={() => { setHighlight2(9) }} className={highlight2 === 9 ? "checkout_highlight" : ""}>10:30AM</div>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +206,7 @@ const Checkout = () => {
                             </div>
                         </div> */}
                         <div className={style.section4_div1}>
-                        <div className={style.section4_div1_div2}>
+                            <div className={style.section4_div1_div2}>
                                 <div>
                                     <h1>Its Summer Time !</h1>
                                     <div>
@@ -253,8 +256,8 @@ const Checkout = () => {
                 </div>
             </section>
             <section>
-                <Subescribe/>
-                <CommonFooter/>
+                <Subescribe />
+                <CommonFooter />
             </section>
         </>
     );

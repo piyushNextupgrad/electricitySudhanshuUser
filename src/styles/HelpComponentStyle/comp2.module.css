@@ -38,8 +38,14 @@
     font-weight: 500;
     border:none;
 }
+.comp2>form>div>button:hover{
+    background-color: #FFC72C;
+    transition-duration: 300ms;
+    margin-right:5px;
+}
 .bttn{
     
     text-align: right;
     
 }
+

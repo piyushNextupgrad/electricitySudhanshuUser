@@ -19,12 +19,18 @@ import Comp2 from "@/components/HelpComponents/comp2"
 import Comp3 from "@/components/HelpComponents/comp3"
 import Comp4 from "@/components/HelpComponents/comp4"
 import Comp5 from "@/components/HelpComponents/comp5"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 const Help = () => {
 
-    const [comp, setComp] = useState(1);
+    const [comp, setComp] = useState(3);
+
+
+    useEffect(() => {
+
+    }, []);
+
 
 
     return (
@@ -42,14 +48,44 @@ const Help = () => {
                     <div className='col-md-4'>
                         <div className={style.helpbttn}>
 
-                            <div onClick={() => { setComp(3) }}><button>Help with Services<FaArrowRightLong /></button></div>
-                            <div onClick={() => { setComp(1) }}><button>FAQ<FaArrowRightLong /></button></div>
-                            <div onClick={() => { setComp(5) }}><button>Leagal, Terms and Conditions<FaArrowRightLong /></button></div>
-                            <div onClick={() => { setComp(2) }}><button>Ticket generate<FaArrowRightLong /></button></div>
-                            <div onClick={() => { setComp(4) }}><button>Chat<FaArrowRightLong /></button></div>
+                            <div onClick={() => { setComp(3) }}>
+                                <button className={comp === 3 ? "compbttnstyle" : " "}>
+                                    Help with Services
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+                            <div onClick={() => { setComp(1) }} >
+                                <button className={comp === 1 ? "compbttnstyle" : " "}>
+                                    FAQ
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
+                            <div onClick={() => { setComp(5) }}>
+                                <button className={comp === 5 ? "compbttnstyle" : " "}>
+                                    Leagal, Terms and Conditions
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
+                            <div onClick={() => { setComp(2) }}>
+                                <button className={comp === 2 ? "compbttnstyle" : " "}>
+                                    Ticket generate
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
+                            <div onClick={() => { setComp(4) }}>
+                                <button className={comp === 4 ? "compbttnstyle" : " "}>
+                                    Chat
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
+
 
                         </div>
-                      
+
                         <div className={style.content}>
                             <div className={style.photos}>
 
@@ -70,16 +106,18 @@ const Help = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={`${style.compont} col-md-8`}>
+                    <div className={`${style.compont} col-md-8 accordSudh`}>
 
                         {
-                            comp == 1 ? <Comp1 /> :
-                                comp == 2 ? <Comp2 /> :
+                            comp == 1 ? (<Comp1 />) :
+                                comp == 2 ? (<Comp2 />) :
                                     comp == 3 ? <Comp3 /> :
                                         comp == 4 ? <Comp4 /> :
                                             comp == 5 ? <Comp5 /> : "No comp"
                         }
-                        
+
+
+
 
                     </div>
                 </div>

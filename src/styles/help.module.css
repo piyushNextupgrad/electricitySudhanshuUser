@@ -5,10 +5,7 @@
 
 }
 
-.section1>div {
-    max-width: 1400px;
 
-}
 
 .section1>div>h1 {
     color: white;
@@ -57,39 +54,7 @@
     color: white;
 }
 
-.helpbttn>div>button:hover {
-    color: white;
-    background-color: #ff9571;
-}
 
-/* .contactUs {
-    border: 1px solid black;
-
-
-    background-position: right top;
-    width: 60%;
-    margin: 20px 20%;
-    background-image: url("/help/contact.jpg");
-    background-size: auto;
-    max-height: 400px;
-
-} */
-
-/* .overlayback{
-    
-}
-.overlayfront{
-    background-color: #ff9571;
-    z-index: 1;
-    width:100%;
-    min-height: 400px;
-    opacity: 0.40;
-    position:relative;
-}
-.overtext{
-    position:relative;
-    top:0px;
-} */
 .content {
     width: 100%;
    
@@ -162,6 +127,13 @@
     font-weight: 500;
     border-radius: 5px;
 }
+.title>div>a:hover{
+    
+    transition-duration: 300ms;
+    color:black;
+    background-color: antiquewhite;
+    
+}
 .title>div{
     padding:25px 0;
    
@@ -180,3 +152,6 @@
     
     
 }
+/* .compont>.accordion>.accordion-item{
+    --bs-accordion-btn-icon:url{"/homepage/1.jpg"}
+} */

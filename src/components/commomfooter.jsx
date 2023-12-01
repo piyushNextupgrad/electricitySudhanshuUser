@@ -11,9 +11,9 @@ import Link from "next/link";
 const CommonFooter = () => {
     return (
         <footer className={style.footer}>
-            <div>
-                <div className={style.footer_div1}>
-                    <div>
+            <div className="container">
+                <div className={`${style.footer_div1} row`}>
+                    <div className="col-lg-3 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul className={style.footer_logo_ul}>
                             <li><Link href="#"><Image src="/homepage/logo.png" height={40} width={150} alt="img" /></Link></li>
                             <li ><Link href="#"><FaEnvelope style={{ color: "#fdef00" }} /> <span>Info@Electricity.com</span></Link></li>
@@ -27,7 +27,7 @@ const CommonFooter = () => {
                             </li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-lg-2 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul>
                             <li><h4>ABOUT US</h4></li>
                             <li><Link href="#">Support Center</Link></li>
@@ -37,7 +37,7 @@ const CommonFooter = () => {
                             <li><Link href="#">Popular Campaign</Link></li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-lg-2 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul>
                             <li><h4>OUR INFORMATION</h4></li>
                             <li><Link href="#">Return Policy</Link></li>
@@ -47,7 +47,7 @@ const CommonFooter = () => {
                             <li><Link href="#">Store Hours</Link></li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-lg-2 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul>
                             <li><h4>MY ACCOUNT</h4></li>
                             <li><Link href="#">Press Inquiries</Link></li>
@@ -57,7 +57,7 @@ const CommonFooter = () => {
                             <li><Link href="#">Speaker Requests</Link></li>
                         </ul>
                     </div>
-                    <div>
+                    <div className="col-lg-3 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul>
                             <li><h4>POLICY</h4></li>
                             <li><Link href="#">Application Security</Link></li>
@@ -69,11 +69,11 @@ const CommonFooter = () => {
                     </div>
                 </div>
                 <hr />
-                <div className={style.footer_div2}>
-                    <div>
+                <div className={`${style.footer_div2} row`}>
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-md-start  text-sm-center ">
                         Copyright 2023 Ⓒ Electricity
                     </div>
-                    <div>
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12  text-md-end text-sm-center mt-2">
                         <Link href="#">Privacy Policy</Link> |
                         <Link href="#">Term of Services</Link> |
                         <Link href="#">Cookie Policy</Link>

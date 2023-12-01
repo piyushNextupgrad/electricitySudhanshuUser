@@ -1,8 +1,18 @@
-.message{
-   
+/* .message{
+    border:2px solid lightgrey;
+    border-radius: 12px;
+    padding:10px;
+} */
+
+.message1{
+    /* border:1px solid black; */
+    height:500px;
     overflow-y: scroll;
-    height: auto;
+   
+    border-radius: 12px;
+    padding:10px;
 }
+
 .message>div>div{
    
     display: flex;
@@ -30,7 +40,7 @@
     width:70%;
     margin:5px 0;
     
-    padding:5px 5px;
+    padding:10px;
     background-color: blue;
     color: white;
     font-weight: 500;
@@ -43,7 +53,7 @@
     width:70%;
     margin:5px 5px;
     
-    padding:5px 5px;
+    padding:10px;
    
     background-color: lightgray;
     color:black;
@@ -78,6 +88,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* border:1px solid black; */
+    padding:10px;
 }
 .msg_user>img{
     border-radius: 50px;
@@ -92,6 +104,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.msg_input>svg{
+    cursor:pointer;
 }
 .msg_input>input{
     width: 100%;

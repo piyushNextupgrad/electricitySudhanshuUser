@@ -2,6 +2,7 @@
     display: flex;
     justify-content:center;
     background-color: #282932;
+    text-align: center;
 }
 
 .footer>div{
@@ -52,13 +53,14 @@
     margin:10px 0;
 }
 .footer_icons{
-    display:flex;
-    justify-content: space-between;
+    /* display:flex;
+    justify-content: space-between; */
     color:lightgrey;
     font-size: 15px;
 }
 .footer_icons>a{
     color:lightgrey !important;
+    margin:10px;
 }
 .footer_icons>a>svg:hover{
     color:#fdef00;
@@ -75,3 +77,15 @@
     transition-duration: 1000ms;
    
 }
+
+/* .footer_div1>div>ul>li>a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background: #fdef00;
+    transition: width .3s ease-in;
+  }
+  .footer_div1>div>ul>li>a:hover::after {
+    width: 100%;
+  } */
