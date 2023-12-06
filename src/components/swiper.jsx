@@ -16,7 +16,7 @@ export default function Slider(){
     <div>
       <Swiper
         slidesPerView={2}
-        spaceBetween={30}
+        spaceBetween={10}
 
         autoplay={true}
         pagination={{
@@ -36,22 +36,22 @@ export default function Slider(){
       >
         <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img1.png" height={531} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img1.png" height={500} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img2.png" height={531} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img2.png" height={500} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img1.png" height={531} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img1.png" height={500} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           <SwiperSlide>
           <div>
-            <Image src="/homepage/banner-slider-img2.png" height={531} width= {300} alt='img' />
+            <Image src="/homepage/banner-slider-img2.png" height={500} width= {300} alt='img' />
           </div>
           </SwiperSlide>
           

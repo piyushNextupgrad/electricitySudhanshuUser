@@ -17,7 +17,7 @@ const Checkout = () => {
     const [highlight, setHighlight] = useState(0)
     const [highlight2, setHighlight2] = useState(0)
     return (
-        <>
+        <div >
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -26,9 +26,9 @@ const Checkout = () => {
                     </div>
                 </div>
             </section>
-            <section className={`${style.section2} container`}>
+            <section className={`${style.section2} container`} >
                 <div className="row" >
-                    <div className={`${style.section2_col1} col`} >
+                    <div className={`${style.section2_col1} col text-center text-lg-start`} >
                         <div className={style.account}>
                             <h2>Account</h2>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero magnam fuga blanditiis debitis ipsa voluptates.</p>
@@ -42,13 +42,13 @@ const Checkout = () => {
                                     <option value="option2">+92</option>
                                     <option value="option3">+93</option>
                                 </select>
-                                <input type="number" placeholder="Enter Mobile Number" />
+                                <input type="number" placeholder="Enter Mobile Number" maxlength="10"/>
                             </div>
                         </div>
                         <div className={style.otp}>
                             <label>Varification Code</label>
                             <p>We Have send you 4 digit varification code on <span>+91-7985133197</span></p>
-                            <div>
+                            <div className="justify-content-center justify-content-lg-start">
                                 <input type="text" maxlength="1" />
                                 <input type="text" maxlength="1" />
                                 <input type="text" maxlength="1" />
@@ -57,7 +57,7 @@ const Checkout = () => {
                         </div>
                         <div className={style.address}>
                             <label>Address</label>
-                            <form>
+                            <form className="text-start">
                                 <input type="text" placeholder="Search for Location" />
                                 <AiOutlineSearch />
                             </form>
@@ -74,17 +74,17 @@ const Checkout = () => {
 
                         </div>
                         <div className={style.timeslot}>
-                            <h2>Slot</h2>
-                            <h3>When Should the proffesional arrive?</h3>
+                            <h1>Slot</h1>
+                            <h4>When Should the proffesional arrive?</h4>
                             <p>Your service will take approx <span>40</span>mins</p>
-                            <div className={style.timeslot_day}>
+                            <div className={`${style.timeslot_day}  justify-content-center justify-content-lg-start`}>
                                 <div onClick={() => { setHighlight(1) }} className={highlight === 1 ? "checkout_highlight" : ""}>Fri <br /> <span>29</span></div>
                                 <div onClick={() => { setHighlight(2) }} className={highlight === 2 ? "checkout_highlight" : ""}>Sat <br /> <span>30</span></div>
                                 <div onClick={() => { setHighlight(3) }} className={highlight === 3 ? "checkout_highlight" : ""}>Sun  <br /> <span>01</span></div>
                             </div>
                             <span>Select start time of service</span>
                             <div className={style.timeslot_time}>
-                                <div>
+                                <div className="text-center">
                                     <div onClick={() => { setHighlight2(4) }} className={highlight2 === 4 ? "checkout_highlight" : ""}>8:00AM</div>
                                     <div onClick={() => { setHighlight2(5) }} className={highlight2 === 5 ? "checkout_highlight" : ""}>8:30AM</div>
                                     <div onClick={() => { setHighlight2(6) }} className={highlight2 === 6 ? "checkout_highlight" : ""}>9:00AM</div>
@@ -103,7 +103,7 @@ const Checkout = () => {
                     </div>
 
 
-                    <div className={`${style.section2_col2} col`} >
+                    <div className={`${style.section2_col2} col text-center text-lg-start`} >
                         <div className={style.foam}>
                             <h1>Foam & Power jet AC Service (Split)</h1>
                             <div className={style.foam_payment}>
@@ -129,10 +129,10 @@ const Checkout = () => {
                                 <div>
                                     <div>
                                         <BiSolidOffer />
-                                        <p>Coupons and offers</p>
+                                        <Link href="#">Coupons and offers</Link>
                                     </div>
                                     <div>
-                                        <p>Login/Signup to view offers</p>
+                                        <Link href="#">Login/Signup to view offers</Link>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +259,7 @@ const Checkout = () => {
                 <Subescribe />
                 <CommonFooter />
             </section>
-        </>
+        </div>
     );
 }
 

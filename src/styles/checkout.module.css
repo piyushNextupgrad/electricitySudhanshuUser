@@ -352,10 +352,12 @@
 
 .coupons>div>div>svg {
     font-size: 50px;
+    
 }
 
-.coupons>div>div>p {
-    margin-bottom: 0;
+.coupons>div>div>a {
+    text-decoration: none;
+    color:white;
 }
 
 .paymentsummry {
@@ -533,4 +535,56 @@
 
 .summer_imgdiv>img {
     width: 100%;
+}
+@media only screen and (max-width:992px){
+    .section4_div1_div2>div>div>div{
+        display: grid;
+        place-content: center;
+        place-items: center;
+    }
+}
+
+@media only screen and (max-width:500px){
+    .timeslot_time>div{
+        display: grid;
+
+        place-content: center;
+        place-items: center;
+    }
+    .timeslot_day{
+        justify-content: center;
+        /* display: grid !important;
+        place-content: center;
+        place-items: center; */
+    }
+    .timeslot_day>div{
+        width:100%;
+        margin-top:5px;
+        margin-bottom:5px;
+    }
+}
+
+@media only screen and (max-width:390px){
+    .quantity{
+        display:grid;
+        place-content: center;
+        place-items: center;
+    }
+    .quantity>div{
+        margin:5px;
+    }
+    .section4_div1_div2{
+        font-size:40px;
+    }
+    .section4_div1_div2>div>div>div>div>a{
+        font-size: 12px;
+    }
+    .section4_div1_div2>div{
+        padding:10px;
+    }
+    .timeslot_day>div{
+        padding:15px;
+    }
+        
+    
 }

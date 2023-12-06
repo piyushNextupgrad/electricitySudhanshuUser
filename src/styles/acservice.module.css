@@ -16,7 +16,11 @@
 
 .section2 {
 
-    padding: 100px 0;
+    padding-top:100px;
+    padding-bottom:100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
    
 
 }
@@ -40,6 +44,7 @@
 .section2>div {
     display: flex;
     justify-content: space-evenly;
+    width:100%;
 
 }
 
@@ -316,6 +321,9 @@
     .bttn{
         justify-content: center !important;
     }
+    .section2_div2{
+        margin-top:50px;
+    }
 }
 @media only screen and (max-width:876px){
     .section3>div>div{
@@ -358,5 +366,16 @@
     .section2_div1>img{
         width:100%;
         height:auto;
+    }
+}
+
+@media only screen and (max-width:450px){
+    .section3>div>div>div>img{
+        
+        width:100%;
+        height: auto;
+    }
+    .section2_div1>img{
+        padding:20px;
     }
 }

@@ -11,8 +11,9 @@ import CommonFooter from "@/components/commomfooter";
 import Navbar from "@/components/navbar";
 import Link from "next/link";
 const ACservices = () => {
-    return (<>
-        <section className={`${style.section1} container-fluid`} >
+    return (
+    <div >
+        <section className={`${style.section1} container-fluid`}  >
             <div className="container">
                 <div className="row align-items-center">
                     <Navbar />
@@ -23,10 +24,10 @@ const ACservices = () => {
         </section>
         <section className={`${style.section2} container`} >
             <div className="row" >
-                <div className={`${style.section2_div1} col-xs-12 col-sm-12 col-md-12 col-lg-6 text-sm-center text-lg-start text-xs-center`}>
+                <div className={`${style.section2_div1} col-xs-12 col-sm-12 col-md-12 col-lg-6 text-sm-center text-lg-start text-xs-center`} >
                     <Image src="/ac_service/Layer_50.png" width={500} height={500} alt="img" />
                 </div>
-                <div className={`${style.section2_div2} col-xs-12  col-sm-12 col-md-12 col-lg-6 text-sm-center text-lg-start mt-5 text-xs-center`} >
+                <div className={`${style.section2_div2} col-xs-12  col-sm-12 col-md-12 col-lg-6 text-sm-center text-lg-start  text-xs-center`} >
                     <span>30 DAYS WARRENTY</span>
                     <h1>Foam & Power jet AC Service (Split)</h1>
                     <div>
@@ -274,7 +275,7 @@ const ACservices = () => {
 
         </section>
 
-    </>);
+    </div>);
 }
 
 export default ACservices;

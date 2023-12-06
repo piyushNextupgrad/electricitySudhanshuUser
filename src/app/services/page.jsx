@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const Services = () => {
     return (
-        <>
+        <div >
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -61,7 +61,7 @@ const Services = () => {
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-xxl-8 col-xl-8 col-lg-8">
-                            <h3>FEATURES</h3>
+                            <h2>FEATURES</h2>
                             <p>OUR WORK FLOW</p>
                             <div className={style.section3_designs}>
                                 <div><Image src="/services/design1.png" height={125} width={140} alt="img" /></div>
@@ -86,8 +86,8 @@ const Services = () => {
                             </div>
 
                         </div>
-                        <div className="col-xxl-4 col-xl-4 col-lg-4">
-                            <Image src="/services/Layer_63.png" height={550} width={500} alt="img" />
+                        <div className="col-xxl-4 col-xl-4 col-lg-4 text-center">
+                            <Image src="/services/Layer_63.png" height={550} width={500} alt="img" className={style.designimg} />
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ const Services = () => {
 
 
 
-        </>
+        </ div>
 
     );
 }

@@ -34,7 +34,7 @@ const Help = () => {
 
 
     return (
-        <>
+        < div >
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -128,7 +128,7 @@ const Help = () => {
 
             </section>
 
-        </>
+        </div  >
     );
 }
 

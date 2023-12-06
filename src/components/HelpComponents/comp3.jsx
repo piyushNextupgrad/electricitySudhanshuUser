@@ -5,7 +5,7 @@ const Comp3 = () => {
         <>
             <div className={style.comp3}>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 text-center">
                         <Image src="/ac_service/Layer_50.png" height={100} width={100} alt="img" />
                     </div>
                     <div className={`${style.text} col-md-9`}>
@@ -31,7 +31,7 @@ const Comp3 = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 text-center">
                         <Image src="/ac_service/Layer_50.png" height={100} width={100} alt="img" />
                     </div>
                     <div className={`${style.text} col-md-9`}>
@@ -57,7 +57,7 @@ const Comp3 = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 text-center">
                         <Image src="/ac_service/Layer_50.png" height={100} width={100} alt="img" />
                     </div>
                     <div className={`${style.text} col-md-9`}>
@@ -83,7 +83,7 @@ const Comp3 = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-md-3 text-center  ">
                         <Image src="/ac_service/Layer_50.png" height={100} width={100} alt="img" />
                     </div>
                     <div className={`${style.text} col-md-9`}>

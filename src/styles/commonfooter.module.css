@@ -21,6 +21,9 @@
     
     
 }
+.footer>div>div>div>ul{
+    padding-left:0;
+}
 .footer>div>div>div>ul>li>a{
     cursor:pointer;
     color:white;

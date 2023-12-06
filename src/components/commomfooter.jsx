@@ -10,13 +10,13 @@ import Link from "next/link";
 
 const CommonFooter = () => {
     return (
-        <footer className={style.footer}>
+        <footer className={style.footer} >
             <div className="container">
-                <div className={`${style.footer_div1} row`}>
+                <div className={`${style.footer_div1} row`} >
                     <div className="col-lg-3 col-md-3 col-sm-12 text-sm-center text-md-start">
                         <ul className={style.footer_logo_ul}>
-                            <li><Link href="#"><Image src="/homepage/logo.png" height={40} width={150} alt="img" /></Link></li>
-                            <li ><Link href="#"><FaEnvelope style={{ color: "#fdef00" }} /> <span>Info@Electricity.com</span></Link></li>
+                            <li ><Link href="#"><Image src="/homepage/logo.png" height={40} width={150} alt="img" /></Link></li>
+                            <li  ><Link href="#"><FaEnvelope style={{ color: "#fdef00" }} /> <span>Info@Electricity.com</span></Link></li>
                             <li><Link href="#"><FaMobileAlt style={{ color: "#fdef00" }} /> <span>123-456-7890</span></Link></li>
                             <li className={style.footer_icons}>
                                 <Link href="#"><FaFacebookF /></Link>

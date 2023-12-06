@@ -5,6 +5,9 @@ import style from "../styles/homepage.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.css";
+import React from "react";
+import Slider from "react-slick";
+import ReactPlayer from 'react-player'
 
 
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -42,13 +45,15 @@ function Homepage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+
   return (
     <div>
-      <section className={style.header}>
+      <section className={style.header} >
         <nav className={style.nav}>
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-4">
+              <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-12">
                 {" "}
                 <Link href="#">
                   <Image
@@ -60,7 +65,7 @@ function Homepage() {
                   />
                 </Link>
               </div>
-              <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9`}>
+              <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9 col-12`}>
                 <Link href="#">
                   <FaShoppingCart />
                 </Link>
@@ -78,7 +83,7 @@ function Homepage() {
         <div className={style.banner_items}>
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">
+              <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12">
                 <div className={style.banner_text}>
                   <h1>
                     Quality Home Services <span>on Demand.</span>
@@ -106,7 +111,7 @@ function Homepage() {
                   </div>
                 </div>
               </div>
-              <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">
+              <div className={`${style.banner_slider} col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12`} >
                 <Swiper1 />
                 {/* <div className={style.slider1}> </div> */}
               </div>{" "}
@@ -114,7 +119,8 @@ function Homepage() {
           </div>
         </div>
       </section>
-      <section className={style.section2}>
+
+      <section className={style.section2} >
         <div className="container">
           <h1>Quality of Home Services.</h1>
           <p>
@@ -123,7 +129,7 @@ function Homepage() {
             ad minim veniam.
           </p>
 
-          <div className={style.section2_slider}>
+          <div className={style.section2_slider} >
             <Swiper
               slidesPerView={5}
               spaceBetween={15}
@@ -131,6 +137,24 @@ function Homepage() {
               modules={[Navigation]}
               loop={true}
               navigation={true}
+              breakpoints={{
+                1024: {
+                  slidesPerView: 5,
+                },
+                992: {
+                  slidesPerView: 4,
+                },
+                768: {
+                  slidesPerView: 3,
+                },
+                576: {
+                  slidesPerView: 2,
+                },
+                0: {
+                  slidesPerView: 1
+                }
+
+              }}
               // Navigation={{ nextE1: '.review-swiper-button-next', prevE1: '.review-swiper-button-prev' }}
 
               className="mySwiper sliderbox"
@@ -248,103 +272,101 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
             </Swiper>
-            {/* <div>
-                        <div className="swiper-button-prev"><FaArrowLeft /></div>
-                        <div className="swiper-button-next"><FaArrowRight /></div>
-                    </div> */}
+
           </div>
         </div>
       </section>
       <section className={style.section3}>
-        <div >
-        <div className="container-fluid">
-          <div className="row align-items-center">
-            <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-4">
-              <Image
-                src="/homepage/couple.png"
-                height={766}
-                width={640}
-                alt="img"
-              />
-            </div>
-            <div
-              className={`${style.section3_div2} col-xxl-6 col-xl-6 col-lg-4`}
-            >
-              <h1>
-                Sit at Home
-                <br />
-                <span>We Will Take Care</span>
-              </h1>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-              <div>
-                <div>
-                  <Link href="#">
-                    <Image
-                      src="/homepage/fastservice.png"
-                      height={70}
-                      width={80}
-                      alt="img"
-                    />
-                  </Link>
-                  <span>
-                    Fast Service
-                    <br /> on Time
-                  </span>
-                </div>
-                <div>
-                  <Link href="#">
-                    <Image
-                      src="/homepage/helpcenter.png"
-                      height={70}
-                      width={70}
-                      alt="img"
-                    />
-                  </Link>
-                  <span>
-                    24/7 <br />
-                    Help Center
-                  </span>
-                </div>
-                <div>
-                  <Link href="#">
-                    <Image
-                      src="/homepage/widemap.png"
-                      height={70}
-                      width={70}
-                      alt="img"
-                    />
-                  </Link>
-                  <span>
-                    Wide
-                    <br /> Coverage Map
-                  </span>
-                </div>
-                <div>
-                  <Link href="#">
-                    <Image
-                      src="/homepage/employee.png"
-                      height={70}
-                      width={70}
-                      alt="img"
-                    />
-                  </Link>
-                  <span>
-                    More Than <br />
-                    1500 Employee
-                  </span>
-                </div>
+        <div className="">
+
+          <div className="container-fluid">
+            <div className="row align-items-center">
+              <div className={`${style.section3_div1} col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12`}>
+                <Image
+                  src="/homepage/couple.png"
+                  height={766}
+                  width={640}
+                  alt="img"
+                />
               </div>
-              <div>
-                <Link href="#">Read More</Link>
+              <div
+                className={`${style.section3_div2} col-xxl-6 col-xl-6 col-lg-4 col-12`}
+              >
+                <h1>
+                  Sit at Home
+                  <br />
+                  <span>We Will Take Care</span>
+                </h1>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat.
+                </p>
+                <div>
+                  <div>
+                    <Link href="#">
+                      <Image
+                        src="/homepage/fastservice.png"
+                        height={70}
+                        width={80}
+                        alt="img"
+                      />
+                    </Link>
+                    <span>
+                      Fast Service
+                      <br /> on Time
+                    </span>
+                  </div>
+                  <div>
+                    <Link href="#">
+                      <Image
+                        src="/homepage/helpcenter.png"
+                        height={70}
+                        width={70}
+                        alt="img"
+                      />
+                    </Link>
+                    <span>
+                      24/7 <br />
+                      Help Center
+                    </span>
+                  </div>
+                  <div>
+                    <Link href="#">
+                      <Image
+                        src="/homepage/widemap.png"
+                        height={70}
+                        width={70}
+                        alt="img"
+                      />
+                    </Link>
+                    <span>
+                      Wide
+                      <br /> Coverage Map
+                    </span>
+                  </div>
+                  <div>
+                    <Link href="#">
+                      <Image
+                        src="/homepage/employee.png"
+                        height={70}
+                        width={70}
+                        alt="img"
+                      />
+                    </Link>
+                    <span>
+                      More Than <br />
+                      1500 Employee
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <Link href="#">Read More</Link>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
       <section className={style.section4}>
@@ -360,7 +382,7 @@ function Homepage() {
                       <Link href="#">BOOK SERVICES</Link>
                     </div>
                   </div>
-                  <div>
+                  <div className={style.ac_image}>
                     <Image
                       src="/homepage/Layer_31.png"
                       height={150}
@@ -492,7 +514,7 @@ function Homepage() {
         </div>
       </section>
       <section className={style.section6}>
-        
+
         <iframe
           width="100%"
           height="740px"
@@ -501,6 +523,9 @@ function Homepage() {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share;"
         ></iframe>
+        {/* <ReactPlayer
+          url='https://www.youtube.com/watch?v=9xwazD5SyVg'
+          controls={true} height={740} width={"100%"} /> */}
       </section>
       <section className={style.section7}>
         <div className="container">
@@ -668,7 +693,7 @@ function Homepage() {
       {/* ================================off canvas================================= */}
 
       <section className={style.sidemenu} >
-      
+
 
         <Offcanvas show={show} onHide={handleClose} placement='end'>
           <Offcanvas.Header closeButton>
