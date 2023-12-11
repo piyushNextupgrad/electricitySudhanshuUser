@@ -1,3 +1,4 @@
+"use client"
 import style from "@/styles/services.module.css"
 import { FaSearch, FaUser, FaBars } from "react-icons/fa"
 import Image from "next/image";
@@ -5,10 +6,19 @@ import Navbar from "@/components/navbar";
 import Subescribe from "@/components/subscribe";
 import CommonFooter from "@/components/commomfooter";
 import Link from "next/link";
+import { useState } from "react";
 
 const Services = () => {
+    const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     return (
         <div >
+            {isSubmitingLoader ? (
+                <div className="overlay">
+                    <div className="spinner-container">
+                        <img className="animatingSpinnerSvg" src="/spinner.svg" alt="" />
+                    </div>
+                </div>
+            ) : null}
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">

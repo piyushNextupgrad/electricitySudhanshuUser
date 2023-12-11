@@ -13,8 +13,16 @@ import style from "@/styles/plan.module.css"
 import { FiCheck } from 'react-icons/fi';
 
 const Plan = () => {
+  const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
   return (
     <div >
+      {isSubmitingLoader ? (
+        <div className="overlay">
+          <div className="spinner-container">
+            <img className="animatingSpinnerSvg" src="/spinner.svg" alt="" />
+          </div>
+        </div>
+      ) : null}
       <section className={style.section1} >
 
         <div className="container" >

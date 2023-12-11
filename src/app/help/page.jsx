@@ -25,16 +25,24 @@ import { useState, useEffect } from "react";
 const Help = () => {
 
     const [comp, setComp] = useState(3);
+    const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, []);
+    // }, []);
 
 
 
     return (
         < div >
+            {isSubmitingLoader ? (
+                <div className="overlay">
+                    <div className="spinner-container">
+                        <img className="animatingSpinnerSvg" src="/spinner.svg" alt="" />
+                    </div>
+                </div>
+            ) : null}
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">

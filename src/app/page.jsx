@@ -6,8 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
-import Slider from "react-slick";
-import ReactPlayer from 'react-player'
+
 
 
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -37,18 +36,38 @@ import "swiper/css";
 import "swiper/css/navigation";
 // import 'swiper/css/pagination';
 import { Navigation } from "swiper/modules";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { Toaster, toast } from 'sonner'
+import { useRouter } from "next/navigation";
+
 
 function Homepage() {
 
   const [show, setShow] = useState(false);
+  // const login = localStorage?.getItem("token");
+  const login = 1
+  // const [login, setLogin] = useState(localStorage.getItem("token"));
+  const [smShow, setSmShow] = useState(false);
+  const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const route = useRouter();
 
 
   return (
     <div>
+      {isSubmitingLoader ? (
+        <div className="overlay">
+          <div className="spinner-container">
+            <img className="animatingSpinnerSvg" src="/spinner.svg" alt="" />
+          </div>
+        </div>
+      ) : null}
+
+      <Toaster position="top-center" richColors />
       <section className={style.header} >
         <nav className={style.nav}>
           <div className="container">
@@ -69,7 +88,7 @@ function Homepage() {
                 <Link href="#">
                   <FaShoppingCart />
                 </Link>
-                <Link href="#">
+                <Link href="#" onClick={() => setSmShow(true)} className="me-2">
                   <FaUser />
                 </Link>
                 <Link href="#" onClick={handleShow}>
@@ -117,6 +136,59 @@ function Homepage() {
               </div>{" "}
             </div>
           </div>
+        </div>
+
+        <div className="user_model">
+          <Modal
+            size="sm"
+            show={smShow}
+            onHide={() => setSmShow(false)}
+            aria-labelledby="example-modal-sizes-title-sm"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title id="example-modal-sizes-title-sm">
+                Login / Register
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div >
+
+                { //conditional operator
+                  login !== 1 ?
+                    (<div>
+
+                      <div className="d-flex justify-content-around">
+                        <h6>Name:</h6>
+                        {/* <h6>{localStorage?.getItem("userName")}</h6> */}
+                      </div>
+                      <div className="d-flex justify-content-center mt-3">
+                        <Button variant="primary" onClick={() => {
+                          // localStorage?.removeItem("token");
+                          toast.success("Logged out successfully!");
+
+                          setSmShow(false);
+                          setTimeout(route.push("/"), 4500);
+
+                        }}>
+                          Logout
+                        </Button>
+                      </div>
+                    </div>
+                    )
+                    :
+                    (
+                      <div className="d-flex justify-content-around">
+                        <Button variant="primary" onClick={() => route.push("/login")}>Login</Button>
+                        <Button variant="primary" onClick={() => route.push("/register")}>Register</Button>
+                      </div>
+                    )
+                }
+
+
+              </div>
+            </Modal.Body>
+
+          </Modal>
         </div>
       </section>
 
@@ -775,6 +847,4 @@ function Homepage() {
 }
 export default Homepage;
 
-// Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
 
-// AiOutlineDribbbleSquare

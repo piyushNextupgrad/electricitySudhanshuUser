@@ -16,8 +16,16 @@ import { useState } from "react";
 const Checkout = () => {
     const [highlight, setHighlight] = useState(0)
     const [highlight2, setHighlight2] = useState(0)
+    const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     return (
         <div >
+            {isSubmitingLoader ? (
+                <div className="overlay">
+                    <div className="spinner-container">
+                        <img className="animatingSpinnerSvg" src="/spinner.svg" alt="" />
+                    </div>
+                </div>
+            ) : null}
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -42,7 +50,7 @@ const Checkout = () => {
                                     <option value="option2">+92</option>
                                     <option value="option3">+93</option>
                                 </select>
-                                <input type="number" placeholder="Enter Mobile Number" maxlength="10"/>
+                                <input type="number" placeholder="Enter Mobile Number" maxlength="10" />
                             </div>
                         </div>
                         <div className={style.otp}>
