@@ -13,6 +13,20 @@ import Link from "next/link";
 import { useState } from "react";
 const ACservices = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
+
+    const handleOption = (e) => {
+        console.log("select", e.target.value);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem("Elect_service_qty", e.target.value);
+        }
+    }
+    const handleDate = (e) => {
+        
+        console.log("date", e.target.value);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem("Elect_service_date", e.target.value);
+        }
+    }
     return (
         <div >
             {isSubmitingLoader ? (
@@ -53,19 +67,19 @@ const ACservices = () => {
                         <div>
                             <div>
                                 <label>Quantity</label>{" "}
-                                <select id="dropdown" name="dropdown">
-                                    <option value="option1">Option 1</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
+                                <select id="dropdown" name="dropdown" onChange={handleOption}>
+                                    <option defaultValue="option1">Option 1</option>
+                                    <option defaultValue="option2">Option 2</option>
+                                    <option defaultValue="option3">Option 3</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Date</label>{" "}
-                                <input type="datetime-local" />
+                                <input type="datetime-local" onChange={handleDate} />
                             </div>
                         </div>
                         <div className={style.bttn}>
-                            <Link href="#">BOOK SERVICES</Link>
+                            <Link href="/checkout">Add to Cart</Link>
                         </div>
                     </div>
                 </div>

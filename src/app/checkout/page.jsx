@@ -9,14 +9,72 @@ import Link from "next/link";
 import Image from "next/image";
 import CommonFooter from "@/components/commomfooter";
 import Subescribe from "@/components/subscribe";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { postData } from "../../../services/services";
+import { getFormatedDate } from "../../../helper/helper";
+import { toast } from "sonner";
 
 
 
 const Checkout = () => {
     const [highlight, setHighlight] = useState(0)
     const [highlight2, setHighlight2] = useState(0)
+    const [def_selt, setDef_selt] = useState('');
+    const [def_dte, setDef_dte] = useState('');
+    const[user_id,setUser_id] = useState('')
+    const [finalSelect,setFinalSelect] = useState('')
+    const [finalDate,setFinalDate] = useState('')
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
+
+
+    const def_values = () => {
+
+        if (typeof window !== 'undefined') {
+            setDef_selt(localStorage.getItem("Elect_service_qty"));
+            setDef_dte(localStorage.getItem("Elect_service_date"));
+            setUser_id(localStorage.getItem("ElectricityId"));
+        }
+
+    }
+    
+
+    
+    const handleSubmit = async() => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem("Elect_service_date")
+            localStorage.removeItem("Elect_service_qty")
+        }
+        // console.log("final quantity is",finalSelect)
+        // console.log("final date is",finalDate)
+        try {
+                const formateDate = getFormatedDate(finalDate,"YYYY-MM-DD hh:mm:ss")
+                const today = getFormatedDate(Date.now(),"YYYY-MM-DD hh:mm:ss")
+             const ServiceBooking={
+                "service_id":45,
+                "customer_id":user_id,
+                "qty":finalSelect,
+                "service_book_date":today,
+                'service_avail_date':formateDate
+             }
+            //  console.log("formated date",Date.now())
+            //  console.log("formated date today",today)
+            //  console.log("datenow",new Date())
+            //  console.log("servicebooking object",ServiceBooking)
+            //  console.log("final_Select",finalSelect)
+            //  console.log("type of finalselect",typeof(Number(finalSelect)))
+            const resp = await postData("/StoreServiceBooking",ServiceBooking)
+            console.log("resp",resp)
+            toast.success(resp.message);
+        } catch (error) {
+                console.log("try-catch error",error)
+        }
+        
+    }
+    useEffect(() => {
+        def_values()
+    }, []);
+
+
     return (
         <div >
             {isSubmitingLoader ? (
@@ -50,7 +108,7 @@ const Checkout = () => {
                                     <option value="option2">+92</option>
                                     <option value="option3">+93</option>
                                 </select>
-                                <input type="number" placeholder="Enter Mobile Number" maxlength="10" />
+                                <input type="number" placeholder="Enter Mobile Number" maxLength="10" />
                             </div>
                         </div>
                         <div className={style.otp}>
@@ -81,7 +139,7 @@ const Checkout = () => {
                             </div>
 
                         </div>
-                        <div className={style.timeslot}>
+                        {/* <div className={style.timeslot}>
                             <h1>Slot</h1>
                             <h4>When Should the proffesional arrive?</h4>
                             <p>Your service will take approx <span>40</span>mins</p>
@@ -103,10 +161,10 @@ const Checkout = () => {
                                     <div onClick={() => { setHighlight2(9) }} className={highlight2 === 9 ? "checkout_highlight" : ""}>10:30AM</div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={style.payment}>
                             <h2>Payment Method</h2>
-                            <Link href="#">Pay $658</Link>
+                            <Link href="#" onClick={handleSubmit}>Pay $658</Link>
                         </div>
                     </div>
 
@@ -121,15 +179,16 @@ const Checkout = () => {
                             <div className={style.quantity}>
                                 <div>
                                     <label>Quantity</label>{" "}
-                                    <select id="dropdown" name="dropdown">
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
+                                    <select id="dropdown" name="dropdown"  onChange={(e)=>{setFinalSelect(e.target.value)}}>    
+                                        <option value={def_selt} >{def_selt}</option>
+                                        <option value="1" >1</option>
+                                        <option value="2" >2</option>
+                                        <option value="3" >3</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label>Date</label>{" "}
-                                    <input type="datetime-local" />
+                                    <input type="datetime-local" value={def_dte} onChange={(e)=>setFinalDate(e.target.value)}/>
                                 </div>
                             </div>
                             <div className={style.coupons}>
@@ -213,7 +272,7 @@ const Checkout = () => {
                                 </div>
                             </div>
                         </div> */}
-                        <div className={style.section4_div1}>
+                        {/* <div className={style.section4_div1}>
                             <div className={style.section4_div1_div2}>
                                 <div>
                                     <h1>Its Summer Time !</h1>
@@ -256,7 +315,7 @@ const Checkout = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
 
 

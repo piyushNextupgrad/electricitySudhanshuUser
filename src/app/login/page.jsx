@@ -37,8 +37,9 @@ export default function Login() {
             if (resp?.success) {
                 toast.success(resp?.message);
                 setTimeout(route.push("/"),4500);
-                // localStorage?.setItem("token",JSON.stringify(resp?.data?.token));
-                // localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))
+                if(typeof window !== 'undefined'){
+                localStorage?.setItem("token",JSON.stringify(resp?.data?.token));
+                localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))}
                 // const session = sessionStorage.getItem("LogedIn");
                 // console.log("session",typeof(session));
             }

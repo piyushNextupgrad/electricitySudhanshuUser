@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
+import { postData } from "../../services/services";
 
 
 
@@ -37,16 +38,22 @@ import "swiper/css/navigation";
 // import 'swiper/css/pagination';
 import { Navigation } from "swiper/modules";
 import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+
 import { Toaster, toast } from 'sonner'
 import { useRouter } from "next/navigation";
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 
 
 function Homepage() {
 
   const [show, setShow] = useState(false);
-  // const login = localStorage?.getItem("token");
-  const login = 1
+  const login = typeof window !== 'undefined' ? JSON.parse(localStorage?.getItem("token")) : 1
+
   // const [login, setLogin] = useState(localStorage.getItem("token"));
   const [smShow, setSmShow] = useState(false);
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -54,7 +61,117 @@ function Homepage() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+  const [verify, setVerify] = useState("d-none");
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [register_name, setRegister_name] = useState('');
+  const [register_email, setRegister_email] = useState('');
+  const [register_phone, setRegister_phone] = useState('');
+  const [register_password, setRegister_password] = useState('');
+  const [register_locality, setRegister_locality] = useState('');
+  const [register_city, setRegister_city] = useState('');
+  const [register_state, setRegister_state] = useState('');
+  const [register_zip, setRegister_zip] = useState('');
+
   const route = useRouter();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setisSubmitingLoader(true)
+
+    if (register_name == '' || register_email == '' || register_phone == '' || register_password == '' || register_city == '' || register_zip == '' || register_locality == '' || register_state == '') {
+      toast.error("All fields are required!!")
+    }
+    else if (register_phone.length < 10) {
+      toast.error("Please enter 10 digit phone number!!")
+    }
+    else if (register_zip.length !== 6) {
+      toast.error("Please enter 6 digit Zipcode!!")
+    }
+    else {
+
+      let person = {
+        "name": register_name,
+        "email": register_email,
+        "user_phno": register_phone,
+        "password": register_password,
+        "user_locality": register_locality,
+        "user_city": register_city,
+        "user_state": register_state,
+        "user_zipcode": register_zip,
+        "user_type": "Customer"
+      };
+
+      try {
+        const resp = await postData("/register", person);
+        console.log("resp", resp);
+        if (resp?.status) {
+          toast.success("Customer Registered Successfully!!");
+
+
+          // setSmShow(false);
+        }
+        else {
+          toast.error(resp?.errors?.email[0]);
+          console.log("Customer register fail error", resp?.errors);
+
+        }
+
+
+
+      } catch (error) {
+        console.log("catch Error", error)
+      }
+
+
+    }
+    setisSubmitingLoader(false)
+
+
+  }
+
+  const handleLogin = async (e) => {
+
+    e.preventDefault();
+    setisSubmitingLoader(true);
+    if (email == "" || password == '') {
+      toast.error("Both fields are required!!")
+      setisSubmitingLoader(false)
+    }
+    else {
+      const login = {
+        "email": email,
+        "password": password,
+        "user_type": "Customer"
+      }
+
+      try {
+        const resp = await postData("/login", login);
+        console.log("resp Login", resp)
+        if (resp?.success) {
+          toast.success(resp?.message);
+
+
+          if (typeof window !== 'undefined') {
+            localStorage?.setItem("token", JSON.stringify(resp?.data?.token));
+            localStorage?.setItem("userName", JSON.stringify(resp?.data?.name?.name))
+          }
+          
+        }
+        else {
+          toast.error(resp?.message);
+
+        }
+      } catch (error) {
+        console.log("try-catch error", error)
+      }
+      setisSubmitingLoader(false);
+      setSmShow(false);
+    }
+  }
 
 
   return (
@@ -140,52 +257,138 @@ function Homepage() {
 
         <div className="user_model">
           <Modal
-            size="sm"
+
             show={smShow}
             onHide={() => setSmShow(false)}
             aria-labelledby="example-modal-sizes-title-sm"
           >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-modal-sizes-title-sm">
-                Login / Register
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div >
 
-                { //conditional operator
-                  login !== 1 ?
-                    (<div>
+            <Modal.Body >
+              <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
+                {/* <Tab eventKey="first" title="Register" >
 
-                      <div className="d-flex justify-content-around">
-                        <h6>Name:</h6>
-                        {/* <h6>{localStorage?.getItem("userName")}</h6> */}
-                      </div>
-                      <div className="d-flex justify-content-center mt-3">
-                        <Button variant="primary" onClick={() => {
-                          // localStorage?.removeItem("token");
-                          toast.success("Logged out successfully!");
+                  <Form.Group className="mb-2" >
+                    <Form.Label className="mt-2">Name</Form.Label>
+                    <Form.Control placeholder="Name" type="text" value={register_name} onChange={(e) => setRegister_name(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-2" >
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control placeholder="Email" type="email" value={register_email} onChange={(e) => setRegister_email(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-2" >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control placeholder="Password" type="password" value={register_password} onChange={(e) => setRegister_password(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-2" >
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control placeholder="Phone" type="number" value={register_phone} onChange={(e) => setRegister_phone(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="primary" type="submit" onClick={() => { setVerify("d-block"); toast.error("Phone Need to be varified!!") }}>
+                    Verify Phone Number
+                  </Button>
+                  <div className={`${verify}`}>
+                    <hr />
+                    <Form.Group className="mb-2" >
+                      <Form.Label className="mt-2">OTP</Form.Label>
+                      <Form.Control placeholder="OTP" type="text" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={handleRegister} >
+                      Submit
+                    </Button>
 
-                          setSmShow(false);
-                          setTimeout(route.push("/"), 4500);
-
-                        }}>
-                          Logout
-                        </Button>
-                      </div>
-                    </div>
-                    )
-                    :
-                    (
-                      <div className="d-flex justify-content-around">
-                        <Button variant="primary" onClick={() => route.push("/login")}>Login</Button>
-                        <Button variant="primary" onClick={() => route.push("/register")}>Register</Button>
-                      </div>
-                    )
-                }
+                  </div>
 
 
-              </div>
+
+
+                </Tab> */}
+                <Tab eventKey="first" title="Register" >
+                  <Form>
+                    <Row className="mb-2 mt-2">
+                      <Form.Group as={Col} controlId="formGridName">
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter your name" value={register_name} onChange={(e) => setRegister_name(e.target.value)} />
+                      </Form.Group>
+
+                      <Form.Group as={Col} controlId="formGridPassword">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="Enter your email" value={register_email} onChange={(e) => setRegister_email(e.target.value)} />
+                      </Form.Group>
+                    </Row>
+                    <Row className="mb-2 mt-2">
+                      <Form.Group as={Col} controlId="formGridName">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Enter your name" value={register_password} onChange={(e) => setRegister_password(e.target.value)} />
+                      </Form.Group>
+
+                      <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Label>Phone</Form.Label>
+                        <Form.Control type="number" placeholder="Enter your phone number" value={register_phone} onChange={(e) => setRegister_phone(e.target.value)} />
+                      </Form.Group>
+                    </Row>
+
+
+
+                    <Form.Group className="mb-2" controlId="formGridAddress2">
+                      <Form.Label>Address </Form.Label>
+                      <Form.Control placeholder="Enter your address" value={register_locality} onChange={(e) => setRegister_locality(e.target.value)} />
+                    </Form.Group>
+
+                    <Row className="mb-2">
+                      <Form.Group as={Col} controlId="formGridCity">
+                        <Form.Label>City</Form.Label>
+                        <Form.Control placeholder="City" value={register_city} onChange={(e) => setRegister_city(e.target.value)} />
+                      </Form.Group>
+
+                      <Form.Group as={Col} controlId="formGridState">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control placeholder="State" value={register_state} onChange={(e) => setRegister_state(e.target.value)} />
+                      </Form.Group>
+
+                      <Form.Group as={Col} controlId="formGridZip">
+                        <Form.Label>Zip</Form.Label>
+                        <Form.Control type="number" placeholder="Zipcode" value={register_zip} onChange={(e) => setRegister_zip(e.target.value)} />
+                      </Form.Group>
+                    </Row>
+
+
+
+                    <Button variant="primary" className="mt-2" onClick={() => { setVerify("d-block"); toast.error("Phone Need to be varified!!") }}>
+                      Verify phone number!!
+                    </Button>
+                  </Form>
+                  <div className={`${verify}`}>
+                    <hr />
+                    <Form.Group className="mb-2" >
+                      <Form.Label className="mt-2">OTP</Form.Label>
+                      <Form.Control placeholder="OTP" type="text" />
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={handleRegister} >
+                      Submit
+                    </Button>
+
+                  </div>
+
+
+
+
+                </Tab>
+                <Tab eventKey="second" title="Login">
+                  <Form.Group className="mb-2" >
+                    <Form.Label className="mt-2">Email</Form.Label>
+                    <Form.Control placeholder="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                  </Form.Group>
+                  <Form.Group className="mb-2" >
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                  </Form.Group>
+                  <Button variant="primary" type="submit" onClick={handleLogin}>
+                    Submit
+                  </Button>
+                </Tab>
+
+              </Tabs>
+
             </Modal.Body>
 
           </Modal>
@@ -240,7 +443,7 @@ function Homepage() {
             // }}
             >
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/plumber.png"
@@ -253,7 +456,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/electric.png"
@@ -266,7 +469,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/ac.png"
@@ -279,7 +482,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/invertor.png"
@@ -292,7 +495,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/carpainter.png"
@@ -305,7 +508,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/plumber.png"
@@ -318,7 +521,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/electric.png"
@@ -331,7 +534,7 @@ function Homepage() {
                 </Link>
               </SwiperSlide>
               <SwiperSlide className={style.slider2_background}>
-                <Link href="#" target="_blank">
+                <Link href="/acservice" >
                   <div>
                     <Image
                       src="/homepage/ac.png"

@@ -19,12 +19,14 @@ import Comp2 from "@/components/HelpComponents/comp2"
 import Comp3 from "@/components/HelpComponents/comp3"
 import Comp4 from "@/components/HelpComponents/comp4"
 import Comp5 from "@/components/HelpComponents/comp5"
+import Comp6 from "@/components/HelpComponents/comp6"
+import Comp7 from "@/components/HelpComponents/comp7"
 import { useState, useEffect } from "react";
 
 
 const Help = () => {
 
-    const [comp, setComp] = useState(3);
+    const [comp, setComp] = useState(6);
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
 
@@ -55,10 +57,24 @@ const Help = () => {
                 <div className="row">
                     <div className='col-md-4'>
                         <div className={style.helpbttn}>
+                            <div onClick={() => { setComp(6) }}>
+                                <button className={comp === 6 ? "compbttnstyle" : " "}>
+                                    Customer Profile
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
 
                             <div onClick={() => { setComp(3) }}>
                                 <button className={comp === 3 ? "compbttnstyle" : " "}>
                                     Help with Services
+                                    <FaArrowRightLong />
+                                </button>
+                            </div>
+
+                            <div onClick={() => { setComp(7) }}>
+                                <button className={comp === 7 ? "compbttnstyle" : " "}>
+                                    Services history
                                     <FaArrowRightLong />
                                 </button>
                             </div>
@@ -121,7 +137,10 @@ const Help = () => {
                                 comp == 2 ? (<Comp2 />) :
                                     comp == 3 ? <Comp3 /> :
                                         comp == 4 ? <Comp4 /> :
-                                            comp == 5 ? <Comp5 /> : "No comp"
+                                            comp == 5 ? <Comp5 /> :
+                                                comp == 6 ? <Comp6 /> :
+                                                    comp == 7 ? <Comp7 /> : "No comp"
+
                         }
 
 

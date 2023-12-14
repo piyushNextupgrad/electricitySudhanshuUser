@@ -28165,3 +28165,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
 	-moz-appearance: textfield;
 }
+/* .nav_model .nav-item{
+	font-size:17px;
+	font-weight: bold;
+} */
+.login_tabs>li>button{
+	font-size:17px !important;
+	font-weight: bold !important;
+	border:none !important;
+}
+.login_tabs .active{
+	color:white !important;
+	border:none !important;
+	background-color: #4A32D4 !important;
+}
+.login_tabs>li>button:hover{
+	border:none !important;
+	color:black !important;
+}
