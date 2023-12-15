@@ -68,9 +68,9 @@ const ACservices = () => {
                             <div>
                                 <label>Quantity</label>{" "}
                                 <select id="dropdown" name="dropdown" onChange={handleOption}>
-                                    <option defaultValue="option1">Option 1</option>
-                                    <option defaultValue="option2">Option 2</option>
-                                    <option defaultValue="option3">Option 3</option>
+                                    <option defaultValue="1"> 1</option>
+                                    <option defaultValue="2"> 2</option>
+                                    <option defaultValue="3"> 3</option>
                                 </select>
                             </div>
                             <div>

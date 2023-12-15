@@ -56,6 +56,7 @@ const Checkout = () => {
                 "service_book_date":today,
                 'service_avail_date':formateDate
              }
+               console.log("id",user_id)
             //  console.log("formated date",Date.now())
             //  console.log("formated date today",today)
             //  console.log("datenow",new Date())

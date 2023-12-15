@@ -318,9 +318,9 @@
 
 }
 
-.coupons>p>svg:hover {
+.coupons svg:hover {
     rotate: 360deg;
-    transition: 300ms;
+    transition: 5000ms;
 }
 
 .coupons>p {
@@ -404,6 +404,7 @@
     border-radius: 36px;
     padding: 20px;
 }
+
 
 .section4_div1_div1>div>div>h1 {
     font-size: 50px;
