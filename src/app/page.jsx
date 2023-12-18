@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import style from "../styles/homepage.module.css";
 import Image from "next/image";
@@ -47,6 +47,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import { getData } from "../../services/services";
 
 
 function Homepage() {
@@ -75,9 +76,17 @@ function Homepage() {
   const [register_city, setRegister_city] = useState('');
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
+  const [sliderServices,setSliderServices] = useState([])
 
   const route = useRouter();
 
+  const getServices = async() =>{
+        const resp = await getData("/GetService")
+        console.log("getServices",resp.data);
+        setSliderServices(resp.data)
+        
+  }
+  // console.log("sliderServices",sliderServices)
   const handleRegister = async (e) => {
     e.preventDefault();
     setisSubmitingLoader(true)
@@ -156,8 +165,8 @@ function Homepage() {
 
 
           if (typeof window !== 'undefined') {
-            localStorage?.setItem("token", JSON.stringify(resp?.data?.token));
-            localStorage?.setItem("userName", JSON.stringify(resp?.data?.name?.name))
+            localStorage.setItem("token", JSON.stringify(resp?.data?.token));
+            localStorage.setItem("userName", JSON.stringify(resp?.data?.name?.name))
           }
           
         }
@@ -172,7 +181,9 @@ function Homepage() {
       setSmShow(false);
     }
   }
-
+useEffect(() => {
+  getServices()
+}, []);
 
   return (
     <div>
@@ -202,7 +213,7 @@ function Homepage() {
                 </Link>
               </div>
               <div className={`${style.nav_icon} col-xxl-9 col-xl-9 col-lg-9 col-12`}>
-                <Link href="#">
+                <Link href="/checkout">
                   <FaShoppingCart />
                 </Link>
                 <Link href="#" onClick={() => setSmShow(true)} className="me-2">
@@ -442,20 +453,33 @@ function Homepage() {
             //     "--swiper-pagination-bullet-border-radius": "0px"
             // }}
             >
-              <SwiperSlide className={style.slider2_background}>
-                <Link href="/acservice" >
+              { sliderServices ? sliderServices?.map((t)=>(
+              <SwiperSlide className={style.slider2_background} >
+                <Link href={`/acservice?id=${t?.subscription_id}`}  >
                   <div>
                     <Image
-                      src="/homepage/plumber.png"
+                      src="/homepage/ac.png"
                       height={60}
                       width={60}
                       alt="img"
                     />
-                    <span>Plumbers</span>
+                    <span>{t.service_names}</span>
                   </div>
                 </Link>
-              </SwiperSlide>
-              <SwiperSlide className={style.slider2_background}>
+              </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background}>
+                <Link href="/acservice?id=54" >
+                  <div>
+                    <Image
+                      src="/homepage/electric.png"
+                      height={60}
+                      width={60}
+                      alt="img"
+                    />
+                    <span>dummy slide</span>
+                  </div>
+                </Link>
+              </SwiperSlide>)}
+              {/* <SwiperSlide className={style.slider2_background}>
                 <Link href="/acservice" >
                   <div>
                     <Image
@@ -545,7 +569,7 @@ function Homepage() {
                     <span>AC Repair</span>
                   </div>
                 </Link>
-              </SwiperSlide>
+              </SwiperSlide> */}
             </Swiper>
 
           </div>
@@ -654,7 +678,7 @@ function Homepage() {
                     <h1>Its Summer Time !</h1>
                     <p>Get 30% Off First 50 Order</p>
                     <div>
-                      <Link href="#">BOOK SERVICES</Link>
+                      <Link href="/services">BOOK SERVICES</Link>
                     </div>
                   </div>
                   <div className={style.ac_image}>
@@ -674,7 +698,7 @@ function Homepage() {
                     <div>
                       <p>Get 45% Off More then 10 Services</p>
                       <div>
-                        <Link href="#">BOOK SERVICES</Link>
+                        <Link href="/services">BOOK SERVICES</Link>
                       </div>
                     </div>
                     <div>
@@ -699,7 +723,7 @@ function Homepage() {
                   width={200}
                   alt="img"
                 />
-                <Link href="#">BOOK SERVICES</Link>
+                <Link href="/services">BOOK SERVICES</Link>
               </div>
             </div>{" "}
           </div>{" "}
@@ -1012,10 +1036,10 @@ function Homepage() {
                   <MdKeyboardDoubleArrowRight />
                   <Link href="/help">HELP</Link>
                 </li>
-                <li>
+                {/* <li>
                   <MdKeyboardDoubleArrowRight />
                   <Link href="/acservice">AC SERVICE</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
             <hr />

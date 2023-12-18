@@ -282,10 +282,10 @@ const Navbar = () => {
                 <MdKeyboardDoubleArrowRight />
                 <Link href="/help">HELP</Link>
               </li>
-              <li>
+              {/* <li>
                 <MdKeyboardDoubleArrowRight />
                 <Link href="/acservice">AC SERVICE</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <hr />

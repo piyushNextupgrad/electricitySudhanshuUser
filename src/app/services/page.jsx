@@ -7,6 +7,8 @@ import Subescribe from "@/components/subscribe";
 import CommonFooter from "@/components/commomfooter";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Toaster, toast } from 'sonner'
+import { useRouter } from "next/navigation";
 import { getData } from "../../../services/services";
 
 
@@ -15,20 +17,24 @@ import { getData } from "../../../services/services";
 const Services = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     const [getService, setGetService] = useState([])
+    const [service_id,setService_id] =useState('');
 
+
+    const route = useRouter();
     const get_services = async () => {
         const resp = await getData("/GetService")
         console.log("get_services", resp)
         // return resp;
         setGetService(resp.data);
+        console.log("GetService",getService)
     }
 
     useEffect(() => {
         get_services()
-        
+
     }, []);
 
-    
+
     return (
         <div >
             {isSubmitingLoader ? (
@@ -38,6 +44,7 @@ const Services = () => {
                     </div>
                 </div>
             ) : null}
+            <Toaster position="top-center" richColors />
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -49,12 +56,21 @@ const Services = () => {
             <section className={style.section2}>
                 <div className="container">
                     <div className="row align-items-center">
-                    {getService.map((t)=>(
-                        <div className="col-xxl-4 col-xl-4 col-lg-4">
-                            <Image src="/services/icon1.png" height={100} width={100} alt="img" />
-                            <h2>{t.service_name}</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                        </div> ))}
+                        {getService
+                            ?//conditional operator
+                            getService?.map((t) => (
+                                <div className="col-xxl-4 col-xl-4 col-lg-4">
+                                    <Image src="/services/icon1.png" height={100} width={100} alt="img" />
+                                    <h2 onClick={()=>route.push(`/acservice?id=${t.subscription_id}`)}>{t.service_names}</h2>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                </div>))
+                            :
+                            (<div className="col-xxl-4 col-xl-4 col-lg-4">
+                                <Image src="/services/icon2.png" height={100} width={100} alt="img" />
+                                <h2 onClick={()=>{route.push("/acservice?id=54")}}>Dummy service</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                            </div>)}
+
                         {/* <div className="col-xxl-4 col-xl-4 col-lg-4">
                             <Image src="/services/icon2.png" height={100} width={100} alt="img" />
                             <h2>Lorem Ipsum is Simply</h2>

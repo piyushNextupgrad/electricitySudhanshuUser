@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useState } from "react";
 import { FaEnvelope } from "react-icons/fa6";
+import { Toaster, toast } from 'sonner'
 
 
 export default function Forgot() {
@@ -17,6 +18,7 @@ export default function Forgot() {
                         </div>
                     </div>
                 ) : null}
+                <Toaster position="top-center" richColors />
                 <div className="page-single construction-body">
                     <div className="container text-center single-page single-pageimage  ">
                         <div className="row">

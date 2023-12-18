@@ -7,26 +7,89 @@ import style from "@/styles/acservice.module.css";
 import Accordion from 'react-bootstrap/Accordion';
 import Subscribe from "@/components/subscribe";
 import CommonFooter from "@/components/commomfooter";
+import { getData } from "../../../services/services";
+import { Toaster, toast } from 'sonner'
 
 import Navbar from "@/components/navbar";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+
+
 const ACservices = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
+    const [quantity, setQuantity] = useState('');
+    const [serv_date, setServ_date] = useState('')
+    const [serv_name, setServ_name] = useState('')
+    const[serv_cost,setServ_cost] = useState('')
 
-    const handleOption = (e) => {
-        console.log("select", e.target.value);
-        if (typeof window !== 'undefined') {
-            localStorage.setItem("Elect_service_qty", e.target.value);
-        }
+    const route = useRouter();
+    const searchParams = useSearchParams();
+    const id_in_url = searchParams.get("id");
+
+
+    // console.log("id", id_in_url);
+    // console.log("quantity", quantity);
+    // console.log("date", serv_date)
+
+    const getServices = async () => {
+        const getServiceResp = await getData(`/GetOneService?id=${id_in_url}`);
+        console.log("getServiceResp", getServiceResp);
+        // setServ_name("service name")
+        getServiceResp?.data[0]?.service_names
+            ? //conditional operator used here
+            setServ_name(getServiceResp?.data[0]?.service_names)
+            :
+            setServ_name("Service Name");
+
+            setServ_cost(getServiceResp?.data[0]?.service_cost)
     }
-    const handleDate = (e) => {
-        
-        console.log("date", e.target.value);
-        if (typeof window !== 'undefined') {
-            localStorage.setItem("Elect_service_date", e.target.value);
+    const handleCart = (e) => {
+        e.preventDefault();
+        setisSubmitingLoader(true)
+        if (serv_date !== "" && quantity !== "") {
+            try {
+                if (typeof window !== 'undefined') {
+                    const NewServ = {
+                        "service_id": id_in_url,
+                        "service_date": serv_date,
+                        "service_quantity": quantity,
+                        "service_name":serv_name,
+                        "service_cost":serv_cost
+                    }
+                    console.log("NewServ", NewServ)
+                    if (localStorage.getItem("Cart") === null) {
+                        localStorage.setItem("Cart", JSON.stringify([]))
+                    }
+                    const existingCart = JSON.parse(localStorage.getItem("Cart"))
+                    existingCart.push(NewServ)
+                    localStorage.setItem("Cart", JSON.stringify(existingCart))
+                    toast.success("Service added to Cart")
+
+                    // else {
+
+                    //     const existingCart = JSON.parse(localStorage.getItem("Cart"))
+                    //     existingCart.push(NewServ)
+                    //     localStorage.setItem("Cart", JSON.stringify(existingCart))
+                    //     toast.success("Service added to Cart")
+                    // }
+                }
+            } catch (error) {
+                console.log("try-catch error", error)
+            }
+        } else {
+            toast.error("Please choose correctly!!")
         }
+        setisSubmitingLoader(false)
     }
+
+
+    useEffect(() => {
+        getServices();
+
+    }, []);
     return (
         <div >
             {isSubmitingLoader ? (
@@ -36,7 +99,7 @@ const ACservices = () => {
                     </div>
                 </div>
             ) : null}
-
+            <Toaster position="top-center" richColors />
             <section className={`${style.section1} container-fluid`}  >
                 <div className="container">
                     <div className="row align-items-center">
@@ -53,9 +116,9 @@ const ACservices = () => {
                     </div>
                     <div className={`${style.section2_div2} col-xs-12  col-sm-12 col-md-12 col-lg-6 text-sm-center text-lg-start  text-xs-center`} >
                         <span>30 DAYS WARRENTY</span>
-                        <h1>Foam & Power jet AC Service (Split)</h1>
+                        <h1>{serv_name}</h1>
                         <div>
-                            <span>$599</span>
+                            <span>Cost:{serv_cost}</span>
                             <span>45 mins</span>
                         </div>
                         <ul className="text-start">
@@ -67,20 +130,28 @@ const ACservices = () => {
                         <div>
                             <div>
                                 <label>Quantity</label>{" "}
-                                <select id="dropdown" name="dropdown" onChange={handleOption}>
+                                <select id="dropdown" name="dropdown" onChange={(e) => setQuantity(e.target.value)}>
+                                    <option defaultValue="select"> Select</option>
                                     <option defaultValue="1"> 1</option>
-                                    <option defaultValue="2"> 2</option>
-                                    <option defaultValue="3"> 3</option>
+                                    <option value="2"> 2</option>
+                                    <option value="3"> 3</option>
+                                    <option value="4"> 4</option>
+                                    <option value="5"> 5</option>
                                 </select>
                             </div>
                             <div>
                                 <label>Date</label>{" "}
-                                <input type="datetime-local" onChange={handleDate} />
+                                <input type="datetime-local" onChange={(e) => setServ_date(e.target.value)} />
                             </div>
                         </div>
+
                         <div className={style.bttn}>
-                            <Link href="/checkout">Add to Cart</Link>
+                            <Link href="#" onClick={handleCart}>Add to Cart</Link>
                         </div>
+                        <div className={style.bttn}>
+                            <Link href="/services" >Book other Services</Link>
+                        </div>
+
                     </div>
                 </div>
 
@@ -231,11 +302,11 @@ const ACservices = () => {
                                 <p>4.83<span><FaStar /></span></p>
                                 <span>26.8k reviews</span>
                                 <ul>
-                                    <li>5<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} value={5} /><span>25.2k</span></li>
-                                    <li>4<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} value={3} /><span>6.1k</span></li>
-                                    <li>3<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} value={2} /><span>7.2k</span></li>
-                                    <li>2<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} value={2} /><span>8.3k</span></li>
-                                    <li>1<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} value={1} /><span>9.4k</span></li>
+                                    <li>5<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} defaultValue={5} /><span>25.2k</span></li>
+                                    <li>4<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} defaultValue={3} /><span>6.1k</span></li>
+                                    <li>3<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} defaultValue={2} /><span>7.2k</span></li>
+                                    <li>2<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} defaultValue={2} /><span>8.3k</span></li>
+                                    <li>1<FaStar /><input style={{ accentColor: " black;" }} type="range" min={0} max={5} defaultValue={1} /><span>9.4k</span></li>
                                 </ul>
 
                             </div>

@@ -12,6 +12,7 @@ import { useState, useEffect } from "react";
 import style from "@/styles/plan.module.css"
 import { FiCheck } from 'react-icons/fi';
 import { getData } from "../../../services/services";
+import { Toaster, toast } from 'sonner'
 
 const Plan = () => {
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -53,6 +54,7 @@ const Plan = () => {
           </div>
         </div>
       ) : null}
+      <Toaster position="top-center" richColors />
       <section className={style.section1} >
 
         <div className="container" >

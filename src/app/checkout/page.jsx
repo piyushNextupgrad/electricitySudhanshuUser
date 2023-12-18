@@ -12,7 +12,7 @@ import Subescribe from "@/components/subscribe";
 import { useEffect, useState } from "react";
 import { postData } from "../../../services/services";
 import { getFormatedDate } from "../../../helper/helper";
-import { toast } from "sonner";
+import { Toaster, toast } from 'sonner'
 
 
 
@@ -21,31 +21,49 @@ const Checkout = () => {
     const [highlight2, setHighlight2] = useState(0)
     const [def_selt, setDef_selt] = useState('');
     const [def_dte, setDef_dte] = useState('');
-    const[user_id,setUser_id] = useState('')
-    const [finalSelect,setFinalSelect] = useState('')
-    const [finalDate,setFinalDate] = useState('')
+    const [user_id, setUser_id] = useState('')
+    const [finalSelect, setFinalSelect] = useState('')
+    const [finalDate, setFinalDate] = useState('')
+    const [cartList, setCartList] = useState([])
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
+    const [cartTotal,setCartTotol] = useState();
+    const [finalAmmt,setFinalAmmt] =useState();
 
 
     const def_values = () => {
 
         if (typeof window !== 'undefined') {
-            setDef_selt(localStorage.getItem("Elect_service_qty"));
-            setDef_dte(localStorage.getItem("Elect_service_date"));
-            setUser_id(localStorage.getItem("ElectricityId"));
+            // setDef_selt(localStorage.getItem("Elect_service_qty"));
+            // setDef_dte(localStorage.getItem("Elect_service_date"));
+            // setUser_id(localStorage.getItem("ElectricityId"));
+            const cartServices = JSON.parse(localStorage.getItem("Cart"))
+            // console.log("cartServices", cartServices)
+            setCartList(cartServices)
+            //adding cart total here
+            const total_array=[]
+           cartServices.filter((c)=>total_array.push(c.service_cost))
+            // console.log("total",total_array)
+            let total = 0;
+             total_array.map((e)=>{
+                
+                total = total + e;
+                setCartTotol(total)
+                setFinalAmmt(total + 59)
+            })
+
         }
 
     }
-    
 
-    
-    const handleSubmit = async() => {
-        if (typeof window !== 'undefined') {
-            localStorage.removeItem("Elect_service_date")
-            localStorage.removeItem("Elect_service_qty")
-        }
-        // console.log("final quantity is",finalSelect)
-        // console.log("final date is",finalDate)
+
+    // console.log("CArtlist",cartList)
+    const handleSubmit = async () => {
+        setisSubmitingLoader(true)
+        
+        // if (typeof window !== 'undefined') {
+           
+        // }
+        
         try {
                 const formateDate = getFormatedDate(finalDate,"YYYY-MM-DD hh:mm:ss")
                 const today = getFormatedDate(Date.now(),"YYYY-MM-DD hh:mm:ss")
@@ -60,22 +78,23 @@ const Checkout = () => {
             //  console.log("formated date",Date.now())
             //  console.log("formated date today",today)
             //  console.log("datenow",new Date())
-            //  console.log("servicebooking object",ServiceBooking)
+             console.log("servicebooking object",ServiceBooking)
             //  console.log("final_Select",finalSelect)
             //  console.log("type of finalselect",typeof(Number(finalSelect)))
             const resp = await postData("/StoreServiceBooking",ServiceBooking)
             console.log("resp",resp)
-            toast.success(resp.message);
+            toast(resp.message);
         } catch (error) {
                 console.log("try-catch error",error)
         }
-        
+        setisSubmitingLoader(false)
+
     }
     useEffect(() => {
         def_values()
     }, []);
 
-
+        
     return (
         <div >
             {isSubmitingLoader ? (
@@ -85,6 +104,7 @@ const Checkout = () => {
                     </div>
                 </div>
             ) : null}
+            <Toaster position="top-center" richColors />
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
@@ -116,10 +136,10 @@ const Checkout = () => {
                             <label>Varification Code</label>
                             <p>We Have send you 4 digit varification code on <span>+91-7985133197</span></p>
                             <div className="justify-content-center justify-content-lg-start">
-                                <input type="text" maxlength="1" />
-                                <input type="text" maxlength="1" />
-                                <input type="text" maxlength="1" />
-                                <input type="text" maxlength="1" />
+                                <input type="text" maxLength="1" />
+                                <input type="text" maxLength="1" />
+                                <input type="text" maxLength="1" />
+                                <input type="text" maxLength="1" />
                             </div>
                         </div>
                         <div className={style.address}>
@@ -163,35 +183,132 @@ const Checkout = () => {
                                 </div>
                             </div>
                         </div> */}
-                        <div className={style.payment}>
-                            <h2>Payment Method</h2>
-                            <Link href="#" onClick={handleSubmit}>Pay $658</Link>
+                        {/* <div className={style.seasonoffer}>
+                            <div >
+                                <div>
+                                    <div>
+                                        <h1>Its Summer Time !</h1>
+                                        <p>Get 30% Off First 50 Order</p>
+                                        <div>
+                                            <Link href="#">BOOK SERVICES</Link>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <Image
+                                            src="/homepage/Layer_31.png"
+                                            height={150}
+                                            width={300}
+                                            alt="img"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div >
+                                <div>
+                                    <h1>Its All Time Offer !</h1>
+                                    <div>
+                                        <div>
+                                            <p>Get 45% Off More then 10 Services</p>
+                                            <div>
+                                                <Link href="#">BOOK SERVICES</Link>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Image
+                                                src="/homepage/Layer_35.png"
+                                                height={150}
+                                                width={400}
+                                                alt="img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> */}
+                        <div className={style.section4_div1}>
+                            <div className={style.section4_div1_div2}>
+                                <div>
+                                    <h1>Its Summer Time !</h1>
+                                    <div>
+                                        <div>
+                                            <p>Get 30% Off First 50 Order.</p>
+                                            <div>
+                                                <Link href="/services">BOOK SERVICES</Link>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Image
+                                                src="/homepage/Layer_31.png"
+                                                height={150}
+                                                width={400}
+                                                alt="img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={style.section4_div1_div2}>
+                                <div>
+                                    <h1>Its All Time Offer !</h1>
+                                    <div>
+                                        <div>
+                                            <p>Get 45% Off More then 10 Services</p>
+                                            <div>
+                                                <Link href="/services">BOOK SERVICES</Link>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <Image
+                                                src="/homepage/Layer_35.png"
+                                                height={150}
+                                                width={400}
+                                                alt="img"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
 
                     <div className={`${style.section2_col2} col text-center text-lg-start`} >
+                        {/* {cartList.map((t)=>{})} */}
                         <div className={style.foam}>
-                            <h1>Foam & Power jet AC Service (Split)</h1>
-                            <div className={style.foam_payment}>
-                                <span>$599</span>
-                                <span>45 mins</span>
-                            </div>
-                            <div className={style.quantity}>
-                                <div>
-                                    <label>Quantity</label>{" "}
-                                    <select id="dropdown" name="dropdown"  onChange={(e)=>{setFinalSelect(e.target.value)}}>    
-                                        <option value={def_selt} >{def_selt}</option>
-                                        <option value="1" >1</option>
-                                        <option value="2" >2</option>
-                                        <option value="3" >3</option>
-                                    </select>
+                            {cartList.map((t)=>(
+                            <div >
+                                {/* <hr/> */}
+                                <h1 className="text-center">{t.service_name}</h1>
+                                <div className={style.foam_payment}>
+                                    <span>${t.service_cost}</span>
+                                    <span>45 mins</span>
                                 </div>
-                                <div>
-                                    <label>Date</label>{" "}
-                                    <input type="datetime-local" value={def_dte} onChange={(e)=>setFinalDate(e.target.value)}/>
+                                {/* { console.log("t",t.service_cost)} */}
+                                <div className={style.quantity}>
+                                    <div>
+                                        <label>Quantity</label>{" "}
+                                        <select id="dropdown" name="dropdown" value={t.service_quantity} onChange={(e) => { setFinalSelect(e.target.value) }}>
+                                            <option value="choose" >choose</option>
+                                            <option value="1" >1</option>
+                                            <option value="2" >2</option>
+                                            <option value="3" >3</option>
+                                            <option value="4" >4</option>
+                                            <option value="5" >5</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>Date</label>{" "}
+                                        <input type="datetime-local" value={t.service_date} onChange={(e) => setFinalDate(e.target.value)} />
+                                    </div>
                                 </div>
+                                {/* <hr/> */}
                             </div>
+                            ))}
+                            {/* <div className={style.payment}>
+                                <h2>Payment Method</h2>
+                                <Link href="/services" >Book other services</Link>
+                            </div> */}
                             <div className={style.coupons}>
                                 <p><FiCheck />Avoid calling before reaching the location</p>
                                 <div>
@@ -209,7 +326,7 @@ const Checkout = () => {
                             <h2>Payment Summary</h2>
                             <div>
                                 <span>Item Total</span>
-                                <span>$599</span>
+                                <span>${cartTotal}</span>
                             </div>
                             <div>
                                 <span>Tax & Fee</span>
@@ -218,15 +335,20 @@ const Checkout = () => {
                             <hr />
                             <div>
                                 <span>Total</span>
-                                <span>$658</span>
+                                <span>${finalAmmt}</span>
                             </div>
                             <div className={style.ttlpmt}>
                                 <span>Ammount to Pay</span>
-                                <span>$658</span>
+                                <span>${finalAmmt}</span>
                             </div>
                             <hr />
 
                         </div>
+                        <div className={style.payment}>
+                            <h2>Payment Method</h2>
+                            <Link href="#" onClick={handleSubmit}>Pay ${finalAmmt}</Link>
+                        </div>
+
                         <div className={style.cancellation}>
                             <h3>Cancellation Policy</h3>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, modi animi? Exercitationem aut reprehenderit recusandae nisi dolore fuga quod libero!</p>

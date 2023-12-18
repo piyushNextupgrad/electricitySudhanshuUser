@@ -85,8 +85,11 @@
 .section2>div>div>p{
     font-size: 15px;
 }
-.section2>div>div>h2{
+.section2>div>div>div>h2{
     font-weight: bold;
+}
+.section2>div>div>div>h2:hover{
+    cursor:pointer;
 }
 .section3{
   

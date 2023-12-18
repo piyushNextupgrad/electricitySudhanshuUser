@@ -8,6 +8,7 @@ import style from "@/styles/help.module.css"
 import Navbar from "@/components/navbar";
 import Link from "next/link";
 import Image from "next/image";
+import { Toaster, toast } from 'sonner'
 
 
 
@@ -45,6 +46,7 @@ const Help = () => {
                     </div>
                 </div>
             ) : null}
+            <Toaster position="top-center" richColors />
             <section className={style.section1}>
                 <div className="container">
                     <div className="row align-items-center">
