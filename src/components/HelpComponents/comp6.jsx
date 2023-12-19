@@ -26,7 +26,7 @@ const Comp6 = () => {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
-    const [userType,setUserType] = useState('')
+    const [userType, setUserType] = useState('')
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
 
@@ -40,6 +40,7 @@ const Comp6 = () => {
 
                 const resp = await getData(`/GetAllUser?id=${user_id}`)
                 console.log("get user resp", resp)
+                resp.msg === 'No Data Found' ? toast.error(resp.msg) : ""
                 setName(resp.data[0].name);
                 setEmail(resp.data[0].email);
                 setPhone(resp.data[0].user_phno);
@@ -52,7 +53,7 @@ const Comp6 = () => {
                 setState(resp.data[0].user_state);
                 setHno(resp.data[0].user_house_num);
                 setUserType(resp.data[0].user_type);
-               
+
             }
 
         } catch (error) {
@@ -60,56 +61,60 @@ const Comp6 = () => {
         }
         setisSubmitingLoader(false)
     }
-    
+
     const handleUpdate = async (e) => {
         e.preventDefault();
         setisSubmitingLoader(true)
+        
 
-        try {
-            
-            if (zip.toString().length !== 6) {
-                toast.error("Zipcode must be 6 digits!!")
-                // console.log("zip",typeof(zip))
-                // console.log("zip",zip.length)
-            }
-            else if (alt_phone.toString().length !== 10) {
-                toast.error("Phone no must have 10 numbers!!")
-                // console.log("phone",typeof(alt_phone))
-            }
-            else {
-                if (typeof window !== 'undefined') {
-                    const user_id = localStorage.getItem("ElectricityId");
-                    console.log("user-id", user_id)
-                    const person = {
-                        "updId": user_id,
-                        "name": name,
-                        "user_alt_phno": alt_phone,
-                        "user_locality": locality,
-                        "user_house_num": Hno,
-                        "user_landmark": lankmark,
-                        "user_zipcode": zip,
-                        "user_city": city,
-                        "user_state": state,
-                        "user_country": country,
-                        "user_type": "Customer"
-                    }
-                    const resp = await putData(`/UpdateUser?id=${user_id}`, person)
-                    console.log("update user resp", resp)
-                    toast.success(resp.message)
-                    route.refresh();
+            try {
+
+                if (zip.toString().length !== 6) {
+                    toast.error("Zipcode must be 6 digits!!")
+                    // console.log("zip",typeof(zip))
+                    // console.log("zip",zip.length)
                 }
+                else if (alt_phone.toString().length !== 10) {
+                    toast.error("Phone no must have 10 numbers!!")
+                    // console.log("phone",typeof(alt_phone))
+                }
+                else {
+                    if (typeof window !== 'undefined') {
+                        const user_id = localStorage.getItem("ElectricityId");
+                        console.log("user-id", user_id)
+                        const person = {
+                            "updId": user_id,
+                            "name": name,
+                            "user_alt_phno": alt_phone,
+                            "user_locality": locality,
+                            "user_house_num": Hno,
+                            "user_landmark": lankmark,
+                            "user_zipcode": zip,
+                            "user_city": city,
+                            "user_state": state,
+                            "user_country": country,
+                            "user_type": "Customer"
+                        }
+                        const resp = await putData(`/UpdateUser?id=${user_id}`, person)
+                        console.log("update user resp", resp)
+                        resp.message ? toast.success(resp.message) : toast.error(resp.msg)
+
+                        location.reload();
+                    }
+                }
+
+
+
+            } catch (error) {
+                console.log("try-catch error", error)
             }
-
-
-
-        } catch (error) {
-            console.log("try-catch error", error)
-        }
+        
         setisSubmitingLoader(false)
     }
 
     const handleLogout = () => {
         setisSubmitingLoader(true)
+        
         try {
             if (typeof window !== 'undefined') {
                 localStorage.removeItem("token");
@@ -213,12 +218,17 @@ const Comp6 = () => {
 
 
                 <div className='d-flex justify-content-evenly'>
-                    <Button variant="primary" type="submit" onClick={handleUpdate}>
+
+                    {(email == "" || userType == "" || phone == "" ) ? (<Button variant="primary" type="submit" onClick={handleUpdate} disabled>
                         Update
-                    </Button>
-                    <Button variant="primary" type="submit" onClick={handleLogout}>
+                    </Button>):(<Button variant="primary" type="submit" onClick={handleUpdate}>
+                        Update
+                    </Button>)}
+                    {(email == "" || userType == "" || phone == "" )? (<Button variant="primary" type="submit" onClick={handleLogout} disabled>
                         Sign Out
-                    </Button>
+                    </Button>):(<Button variant="primary" type="submit" onClick={handleLogout}>
+                        Sign Out
+                    </Button>)}
                 </div>
             </Form>
         </div>

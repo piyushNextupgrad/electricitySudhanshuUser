@@ -17,7 +17,7 @@ import { getData } from "../../../services/services";
 const Services = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     const [getService, setGetService] = useState([])
-    const [service_id,setService_id] =useState('');
+    const [service_id, setService_id] = useState('');
 
 
     const route = useRouter();
@@ -26,7 +26,7 @@ const Services = () => {
         console.log("get_services", resp)
         // return resp;
         setGetService(resp.data);
-        console.log("GetService",getService)
+        console.log("GetService", getService)
     }
 
     useEffect(() => {
@@ -59,15 +59,15 @@ const Services = () => {
                         {getService
                             ?//conditional operator
                             getService?.map((t) => (
-                                <div className="col-xxl-4 col-xl-4 col-lg-4">
+                                <div className="col-xxl-4 col-xl-4 col-lg-4" key={t.subscription_id}>
                                     <Image src="/services/icon1.png" height={100} width={100} alt="img" />
-                                    <h2 onClick={()=>route.push(`/acservice?id=${t.subscription_id}`)}>{t.service_names}</h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                    <h2 onClick={() => route.push(`/acservice?id=${t.subscription_id}`)}>{t.service_names}</h2>
+                                    <p>{t.service_des} </p>
                                 </div>))
                             :
                             (<div className="col-xxl-4 col-xl-4 col-lg-4">
                                 <Image src="/services/icon2.png" height={100} width={100} alt="img" />
-                                <h2 onClick={()=>{route.push("/acservice?id=54")}}>Dummy service</h2>
+                                <h2 onClick={() => { route.push("/acservice?id=54") }}>Dummy service</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
                             </div>)}
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import style from "../styles/homepage.module.css";
 import Image from "next/image";
@@ -76,15 +76,15 @@ function Homepage() {
   const [register_city, setRegister_city] = useState('');
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
-  const [sliderServices,setSliderServices] = useState([])
+  const [sliderServices, setSliderServices] = useState([])
 
   const route = useRouter();
 
-  const getServices = async() =>{
-        const resp = await getData("/GetService")
-        console.log("getServices",resp.data);
-        setSliderServices(resp.data)
-        
+  const getServices = async () => {
+    const resp = await getData("/GetService")
+    console.log("getServices", resp.data);
+    setSliderServices(resp.data)
+
   }
   // console.log("sliderServices",sliderServices)
   const handleRegister = async (e) => {
@@ -168,7 +168,7 @@ function Homepage() {
             localStorage.setItem("token", JSON.stringify(resp?.data?.token));
             localStorage.setItem("userName", JSON.stringify(resp?.data?.name?.name))
           }
-          
+
         }
         else {
           toast.error(resp?.message);
@@ -181,9 +181,9 @@ function Homepage() {
       setSmShow(false);
     }
   }
-useEffect(() => {
-  getServices()
-}, []);
+  useEffect(() => {
+    getServices()
+  }, []);
 
   return (
     <div>
@@ -268,15 +268,18 @@ useEffect(() => {
 
         <div className="user_model">
           <Modal
-
+            size="sm"
             show={smShow}
             onHide={() => setSmShow(false)}
             aria-labelledby="example-modal-sizes-title-sm"
           >
+            <Modal.Header closeButton>
+              <Modal.Title><Image src="/logo.png" height={50} width={200} alt="img" /></Modal.Title>
+            </Modal.Header>
 
             <Modal.Body >
-              <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
-                {/* <Tab eventKey="first" title="Register" >
+              {/* <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
+                <Tab eventKey="first" title="Register" >
 
                   <Form.Group className="mb-2" >
                     <Form.Label className="mt-2">Name</Form.Label>
@@ -312,7 +315,7 @@ useEffect(() => {
 
 
 
-                </Tab> */}
+                </Tab>
                 <Tab eventKey="first" title="Register" >
                   <Form>
                     <Row className="mb-2 mt-2">
@@ -398,7 +401,15 @@ useEffect(() => {
                   </Button>
                 </Tab>
 
-              </Tabs>
+              </Tabs> */}
+              <div className="d-flex justify-content-evenly">
+                <Button variant="primary" onClick={() => route.push("/login")}>
+                  Login
+                </Button>
+                <Button variant="primary" onClick={() => route.push("/register")}>
+                  Register
+                </Button>
+              </div>
 
             </Modal.Body>
 
@@ -453,32 +464,32 @@ useEffect(() => {
             //     "--swiper-pagination-bullet-border-radius": "0px"
             // }}
             >
-              { sliderServices ? sliderServices?.map((t)=>(
-              <SwiperSlide className={style.slider2_background} >
-                <Link href={`/acservice?id=${t?.subscription_id}`}  >
-                  <div>
-                    <Image
-                      src="/homepage/ac.png"
-                      height={60}
-                      width={60}
-                      alt="img"
-                    />
-                    <span>{t.service_names}</span>
-                  </div>
-                </Link>
-              </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background}>
-                <Link href="/acservice?id=54" >
-                  <div>
-                    <Image
-                      src="/homepage/electric.png"
-                      height={60}
-                      width={60}
-                      alt="img"
-                    />
-                    <span>dummy slide</span>
-                  </div>
-                </Link>
-              </SwiperSlide>)}
+              {sliderServices ? sliderServices?.map((t) => (
+                <SwiperSlide className={style.slider2_background} key={t?.subscription_id}>
+                  <Link href={`/acservice?id=${t?.subscription_id}`}  >
+                    <div>
+                      <Image
+                        src="/homepage/ac.png"
+                        height={60}
+                        width={60}
+                        alt="img"
+                      />
+                      <span>{t.service_names}</span>
+                    </div>
+                  </Link>
+                </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background}>
+                  <Link href="/acservice?id=54" >
+                    <div>
+                      <Image
+                        src="/homepage/electric.png"
+                        height={60}
+                        width={60}
+                        alt="img"
+                      />
+                      <span>dummy slide</span>
+                    </div>
+                  </Link>
+                </SwiperSlide>)}
               {/* <SwiperSlide className={style.slider2_background}>
                 <Link href="/acservice" >
                   <div>

@@ -39,7 +39,11 @@ export default function Login() {
                 setTimeout(route.push("/"),4500);
                 if(typeof window !== 'undefined'){
                 localStorage?.setItem("token",JSON.stringify(resp?.data?.token));
-                localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))}
+                localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))
+                localStorage?.setItem("ElectricityId",JSON.stringify(resp?.data?.name?.id))
+            
+            }
+                
                 // const session = sessionStorage.getItem("LogedIn");
                 // console.log("session",typeof(session));
             }

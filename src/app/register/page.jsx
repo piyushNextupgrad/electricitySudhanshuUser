@@ -23,16 +23,16 @@ import { useRouter } from 'next/navigation';
 
 export default function Ragister() {
 
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [phone, setPhone] = useState();
-    const [cnf_phone, setCnf_phone] = useState();
-    const [password, setPassword] = useState();
-    const [cnf_password, setCnf_password] = useState();
-    const [locality, setLocality] = useState();
-    const [city, setCity] = useState();
-    const [state, setState] = useState();
-    const [zip, setZip] = useState();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [cnf_phone, setCnf_phone] = useState('');
+    const [password, setPassword] = useState('');
+    const [cnf_password, setCnf_password] = useState('');
+    const [locality, setLocality] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zip, setZip] = useState('');
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
     const route = useRouter();

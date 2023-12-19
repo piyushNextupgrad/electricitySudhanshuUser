@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import style from "@/styles/navbar.module.css"
@@ -26,7 +27,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 
 import { FaSearch, FaUser, FaBars, FaRegWindowClose, FaFacebookF, FaGooglePlusG, FaSkype, FaShoppingCart, FaTwitter, FaChevronRight } from "react-icons/fa"
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+
 
 
 const Navbar = () => {
@@ -58,127 +59,144 @@ const Navbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleLogin = async (e) => {
-
-    e.preventDefault();
-    setisSubmitingLoader(true);
-    if (email == '' || password == '') {
-      toast.error("Both fields are required !!")
-    }
-    else {
-      const login = {
-        "email": email,
-        "password": password,
-        "user_type": "Customer"
-      }
-      try {
-        const resp = await postData("/login", login);
-        // console.log("resp Login", resp)
-        if (resp?.success) {
-          toast.success(resp?.message);
-          if (typeof window !== 'undefined') {
-            localStorage?.setItem("token", JSON.stringify(resp?.data?.token));
-            localStorage?.setItem("userName", JSON.stringify(resp?.data?.name?.name))
-            localStorage?.setItem("ElectricityId", JSON.stringify(resp?.data?.name?.id))
-          }
+  const handleLoginValidation = () => {
+    // setisSubmitingLoader(true)
+    // if (typeof window !== 'undefined') {
+    //   const user = JSON.parse(localStorage.getItem("ElectricityId"))
+    //   console.log("user", user)
+    //   if (user) {
+    //     toast.success("You are logged In");
+    //     route.push('/checkout');
         
-        }
-        else {
-          toast.error(resp?.message);
-
-        }
-      } catch (error) {
-        console.log("try-catch error", error)
-      }
-
-      setSmShow(false);
-    }
-    setisSubmitingLoader(false);
-    route.refresh();
+    //   } else {
+    //     toast.error("Please Login first!!");
+    //     route.push('/login');
+    //   }
+    // }
+    // setisSubmitingLoader(false)
   }
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setisSubmitingLoader(true)
+  // const handleLogin = async (e) => {
 
-    if (register_name == '' || register_email == '' || register_phone == '' || register_password == '' || register_city == '' || register_zip == '' || register_locality == '' || register_state == '') {
-      toast.error("All fields are required!!")
-    }
-    else if (register_phone.length < 10) {
-      toast.error("Please enter 10 digit phone number!!")
-    } else if (register_zip.length !== 6) {
-      toast.error("Please enter 6 digit Zipcode!!")
-    }
-    else {
+  //   e.preventDefault();
+  //   setisSubmitingLoader(true);
+  //   if (email == '' || password == '') {
+  //     toast.error("Both fields are required !!")
+  //   }
+  //   else {
+  //     const login = {
+  //       "email": email,
+  //       "password": password,
+  //       "user_type": "Customer"
+  //     }
+  //     try {
+  //       const resp = await postData("/login", login);
+  //       // console.log("resp Login", resp)
+  //       if (resp?.success) {
+  //         toast.success(resp?.message);
+  //         if (typeof window !== 'undefined') {
+  //           localStorage?.setItem("token", JSON.stringify(resp?.data?.token));
+  //           localStorage?.setItem("userName", JSON.stringify(resp?.data?.name?.name))
+  //           localStorage?.setItem("ElectricityId", JSON.stringify(resp?.data?.name?.id))
+  //         }
 
-      let person = {
-        "name": register_name,
-        "email": register_email,
-        "user_phno": register_phone,
-        "password": register_password,
-        "user_locality": register_locality,
-        "user_city": register_city,
-        "user_state": register_state,
-        "user_zipcode": register_zip,
-        "user_type": "Customer"
-      };
+  //       }
+  //       else {
+  //         toast.error(resp?.message);
 
-      try {
-        const resp = await postData("/register", person);
-        console.log("resp", resp);
-        if (resp?.status) {
-          toast.success("Customer Registered Successfully!!");
-          setSmShow(false);
-        }
-        else {
-          toast.error(resp?.errors?.email[0]);
-          console.log("Customer register fail error", resp?.errors);
-        }
-      } catch (error) {
-        console.log("catch Error", error)
-      }
+  //       }
+  //     } catch (error) {
+  //       console.log("try-catch error", error)
+  //     }
 
-      //zip code validation try-catch block.
-      // try {
-      //   const filter_data = []
-      //   const secondResp = await getData("/GetServiceLocation");
-      //   // console.log("zip_data_response",secondResp);
-      //   secondResp.data.map(e => filter_data.push(e.zip_code))
-      //   // console.log("filter_data", filter_data)
-      //   // console.log("register_zip",register_zip)
-      //   // console.log(typeof(register_zip))
-      //   // console.log(typeof(filter_data[0]))
-        
-      //   // console.log("boolean",filter_data.includes(register_zip))
-      //   if (filter_data.includes(Number(register_zip))) {
-      //     toast.success("We are available in your area!")
-      //   }
-      //   else {
-      //     // toast.error("We don't provide services on this zipcode!!")
-          
-      //     Swal.fire({
-      //       icon: 'error',
-      //       title: 'Oops...',
-      //       text: "We dont provide services in your area! ",
-            
-      //     })
-      //   }
-      // } catch (error) {
-      //   console.log("try-catch error", error);
-      // }
+  //     setSmShow(false);
+  //   }
+  //   setisSubmitingLoader(false);
+  //   route.refresh();
+  // }
+
+  // const handleRegister = async (e) => {
+  //   e.preventDefault();
+  //   setisSubmitingLoader(true)
+
+  //   if (register_name == '' || register_email == '' || register_phone == '' || register_password == '' || register_city == '' || register_zip == '' || register_locality == '' || register_state == '') {
+  //     toast.error("All fields are required!!")
+  //   }
+  //   else if (register_phone.length < 10) {
+  //     toast.error("Please enter 10 digit phone number!!")
+  //   } else if (register_zip.length !== 6) {
+  //     toast.error("Please enter 6 digit Zipcode!!")
+  //   }
+  //   else {
+
+  //     let person = {
+  //       "name": register_name,
+  //       "email": register_email,
+  //       "user_phno": register_phone,
+  //       "password": register_password,
+  //       "user_locality": register_locality,
+  //       "user_city": register_city,
+  //       "user_state": register_state,
+  //       "user_zipcode": register_zip,
+  //       "user_type": "Customer"
+  //     };
+
+  //     try {
+  //       const resp = await postData("/register", person);
+  //       console.log("resp", resp);
+  //       if (resp?.status) {
+  //         toast.success("Customer Registered Successfully!!");
+  //         setSmShow(false);
+  //       }
+  //       else {
+  //         toast.error(resp?.errors?.email[0]);
+  //         console.log("Customer register fail error", resp?.errors);
+  //       }
+  //     } catch (error) {
+  //       console.log("catch Error", error)
+  //     }
+
+  //     //zip code validation try-catch block.
+  //     // try {
+  //     //   const filter_data = []
+  //     //   const secondResp = await getData("/GetServiceLocation");
+  //     //   // console.log("zip_data_response",secondResp);
+  //     //   secondResp.data.map(e => filter_data.push(e.zip_code))
+  //     //   // console.log("filter_data", filter_data)
+  //     //   // console.log("register_zip",register_zip)
+  //     //   // console.log(typeof(register_zip))
+  //     //   // console.log(typeof(filter_data[0]))
+
+  //     //   // console.log("boolean",filter_data.includes(register_zip))
+  //     //   if (filter_data.includes(Number(register_zip))) {
+  //     //     toast.success("We are available in your area!")
+  //     //   }
+  //     //   else {
+  //     //     // toast.error("We don't provide services on this zipcode!!")
+
+  //     //     Swal.fire({
+  //     //       icon: 'error',
+  //     //       title: 'Oops...',
+  //     //       text: "We dont provide services in your area! ",
+
+  //     //     })
+  //     //   }
+  //     // } catch (error) {
+  //     //   console.log("try-catch error", error);
+  //     // }
 
 
-    }
-    setisSubmitingLoader(false)
+  //   }
+  //   setisSubmitingLoader(false)
 
 
-  }
+  // }
 
   // useEffect(() => {
-    
+
   // }, []);
 
-  
+
 
 
   return (<>
@@ -221,7 +239,7 @@ const Navbar = () => {
                 </div>
               </div>  </div>
             <div className={`col-xxl-3 col-xl-3 col-lg-3 ${style.innerhomeicon}`}>
-              <Link href="/checkout">
+              <Link href="/checkout" onClick={handleLoginValidation}>
                 <FaShoppingCart />
               </Link>
               <Link href="#" onClick={() => setSmShow(true)} className="me-2">
@@ -316,15 +334,18 @@ const Navbar = () => {
 
 
       <Modal
-
+        size="sm"
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
       >
+        <Modal.Header closeButton>
+          <Modal.Title><Image src="/logo.png" height={50} width={200} alt="img" /></Modal.Title>
+        </Modal.Header>
 
         <Modal.Body >
 
-          <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
+          {/* <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
             <Tab eventKey="first" title="Register" >
               <Form>
                 <Row className="mb-2 mt-2">
@@ -383,7 +404,7 @@ const Navbar = () => {
               <div className={`${verify}`}>
                 <hr />
                 <Form.Group className="mb-2" >
-                  {/* <Form.Label className="mt-2">OTP</Form.Label> */}
+                  <Form.Label className="mt-2">OTP</Form.Label>
                   <Form.Control placeholder="OTP" type="text" />
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={handleRegister} >
@@ -410,7 +431,15 @@ const Navbar = () => {
               </Button>
             </Tab>
 
-          </Tabs>
+          </Tabs> */}
+          <div className="d-flex justify-content-evenly">
+            <Button variant="primary" onClick={() => route.push("/login")}>
+              Login
+            </Button>
+            <Button variant="primary" onClick={() => route.push("/register")}>
+              Register
+            </Button>
+          </div>
 
         </Modal.Body>
 
