@@ -29,7 +29,7 @@ const Plan = () => {
     setisSubmitingLoader(true)
     try {
       const resp = await getData("/GetSubscription");
-      // console.log("plan resp", resp.data[1]);
+      console.log("plan resp", resp);
       resp.data[0] !== undefined ? setPlan1(resp.data[0]) : setEmpty_plan1("d-none");
       resp.data[1] !== undefined ? setPlan2(resp.data[1]) : setEmpty_plan2("d-none");
       resp.data[2] !== undefined ? setPlan3(resp.data[2]) : setEmpty_plan3("d-none");
@@ -71,15 +71,15 @@ const Plan = () => {
             <div className="col-xxl-4 col-xl-4 col-lg-4">
               <div className={`${empty_plan1} planbox`}  >
                 <h1>{plan1.subscription_name}</h1>
-                <p className={style.basic_para1}>{plan1.subscription_amt}<span>/month</span></p>
+                <p className={style.basic_para1}>{plan1.subscription_amt}<span>/Year</span></p>
                 <span className={style.basic_para2}>{plan1.subscription_description}</span>
+                
                 <ul>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
+                  
+                {plan1.service_name ? plan1.service_name.map((t)=>(
+                  <li key={t}><FiCheck />{t}</li>
+                  // {console.log("t",t)}
+                )):(<li><FiCheck />Lorem ipsum is Simply</li>)}
 
                 </ul>
                 <Link href="#">Start Now <FaChevronRight /></Link>
@@ -88,7 +88,7 @@ const Plan = () => {
             <div className="col-xxl-4 col-xl-4 col-lg-4">
               <div className={`${empty_plan2} planbox premiumplan`} >
                 <h1>{plan2.subscription_name}</h1>
-                <p className={style.standard_para1}>{plan2.subscription_amt}<span>/month</span></p>
+                <p className={style.standard_para1}>{plan2.subscription_amt}<span>/Year</span></p>
                 <span className={style.standard_para2}>{plan2.subscription_description}</span>
                 <ul>
                   <li><FiCheck />Lorem ipsum is Simply</li>
@@ -105,7 +105,7 @@ const Plan = () => {
             <div className="col-xxl-4 col-xl-4 col-lg-4">
               <div className={`${empty_plan3} planbox`}>
                 <h1>{plan3.subscription_name}</h1>
-                <p className={style.premium_para1}>{plan3.subscription_amt}<span>/month</span></p>
+                <p className={style.premium_para1}>{plan3.subscription_amt}<span>/Year</span></p>
                 <span className={style.premium_para2}>{plan3.subscription_description}</span>
                 <ul>
                   <li><FiCheck />Lorem ipsum is Simply</li>

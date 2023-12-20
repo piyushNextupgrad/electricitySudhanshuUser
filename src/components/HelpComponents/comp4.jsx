@@ -1,3 +1,5 @@
+// chat
+
 import { CiImageOn } from "react-icons/ci";
 import style from "@/styles/HelpComponentStyle/comp4.module.css"
 import Image from "next/image";

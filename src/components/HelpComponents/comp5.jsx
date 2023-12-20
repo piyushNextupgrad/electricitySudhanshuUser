@@ -1,3 +1,4 @@
+//Leagal,terms and conditions
 import style from "@/styles/HelpComponentStyle/comp5.module.css"
 const Comp5 = () => {
     return ( 

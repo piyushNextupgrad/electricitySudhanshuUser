@@ -1,3 +1,4 @@
+//customer profile
 "use client"
 import Image from 'next/image';
 import Button from 'react-bootstrap/Button';
@@ -219,12 +220,12 @@ const Comp6 = () => {
 
                 <div className='d-flex justify-content-evenly'>
 
-                    {(email == "" || userType == "" || phone == "" ) ? (<Button variant="primary" type="submit" onClick={handleUpdate} disabled>
-                        Update
+                    {(email == "" || userType == "" || phone == "" ) ? (<Button variant="primary"  onClick={()=>route.push("/login")} >
+                        Login
                     </Button>):(<Button variant="primary" type="submit" onClick={handleUpdate}>
                         Update
                     </Button>)}
-                    {(email == "" || userType == "" || phone == "" )? (<Button variant="primary" type="submit" onClick={handleLogout} disabled>
+                    {(email == "" || userType == "" || phone == "" )? (<Button variant="primary"  onClick={handleLogout} disabled>
                         Sign Out
                     </Button>):(<Button variant="primary" type="submit" onClick={handleLogout}>
                         Sign Out

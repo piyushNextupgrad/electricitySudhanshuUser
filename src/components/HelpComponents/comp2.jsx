@@ -1,3 +1,4 @@
+//ticket generate
 import style from "@/styles/HelpComponentStyle/comp2.module.css"
 const Comp2 = () => {
     return (

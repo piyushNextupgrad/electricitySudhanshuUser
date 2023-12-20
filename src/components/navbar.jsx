@@ -48,6 +48,7 @@ const Navbar = () => {
   const [register_city, setRegister_city] = useState('');
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
+  const [userId, setUserId] = useState('');
 
 
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -67,7 +68,7 @@ const Navbar = () => {
     //   if (user) {
     //     toast.success("You are logged In");
     //     route.push('/checkout');
-        
+
     //   } else {
     //     toast.error("Please Login first!!");
     //     route.push('/login');
@@ -196,7 +197,17 @@ const Navbar = () => {
 
   // }, []);
 
+  const def_data = () => {
+    if (typeof window !== 'undefined') {
+      // const localUserId =  JSON.parse(localStorage.getItem("ElectricityId"))
+      JSON.parse(localStorage.getItem("ElectricityId")) ? (setUserId(localStorage.getItem("ElectricityId"))) :("")
+  }
+  }
 
+
+  useEffect(() => {
+    def_data();
+  }, []);
 
 
   return (<>
@@ -343,6 +354,8 @@ const Navbar = () => {
           <Modal.Title><Image src="/logo.png" height={50} width={200} alt="img" /></Modal.Title>
         </Modal.Header>
 
+
+        
         <Modal.Body >
 
           {/* <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">

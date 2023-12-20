@@ -1,3 +1,4 @@
+//FAQ
 import Accordion from 'react-bootstrap/Accordion';
 import style from "@/styles/HelpComponentStyle/comp1.module.css"
 import { CiSquarePlus } from "react-icons/ci";

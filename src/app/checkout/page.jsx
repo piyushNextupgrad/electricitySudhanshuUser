@@ -120,8 +120,9 @@ const Checkout = () => {
                 }
 
                 console.log("final_object", final_object)
-                // const resp = await postData("/StoreServiceBooking",final_object)
-                // console.log("resp",resp)
+                const resp = await postData("/StoreServiceBooking",final_object)
+                console.log("resp",resp)
+                toast.success(resp.message)
 
                 // const services_object = {
                 //     "service_data": [{
@@ -207,11 +208,7 @@ const Checkout = () => {
             <section className={`${style.section2} container`} >
                 <div className="row" >
                     <div className={`${style.section2_col1} col text-center text-lg-start`} >
-                        {localUserId ? (<div className={style.account}>
-                            <h2>Account</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero magnam fuga blanditiis debitis ipsa voluptates.</p>
-                            <button onClick={() => route.push("/login")} disabled>Logged In</button>
-                        </div>) : (<div className={style.account}>
+                        {localUserId ? (<></>) : (<div className={style.account}>
                             <h2>Account</h2>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero magnam fuga blanditiis debitis ipsa voluptates.</p>
                             <button onClick={() => route.push("/login")}>Login</button>
