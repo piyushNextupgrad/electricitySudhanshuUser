@@ -22,6 +22,7 @@ import Row from 'react-bootstrap/Row';
 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
+import Table from 'react-bootstrap/Table';
 
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
@@ -49,6 +50,7 @@ const Navbar = () => {
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
   const [userId, setUserId] = useState('');
+  const [userName, setUserName] = useState('')
 
 
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -60,21 +62,20 @@ const Navbar = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleLoginValidation = () => {
-    // setisSubmitingLoader(true)
-    // if (typeof window !== 'undefined') {
-    //   const user = JSON.parse(localStorage.getItem("ElectricityId"))
-    //   console.log("user", user)
-    //   if (user) {
-    //     toast.success("You are logged In");
-    //     route.push('/checkout');
-
-    //   } else {
-    //     toast.error("Please Login first!!");
-    //     route.push('/login');
-    //   }
-    // }
-    // setisSubmitingLoader(false)
+  const handleLogout = () => {
+    setisSubmitingLoader(true)
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem("ElectricityId")
+        localStorage.removeItem("userName")
+        localStorage.removeItem("token")
+      }
+      location.reload();
+    } catch (error) {
+      console.log("try-catch error", error)
+    }
+    setShow(false)
+    setisSubmitingLoader(false)
   }
 
   // const handleLogin = async (e) => {
@@ -200,8 +201,10 @@ const Navbar = () => {
   const def_data = () => {
     if (typeof window !== 'undefined') {
       // const localUserId =  JSON.parse(localStorage.getItem("ElectricityId"))
-      JSON.parse(localStorage.getItem("ElectricityId")) ? (setUserId(localStorage.getItem("ElectricityId"))) :("")
-  }
+      setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
+      setUserName(JSON.parse(localStorage.getItem("userName")))
+    }
+    
   }
 
 
@@ -250,7 +253,7 @@ const Navbar = () => {
                 </div>
               </div>  </div>
             <div className={`col-xxl-3 col-xl-3 col-lg-3 ${style.innerhomeicon}`}>
-              <Link href="/checkout" onClick={handleLoginValidation}>
+              <Link href="/checkout" >
                 <FaShoppingCart />
               </Link>
               <Link href="#" onClick={() => setSmShow(true)} className="me-2">
@@ -355,7 +358,7 @@ const Navbar = () => {
         </Modal.Header>
 
 
-        
+
         <Modal.Body >
 
           {/* <Tabs defaultActiveKey="first" className="d-flex justify-content-around login_tabs">
@@ -445,14 +448,46 @@ const Navbar = () => {
             </Tab>
 
           </Tabs> */}
-          <div className="d-flex justify-content-evenly">
+          {userId ? (<>
+
+            <div>
+              <div className={style.user}>
+                <Image src="/6.jpg" height={50} width={50} alt="img" />
+              </div>
+              <Table >
+
+                <tbody>
+                  <tr>
+
+
+                    <td>User Name</td>
+                    <td>{userName}</td>
+                  </tr>
+                  <tr>
+
+
+                    <td>User ID</td>
+                    <td>{userId}</td>
+                  </tr>
+
+                </tbody>
+              </Table>
+              <div className="d-flex justify-content-center">
+                <Button variant="primary" onClick={handleLogout}>
+                  LogOut
+                </Button>
+              </div>
+            </div>
+          </>
+          ) : (<div className="d-flex justify-content-evenly">
             <Button variant="primary" onClick={() => route.push("/login")}>
               Login
             </Button>
             <Button variant="primary" onClick={() => route.push("/register")}>
               Register
             </Button>
-          </div>
+          </div>)}
+
 
         </Modal.Body>
 

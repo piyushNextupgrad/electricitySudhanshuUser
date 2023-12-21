@@ -42,6 +42,20 @@
     transition-duration: 500ms;
 }
 
+.userPhoto{
+    /* border:1px solid black; */
+    width:100%;
+    text-align: center;
+    padding:10px;
+    margin-bottom:10px;
+}
+.userPhoto>img{
+    width:100%;
+    height: auto;
+    border-radius: 50%;
+    border:7px solid gray;
+}
+
 .banner_items {
     display: flex;
     justify-content: space-evenly;
@@ -81,7 +95,7 @@
 .banner_text>h1>span {
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
-    font-size: 2.5rem; 
+    font-size: 2.0rem; 
     margin-bottom: 22px;
 }
 
@@ -159,7 +173,7 @@
     padding: 0px 5px;
     background-color: yellow;
     border-radius: 10px;
-    font-weight: 500;
+    font-weight: 600;
 
 }
 

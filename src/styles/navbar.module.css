@@ -182,3 +182,16 @@
 .sidemenu_nav>hr{
     margin:0;
 }
+.user{
+    /* border:1px solid black; */
+    width:100%;
+    text-align: center;
+    padding:10px;
+    margin-bottom:10px;
+}
+.user>img{
+    width:100%;
+    height: auto;
+    border-radius: 50%;
+    border:7px solid gray;
+}

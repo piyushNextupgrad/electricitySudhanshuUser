@@ -7,6 +7,7 @@ import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.css";
 import React from "react";
 import { postData } from "../../services/services";
+import Table from 'react-bootstrap/Table';
 
 
 
@@ -76,6 +77,8 @@ function Homepage() {
   const [register_city, setRegister_city] = useState('');
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
+  const [userId,setUserId] = useState()
+  const [user_name,setUser_name] = useState('')
   const [sliderServices, setSliderServices] = useState([])
 
   const route = useRouter();
@@ -84,6 +87,14 @@ function Homepage() {
     const resp = await getData("/GetService")
     console.log("getServices", resp.data);
     setSliderServices(resp.data)
+    try {
+      if (typeof window !== 'undefined'){
+         setUserId(JSON.parse(localStorage.getItem("ElectricityId"))) 
+          setUser_name(JSON.parse(localStorage.getItem("userName")))
+      }
+    } catch (error) {
+      console.log("try-catch error",error)
+    }
 
   }
   // console.log("sliderServices",sliderServices)
@@ -180,6 +191,21 @@ function Homepage() {
       setisSubmitingLoader(false);
       setSmShow(false);
     }
+  }
+  const handleLogout = () => {
+    setisSubmitingLoader(true)
+    try {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem("ElectricityId")
+        localStorage.removeItem("userName")
+        localStorage.removeItem("token")
+      }
+      location.reload();
+    } catch (error) {
+      console.log("try-catch error", error)
+    }
+    setShow(false)
+    setisSubmitingLoader(false)
   }
   useEffect(() => {
     getServices()
@@ -402,7 +428,40 @@ function Homepage() {
                 </Tab>
 
               </Tabs> */}
-              <div className="d-flex justify-content-evenly">
+              {user_name ? (
+              <>
+              <div>
+              <div className={style.userPhoto}>
+                <Image src="/6.jpg" height={50} width={50} alt="img" />
+              </div>
+              <Table >
+
+                <tbody>
+                  <tr>
+
+
+                    <td>User Name</td>
+                    <td>{user_name}</td>
+                  </tr>
+                  <tr>
+
+
+                    <td>User ID</td>
+                    <td>{userId}</td>
+                  </tr>
+
+                </tbody>
+              </Table>
+              <div className="d-flex justify-content-center">
+                <Button variant="primary" onClick={handleLogout}>
+                  LogOut
+                </Button>
+              </div>
+            </div>
+              
+              </>
+              ):(
+                <div className="d-flex justify-content-evenly">
                 <Button variant="primary" onClick={() => route.push("/login")}>
                   Login
                 </Button>
@@ -410,6 +469,8 @@ function Homepage() {
                   Register
                 </Button>
               </div>
+              )}
+              
 
             </Modal.Body>
 
