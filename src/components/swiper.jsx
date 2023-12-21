@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 // import './styles.css';
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { Pagination,Autoplay } from 'swiper/modules';
 
 export default function Slider(){
   return(
@@ -17,12 +17,16 @@ export default function Slider(){
       <Swiper
         slidesPerView={2}
         spaceBetween={10}
-
-        autoplay={true}
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: true,
+          pauseOnMouseEnter: true
+        }}
+        // autoplay={true}
         pagination={{
           clickable: true,
         }}
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         loop={true}
         className="mySwiper"
         style={{

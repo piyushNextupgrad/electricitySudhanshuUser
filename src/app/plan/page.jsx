@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import style from "@/styles/plan.module.css"
 import { FiCheck } from 'react-icons/fi';
-import { getData } from "../../../services/services";
+import { getData, postData } from "../../../services/services";
 import { Toaster, toast } from 'sonner'
 
 const Plan = () => {
@@ -22,6 +22,7 @@ const Plan = () => {
   const [empty_plan1, setEmpty_plan1] = useState('');
   const [empty_plan2, setEmpty_plan2] = useState('');
   const [empty_plan3, setEmpty_plan3] = useState('');
+  const [userID, setUserID] = useState();
 
 
 
@@ -33,17 +34,42 @@ const Plan = () => {
       resp.data[0] !== undefined ? setPlan1(resp.data[0]) : setEmpty_plan1("d-none");
       resp.data[1] !== undefined ? setPlan2(resp.data[1]) : setEmpty_plan2("d-none");
       resp.data[2] !== undefined ? setPlan3(resp.data[2]) : setEmpty_plan3("d-none");
+      if (typeof window !== 'undefined') {
+        setUserID(JSON.parse(localStorage.getItem("ElectricityId")))
+      }
     } catch (error) {
       console.log("try-catch error", error);
     }
     setisSubmitingLoader(false);
+  }
+  const PlanPurchase = async (planID) => {
+    setisSubmitingLoader(true)
+
+    // console.log("planID",planID)
+    try {
+      const purchaseDetails = {
+        "subscription_id": planID,
+        "customer_id": userID
+      }
+      // console.log("purchaseDetails",purchaseDetails)
+      const resp = await postData("/StoreSubscriber", purchaseDetails)
+
+      // console.log("purchase resp",resp)
+      toast.success(resp.message)
+    } catch (error) {
+      console.log("try-catch error", error)
+    }
+
+    setisSubmitingLoader(false)
   }
 
   useEffect(() => {
     getPlan();
   }, []);
 
-
+  // console.log("plan1",plan1)
+  // console.log("plan2",plan2)
+  // console.log("plan3",plan3)
 
   return (
     <div >
@@ -73,16 +99,16 @@ const Plan = () => {
                 <h1>{plan1.subscription_name}</h1>
                 <p className={style.basic_para1}>{plan1.subscription_amt}<span>/Year</span></p>
                 <span className={style.basic_para2}>{plan1.subscription_description}</span>
-                
+
                 <ul>
-                  
-                {plan1.service_name ? plan1.service_name.map((t)=>(
-                  <li key={t}><FiCheck />{t}</li>
-                  // {console.log("t",t)}
-                )):(<li><FiCheck />Lorem ipsum is Simply</li>)}
+
+                  {plan1.service_name ? plan1.service_name.map((t, index) => (
+                    <li key={index}><FiCheck />{t}</li>
+
+                  )) : (<li><FiCheck />Lorem ipsum is Simply</li>)}
 
                 </ul>
-                <Link href="#">Start Now <FaChevronRight /></Link>
+                {userID ? (<><Link href="#" onClick={() => PlanPurchase(plan1.id)}>Start Now <FaChevronRight /></Link></>) : (<><Link href="/login">Login<FaChevronRight /></Link></>)}
               </div>
             </div>
             <div className="col-xxl-4 col-xl-4 col-lg-4">
@@ -91,15 +117,14 @@ const Plan = () => {
                 <p className={style.standard_para1}>{plan2.subscription_amt}<span>/Year</span></p>
                 <span className={style.standard_para2}>{plan2.subscription_description}</span>
                 <ul>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
+                  {plan2.service_name ? plan2.service_name.map((t, index) => (
+                    <li key={index}><FiCheck />{t}</li>
+
+                  )) : (<li><FiCheck />Lorem ipsum is Simply</li>)}
+
 
                 </ul>
-                <Link href="#">Start Now <FaChevronRight /></Link>
+                {userID ? (<><Link href="#" onClick={() => PlanPurchase(plan2.id)}>Start Now <FaChevronRight /></Link></>) : (<><Link href="/login">Login<FaChevronRight /></Link></>)}
               </div>
             </div>
             <div className="col-xxl-4 col-xl-4 col-lg-4">
@@ -108,15 +133,14 @@ const Plan = () => {
                 <p className={style.premium_para1}>{plan3.subscription_amt}<span>/Year</span></p>
                 <span className={style.premium_para2}>{plan3.subscription_description}</span>
                 <ul>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
-                  <li><FiCheck />Lorem ipsum is Simply</li>
+                  {plan3.service_name ? plan3.service_name.map((t, index) => (
+                    <li key={index}><FiCheck />{t}</li>
+
+                  )) : (<li><FiCheck />Lorem ipsum is Simply</li>)}
+
 
                 </ul>
-                <Link href="#">Start Now <FaChevronRight /></Link>
+                {userID ? (<><Link href="#" onClick={() => PlanPurchase(plan3.id)}>Start Now <FaChevronRight /></Link></>) : (<><Link href="/login">Login<FaChevronRight /></Link></>)}
               </div>
             </div>
           </div>

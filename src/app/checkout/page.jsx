@@ -47,7 +47,7 @@ const Checkout = () => {
             cartServices ? (cartServices.filter((c) => total_array.push(c.service_cost))) : ""
             // console.log("total",total_array)
             let total = 0;
-            total_array.map((e) => {
+            total_array.map((e,index) => {
 
                 total = total + e;
                 setCartTotol(total)
@@ -123,7 +123,8 @@ const Checkout = () => {
                 const resp = await postData("/StoreServiceBooking",final_object)
                 console.log("resp",resp)
                 toast.success(resp.message)
-
+                localStorage.removeItem("Cart");
+                location.reload();
                 // const services_object = {
                 //     "service_data": [{
                 //         "service_id": 45,
@@ -372,12 +373,12 @@ const Checkout = () => {
                     <div className={`${style.section2_col2} col text-center text-lg-start`} >
                         {/* {cartList.map((t)=>{})} */}
                         <div className={style.foam}>
-                            {cartList.map((t) => (
-                                <div >
-                                    <hr />
+                            {cartList.length>0 ?(cartList.map((t,index) => (
+                                <div key={index} className={style.cartItem}>
+                                    {/* <hr /> */}
                                     <h1 className="text-center">{t.service_name}</h1>
                                     <div className={style.foam_payment}>
-                                        <span>${t.service_cost}</span>
+                                        <span>Cost: ${t.service_cost}</span>
                                         <span onClick={() => handleDelete(t)}><MdDelete /></span>
                                     </div>
                                     {/* { console.log("t",t.service_cost)} */}
@@ -400,7 +401,7 @@ const Checkout = () => {
                                     </div>
                                     {/* <hr/> */}
                                 </div>
-                            ))}
+                            ))):(<div className={style.emptyCart}><h2>Cart is empty...</h2></div>)}
                             {/* <div className={style.payment}>
                                 <h2>Payment Method</h2>
                                 <Link href="/services" >Book other services</Link>

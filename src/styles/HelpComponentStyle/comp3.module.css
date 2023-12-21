@@ -1,7 +1,9 @@
 .comp3{
   
     display: grid;
-    
+    /* overflow-y: scroll; */
+    max-height: 720px;
+    overflow-y: scroll;
     
 }
 .comp3>div{

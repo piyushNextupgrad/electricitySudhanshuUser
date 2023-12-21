@@ -1,6 +1,8 @@
 .comp3{
   
     display: grid;
+    max-height: 720px;
+    overflow-block: scroll;
     
     
 }

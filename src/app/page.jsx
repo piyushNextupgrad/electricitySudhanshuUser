@@ -37,8 +37,9 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 // import 'swiper/css/pagination';
-import { Navigation } from "swiper/modules";
+import { Navigation,Autoplay } from "swiper/modules";
 import Modal from 'react-bootstrap/Modal';
+import {  Pagination } from "swiper";
 
 import { Toaster, toast } from 'sonner'
 import { useRouter } from "next/navigation";
@@ -432,7 +433,7 @@ function Homepage() {
               <>
               <div>
               <div className={style.userPhoto}>
-                <Image src="/6.jpg" height={50} width={50} alt="img" />
+                <Image src="/7.jpg" height={50} width={50} alt="img" />
               </div>
               <Table >
 
@@ -491,8 +492,14 @@ function Homepage() {
             <Swiper
               slidesPerView={5}
               spaceBetween={15}
-              autoplay={true}
-              modules={[Navigation]}
+              // autoplay={true}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true
+              }}
+              delay={5000}
+              modules={[Navigation,Autoplay]}
               loop={true}
               navigation={true}
               breakpoints={{
@@ -525,8 +532,8 @@ function Homepage() {
             //     "--swiper-pagination-bullet-border-radius": "0px"
             // }}
             >
-              {sliderServices ? sliderServices?.map((t) => (
-                <SwiperSlide className={style.slider2_background} key={t?.subscription_id}>
+              {sliderServices ? sliderServices?.map((t,index) => (
+                <SwiperSlide className={style.slider2_background} key={index}>
                   <Link href={`/acservice?id=${t?.subscription_id}`}  >
                     <div>
                       <Image
@@ -1096,10 +1103,10 @@ function Homepage() {
                   <MdKeyboardDoubleArrowRight />
                   <Link href="/services">SERVICES</Link>
                 </li>
-                <li>
+                {/* <li>
                   <MdKeyboardDoubleArrowRight />
                   <Link href="/checkout">CHECKOUT</Link>
-                </li>
+                </li> */}
                 <li>
                   <MdKeyboardDoubleArrowRight />
                   <Link href="/plan">PLAN</Link>

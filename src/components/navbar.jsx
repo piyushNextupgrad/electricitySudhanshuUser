@@ -452,7 +452,7 @@ const Navbar = () => {
 
             <div>
               <div className={style.user}>
-                <Image src="/6.jpg" height={50} width={50} alt="img" />
+                <Image src="/7.jpg" height={50} width={50} alt="img" />
               </div>
               <Table >
 
