@@ -38,7 +38,7 @@ const Checkout = () => {
         if (typeof window !== 'undefined') {
             // setDef_selt(localStorage.getItem("Elect_service_qty"));
             // setDef_dte(localStorage.getItem("Elect_service_date"));
-            localStorage.getItem("ElectricityId") ? setLocalUserId(true): false
+            localStorage.getItem("ElectricityId") ? setLocalUserId(true) : false
             const cartServices = JSON.parse(localStorage.getItem("Cart"))
             // console.log("cartServices", cartServices)
             setCartList(cartServices ? cartServices : [])
@@ -47,7 +47,7 @@ const Checkout = () => {
             cartServices ? (cartServices.filter((c) => total_array.push(c.service_cost))) : ""
             // console.log("total",total_array)
             let total = 0;
-            total_array.map((e,index) => {
+            total_array.map((e, index) => {
 
                 total = total + e;
                 setCartTotol(total)
@@ -65,8 +65,8 @@ const Checkout = () => {
             console.log("Cart", Cart)
             const updated_cart = []
             Cart.map((e) => {
-                    console.log("e",e)
-                if (e.service_id === t.service_id && e.service_quantity===t.service_quantity) {
+                console.log("e", e)
+                if (e.service_id === t.service_id && e.service_quantity === t.service_quantity) {
                     toast.success("item deleted successfully!")
                 }
                 else {
@@ -102,29 +102,43 @@ const Checkout = () => {
                 // const service_booking_details = JSON.parse(localStorage.getItem("Cart"));
                 // console.log("service_booking_details", service_booking_details)
                 console.log("cartList", cartList)
-                const services_object = [];
-                cartList.filter((e) => {
-                    const single_details = {
-                        "service_id": parseInt(e.service_id),
-                        "customer_id": userID,
-                        "qty": parseInt(e.service_quantity),
-                        "service_book_date": getFormatedDate(Date.now(), "YYYY-MM-DD hh:mm:ss"),
-                        "service_avail_date": getFormatedDate(e.service_date, "YYYY-MM-DD hh:mm:ss")
+                if (cartList.length > 0) {
+                    const services_object = [];
+                    cartList.filter((e) => {
+                        const single_details = {
+                            "service_id": parseInt(e.service_id),
+                            "customer_id": userID,
+                            "qty": parseInt(e.service_quantity),
+                            "service_book_date": getFormatedDate(Date.now(), "YYYY-MM-DD hh:mm:ss"),
+                            "service_avail_date": getFormatedDate(e.service_date, "YYYY-MM-DD hh:mm:ss")
+                        }
+                        services_object.push(single_details)
+                    })
+                    // console.log("single_details",single_details)
+                    // console.log("services_object",services_object)
+                    const final_object = {
+                        "serivce_data": services_object
                     }
-                    services_object.push(single_details)
-                })
-                // console.log("single_details",single_details)
-                // console.log("services_object",services_object)
-                const final_object = {
-                    "serivce_data": services_object
+
+                    console.log("final_object", final_object)
+                    const resp = await postData("/StoreServiceBooking", final_object)
+                    console.log("resp", resp)
+                    if (resp.message === "Service Created Successfully") {
+                        toast.success(resp.message)
+                        localStorage.removeItem("Cart");
+                        location.reload();
+                    }
+                    else {
+                        toast.error(resp.message)
+                    }
+
+                }
+                else {
+                    toast.error("Cart is empty...")
                 }
 
-                console.log("final_object", final_object)
-                const resp = await postData("/StoreServiceBooking",final_object)
-                console.log("resp",resp)
-                toast.success(resp.message)
-                localStorage.removeItem("Cart");
-                location.reload();
+
+
                 // const services_object = {
                 //     "service_data": [{
                 //         "service_id": 45,
@@ -373,7 +387,7 @@ const Checkout = () => {
                     <div className={`${style.section2_col2} col text-center text-lg-start`} >
                         {/* {cartList.map((t)=>{})} */}
                         <div className={style.foam}>
-                            {cartList.length>0 ?(cartList.map((t,index) => (
+                            {cartList.length > 0 ? (cartList.map((t, index) => (
                                 <div key={index} className={style.cartItem}>
                                     {/* <hr /> */}
                                     <h1 className="text-center">{t.service_name}</h1>
@@ -401,7 +415,7 @@ const Checkout = () => {
                                     </div>
                                     {/* <hr/> */}
                                 </div>
-                            ))):(<div className={style.emptyCart}><h2>Cart is empty...</h2></div>)}
+                            ))) : (<div className={style.emptyCart}><h2>Cart is empty...</h2></div>)}
                             {/* <div className={style.payment}>
                                 <h2>Payment Method</h2>
                                 <Link href="/services" >Book other services</Link>
@@ -443,7 +457,7 @@ const Checkout = () => {
                         </div>
                         <div className={style.payment}>
                             <h2>Payment Method</h2>
-                            {localUserId ? (<Link href="#" onClick={handleSubmit}>Pay ${finalAmmt ? finalAmmt:0}</Link>) : (<Link href="/login" >Login to Book Service</Link>)}
+                            {localUserId ? (<Link href="#" onClick={handleSubmit}>Pay ${finalAmmt ? finalAmmt : 0}</Link>) : (<Link href="/login" >Login to Book Service</Link>)}
                         </div>
                         <div className={style.payment}>
 
