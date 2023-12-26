@@ -33,6 +33,10 @@ const ACservices = () => {
     // console.log("id", id_in_url);
     // console.log("quantity", quantity);
     // console.log("date", serv_date)
+    useEffect(() => {
+        getServices();
+
+    }, []);
 
     const getServices = async () => {
         const getServiceResp = await getData(`/GetOneService?id=${id_in_url}`);
@@ -67,7 +71,7 @@ const ACservices = () => {
                     existingCart.push(NewServ)
                     localStorage.setItem("Cart", JSON.stringify(existingCart))
                     toast.success("Service added to Cart")
-
+                    setTimeout(location.reload(),3000)
                     // else {
 
                     //     const existingCart = JSON.parse(localStorage.getItem("Cart"))
@@ -84,12 +88,19 @@ const ACservices = () => {
         }
         setisSubmitingLoader(false)
     }
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      };
 
 
-    useEffect(() => {
-        getServices();
-
-    }, []);
+    
     return (
         <div >
             {isSubmitingLoader ? (
@@ -118,7 +129,7 @@ const ACservices = () => {
                         <span>30 DAYS WARRENTY</span>
                         <h1>{serv_name}</h1>
                         <div>
-                            <span>Cost:{serv_cost}</span>
+                            <span>$ {quantity>0 ? serv_cost*quantity :0}</span>
                             <span>45 mins</span>
                         </div>
                         <ul className="text-start">
@@ -141,8 +152,9 @@ const ACservices = () => {
                             </div>
                             <div>
                                 <label>Date</label>{" "}
-                                <input type="datetime-local" onChange={(e) => setServ_date(e.target.value)} />
+                                <input type="datetime-local" onChange={(e) => setServ_date(e.target.value)} min={getCurrentDateTime()}/>
                             </div>
+                            {/* min='2023-12-24T07:37' */}
                         </div>
 
                         <div className={style.bttn}>

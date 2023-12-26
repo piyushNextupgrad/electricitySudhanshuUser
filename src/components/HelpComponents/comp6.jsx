@@ -29,6 +29,7 @@ const Comp6 = () => {
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [userType, setUserType] = useState('')
+    const [profile_photo,setProfile_photo] = useState('')
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
 
@@ -95,13 +96,15 @@ const Comp6 = () => {
                         "user_city": city,
                         "user_state": state,
                         "user_country": country,
+                        "user_profile_photo":profile_photo,
                         "user_type": "Customer"
                     }
+                    console.log("person",person)
                     const resp = await putData(`/UpdateUser?id=${user_id}`, person)
                     console.log("update user resp", resp)
-                    resp.message ? toast.success(resp.message) : toast.error(resp.msg)
+                    resp.message ==="User Updated Successfully" ? toast.success(resp.message) : toast.error(resp.message)
 
-                    location.reload();
+                    // location.reload();
                 }
             }
 
@@ -148,9 +151,7 @@ const Comp6 = () => {
                 </div>
             ) : null}
             <Toaster position="top-center" richColors />
-            {/* <div>
-                <Image src="/1.jpg" width={20} height={20} alt="img"/>
-            </div> */}
+            
 
             <div className={style.profilepic}>
                 <Image src="/7.jpg" height={50} width={50} alt='img' />
@@ -179,7 +180,7 @@ const Comp6 = () => {
                             type="file"
                             required
                             name="file"
-
+                            onChange={(e)=>setProfile_photo(e.target.files)}
 
                         />
                     </Form.Group>

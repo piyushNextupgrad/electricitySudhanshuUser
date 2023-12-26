@@ -33,6 +33,13 @@ const Checkout = () => {
     const [finalAmmt, setFinalAmmt] = useState();
 
     const route = useRouter();
+
+    console.log("finalDate",finalDate)
+    console.log("finalSelect",finalSelect)
+
+    useEffect(() => {
+        def_values()
+    }, []);
     const def_values = () => {
 
         if (typeof window !== 'undefined') {
@@ -197,9 +204,17 @@ const Checkout = () => {
         setisSubmitingLoader(false)
 
     }
-    useEffect(() => {
-        def_values()
-    }, []);
+    
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      };
 
 
     return (
@@ -392,7 +407,7 @@ const Checkout = () => {
                                     {/* <hr /> */}
                                     <h1 className="text-center">{t.service_name}</h1>
                                     <div className={style.foam_payment}>
-                                        <span>Cost: ${t.service_cost}</span>
+                                        <span>$ {t.service_cost*t.service_quantity}</span>
                                         <span onClick={() => handleDelete(t)}><MdDelete /></span>
                                     </div>
                                     {/* { console.log("t",t.service_cost)} */}
@@ -410,7 +425,8 @@ const Checkout = () => {
                                         </div>
                                         <div>
                                             <label>Date</label>{" "}
-                                            <input type="datetime-local" value={t.service_date} onChange={(e) => setFinalDate(e.target.value)} />
+                                            <input type="datetime-local" value={t.service_date} onChange={(e) => {setFinalDate(e.target.value)}} min={getCurrentDateTime()}/>
+                                            
                                         </div>
                                     </div>
                                     {/* <hr/> */}
