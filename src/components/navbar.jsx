@@ -51,6 +51,7 @@ const Navbar = () => {
   const [register_zip, setRegister_zip] = useState('');
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('')
+  const [user_photo, setUser_photo] = useState(null)
 
 
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -58,6 +59,10 @@ const Navbar = () => {
   const login = 1;
 
   const route = useRouter();
+
+  useEffect(() => {
+    def_data();
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -198,19 +203,27 @@ const Navbar = () => {
 
   // }, []);
 
-  const def_data = () => {
-    if (typeof window !== 'undefined') {
-      // const localUserId =  JSON.parse(localStorage.getItem("ElectricityId"))
-      setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
-      setUserName(JSON.parse(localStorage.getItem("userName")))
+  const def_data = async () => {
+    try {
+      if (typeof window !== 'undefined') {
+        // const localUserId =  JSON.parse(localStorage.getItem("ElectricityId"))
+        setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
+        setUserName(JSON.parse(localStorage.getItem("userName")))
+      }
+      const resp = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("ElectricityId"))}`)
+      console.log("user details", resp)
+      setUser_photo(resp.data[0].user_profile_photo)
+
+    } catch (error) {
+      console.log("try-catch error", error)
     }
-    
+
+
+
   }
 
 
-  useEffect(() => {
-    def_data();
-  }, []);
+  
 
 
   return (<>
@@ -452,7 +465,8 @@ const Navbar = () => {
 
             <div>
               <div className={style.user}>
-                <Image src="/7.jpg" height={50} width={50} alt="img" />
+                
+                <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
               </div>
               <Table >
 

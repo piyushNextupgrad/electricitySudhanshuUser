@@ -4,8 +4,8 @@
     margin-bottom: 10px;
 }
 .profilepic>img{
-    height: auto;
-    width:100%;
+    /* height: auto;
+    width:100%; */
     border-radius: 50%;
     border:5px solid lightgray;
 }

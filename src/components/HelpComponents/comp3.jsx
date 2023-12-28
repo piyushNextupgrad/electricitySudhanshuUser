@@ -67,7 +67,7 @@ const Comp3 = () => {
                         <div className={`${style.text} col-md-9`}>
                             <h1>{t.service_name}</h1>
                             <div className={style.text_div1}>
-                                <span>${t.service_cost}</span>
+                                <span>${t.service_cost*t.qty}</span>
                                 <span style={{ fontWeight: "bold", color: "red" }}>Ongoing</span>
                             </div>
                             <div className={style.text_div2}>

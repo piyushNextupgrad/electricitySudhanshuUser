@@ -6,11 +6,12 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import "@/styles/HelpComponentStyle/comp6.module.css"
-import { getData, putData } from '../../../services/services';
+import { getData, putData, postData } from '../../../services/services';
 import { useEffect, useState } from 'react';
 import { Toaster, toast } from 'sonner'
 import { useRouter } from 'next/navigation';
-import style from "@/styles/HelpComponentStyle/comp6.module.css"
+import style from "@/styles/HelpComponentStyle/comp6.module.css";
+import axios from 'axios';
 
 
 const Comp6 = () => {
@@ -29,7 +30,8 @@ const Comp6 = () => {
     const [state, setState] = useState('');
     const [country, setCountry] = useState('');
     const [userType, setUserType] = useState('')
-    const [profile_photo,setProfile_photo] = useState('')
+    const [profile_photo, setProfile_photo] = useState('')
+    const [current_photo, setCurrent_photo] = useState(null)
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
 
 
@@ -56,6 +58,7 @@ const Comp6 = () => {
                 setState(resp.data[0].user_state);
                 setHno(resp.data[0].user_house_num);
                 setUserType(resp.data[0].user_type);
+                setCurrent_photo(resp.data[0].user_profile_photo)
 
             }
 
@@ -82,30 +85,57 @@ const Comp6 = () => {
                 // console.log("phone",typeof(alt_phone))
             }
             else {
-                if (typeof window !== 'undefined') {
-                    const user_id = localStorage.getItem("ElectricityId");
-                    console.log("user-id", user_id)
-                    const person = {
-                        "updId": user_id,
-                        "name": name,
-                        "user_alt_phno": alt_phone,
-                        "user_locality": locality,
-                        "user_house_num": Hno,
-                        "user_landmark": lankmark,
-                        "user_zipcode": zip,
-                        "user_city": city,
-                        "user_state": state,
-                        "user_country": country,
-                        "user_profile_photo":profile_photo,
-                        "user_type": "Customer"
-                    }
-                    console.log("person",person)
-                    const resp = await putData(`/UpdateUser?id=${user_id}`, person)
-                    console.log("update user resp", resp)
-                    resp.message ==="User Updated Successfully" ? toast.success(resp.message) : toast.error(resp.message)
+                try {
+                    if (typeof window !== 'undefined') {
+                        const user_id = localStorage.getItem("ElectricityId");
+                        console.log("user-id", user_id)
+                        // const person = {
+                        //     "updId": user_id,
+                        //     "name": name,
+                        //     "user_alt_phno": alt_phone,
+                        //     "user_locality": locality,
+                        //     "user_house_num": Hno,
+                        //     "user_landmark": lankmark,
+                        //     "user_zipcode": zip,
+                        //     "user_city": city,
+                        //     "user_state": state,
+                        //     "user_country": country,
+                        //     "user_profile_photo":profile_photo,
+                        //     "user_type": "Customer"
+                        // }
+                        const formData = new FormData();
 
-                    // location.reload();
+
+
+                        formData.append('updId', user_id);
+                        formData.append('name', name);
+                        formData.append('user_alt_phno', alt_phone);
+                        formData.append('user_locality', locality);
+                        formData.append('user_house_num', Hno);
+                        formData.append('user_landmark', lankmark);
+                        formData.append('user_zipcode', zip);
+                        formData.append('user_city', city);
+                        formData.append('user_state', state);
+                        formData.append('user_country', country);
+                        formData.append('user_profile_photo', profile_photo);
+                        formData.append('user_type', 'Customer');
+
+
+
+
+
+                        // const resp = await postData('/UpdateUser', formData)
+                        const resp = await axios.post("https://nextupgrad.us/electricity/api/UpdateUser", formData)
+
+                        console.log("update user resp", resp)
+                        resp.data.message === "User Updated Successfully" ? toast.success(resp.data.message) : toast.error(resp.data.message)
+
+                        location.reload();
+                    }
+                } catch (error) {
+                    console.log("try-catch error", error)
                 }
+
             }
 
 
@@ -128,6 +158,7 @@ const Comp6 = () => {
 
             }
             toast.success("SignOut Successfully!!")
+            location.reload();
 
         } catch (error) {
             console.log("try-catch error", error)
@@ -151,10 +182,10 @@ const Comp6 = () => {
                 </div>
             ) : null}
             <Toaster position="top-center" richColors />
-            
+
 
             <div className={style.profilepic}>
-                <Image src="/7.jpg" height={50} width={50} alt='img' />
+                <Image src={current_photo === null ? "/dummy.jpg" :`https://nextupgrad.us/electricity/public/images/profile_photo/${current_photo}` } height={200} width={200} alt='img' />
             </div>
             <Form>
                 <Row className="mb-3">
@@ -175,12 +206,12 @@ const Comp6 = () => {
 
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridCity">
-                    <Form.Label>Profile Picture</Form.Label>
+                        <Form.Label>Profile Picture</Form.Label>
                         <Form.Control
                             type="file"
                             required
                             name="file"
-                            onChange={(e)=>setProfile_photo(e.target.files)}
+                            onChange={(e) => setProfile_photo(e.target.files[0])}
 
                         />
                     </Form.Group>
@@ -201,7 +232,7 @@ const Comp6 = () => {
                     </Form.Group>
                 </Row>
 
-                
+
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridCity">
                         <Form.Label>House No.</Form.Label>

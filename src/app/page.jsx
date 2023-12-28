@@ -37,9 +37,9 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 // import 'swiper/css/pagination';
-import { Navigation,Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import Modal from 'react-bootstrap/Modal';
-import {  Pagination } from "swiper";
+import { Pagination } from "swiper";
 
 import { Toaster, toast } from 'sonner'
 import { useRouter } from "next/navigation";
@@ -78,23 +78,31 @@ function Homepage() {
   const [register_city, setRegister_city] = useState('');
   const [register_state, setRegister_state] = useState('');
   const [register_zip, setRegister_zip] = useState('');
-  const [userId,setUserId] = useState()
-  const [user_name,setUser_name] = useState('')
+  const [userId, setUserId] = useState()
+  const [user_name, setUser_name] = useState('')
+  const [user_photo, setUser_photo] = useState(null)
   const [sliderServices, setSliderServices] = useState([])
 
   const route = useRouter();
+
+  useEffect(() => {
+    getServices()
+  }, []);
 
   const getServices = async () => {
     const resp = await getData("/GetService")
     console.log("getServices", resp.data);
     setSliderServices(resp.data)
     try {
-      if (typeof window !== 'undefined'){
-         setUserId(JSON.parse(localStorage.getItem("ElectricityId"))) 
-          setUser_name(JSON.parse(localStorage.getItem("userName")))
+      if (typeof window !== 'undefined') {
+        setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
+        setUser_name(JSON.parse(localStorage.getItem("userName")))
+        let data = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("ElectricityId"))}`)
+        console.log("user details",data)
+        setUser_photo(data.data[0].user_profile_photo)
       }
     } catch (error) {
-      console.log("try-catch error",error)
+      console.log("try-catch error", error)
     }
 
   }
@@ -208,9 +216,7 @@ function Homepage() {
     setShow(false)
     setisSubmitingLoader(false)
   }
-  useEffect(() => {
-    getServices()
-  }, []);
+
 
   return (
     <div>
@@ -301,7 +307,8 @@ function Homepage() {
             aria-labelledby="example-modal-sizes-title-sm"
           >
             <Modal.Header closeButton>
-              <Modal.Title><Image src="/logo.png" height={50} width={200} alt="img" /></Modal.Title>
+              <Modal.Title>
+                <Image src="/logo.png" height={50} width={200} alt="img" /></Modal.Title>
             </Modal.Header>
 
             <Modal.Body >
@@ -430,48 +437,48 @@ function Homepage() {
 
               </Tabs> */}
               {user_name ? (
-              <>
-              <div>
-              <div className={style.userPhoto}>
-                <Image src="/7.jpg" height={50} width={50} alt="img" />
-              </div>
-              <Table >
+                <>
+                  <div>
+                    <div className={style.userPhoto}>
+                    <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
+                    </div>
+                    <Table >
 
-                <tbody>
-                  <tr>
-
-
-                    <td>User Name</td>
-                    <td>{user_name}</td>
-                  </tr>
-                  <tr>
+                      <tbody>
+                        <tr>
 
 
-                    <td>User ID</td>
-                    <td>{userId}</td>
-                  </tr>
+                          <td>User Name</td>
+                          <td>{user_name}</td>
+                        </tr>
+                        <tr>
 
-                </tbody>
-              </Table>
-              <div className="d-flex justify-content-center">
-                <Button variant="primary" onClick={handleLogout}>
-                  LogOut
-                </Button>
-              </div>
-            </div>
-              
-              </>
-              ):(
+
+                          <td>User ID</td>
+                          <td>{userId}</td>
+                        </tr>
+
+                      </tbody>
+                    </Table>
+                    <div className="d-flex justify-content-center">
+                      <Button variant="primary" onClick={handleLogout}>
+                        LogOut
+                      </Button>
+                    </div>
+                  </div>
+
+                </>
+              ) : (
                 <div className="d-flex justify-content-evenly">
-                <Button variant="primary" onClick={() => route.push("/login")}>
-                  Login
-                </Button>
-                <Button variant="primary" onClick={() => route.push("/register")}>
-                  Register
-                </Button>
-              </div>
+                  <Button variant="primary" onClick={() => route.push("/login")}>
+                    Login
+                  </Button>
+                  <Button variant="primary" onClick={() => route.push("/register")}>
+                    Register
+                  </Button>
+                </div>
               )}
-              
+
 
             </Modal.Body>
 
@@ -499,7 +506,7 @@ function Homepage() {
                 pauseOnMouseEnter: true
               }}
               delay={5000}
-              modules={[Navigation,Autoplay]}
+              modules={[Navigation, Autoplay]}
               loop={true}
               navigation={true}
               breakpoints={{
@@ -532,7 +539,7 @@ function Homepage() {
             //     "--swiper-pagination-bullet-border-radius": "0px"
             // }}
             >
-              {sliderServices ? sliderServices?.map((t,index) => (
+              {sliderServices ? sliderServices?.map((t, index) => (
                 <SwiperSlide className={style.slider2_background} key={index}>
                   <Link href={`/acservice?id=${t?.subscription_id}`}  >
                     <div>

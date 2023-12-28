@@ -21,7 +21,7 @@ const Subescribe = () => {
             const resp = await postData("/StoreNewsLetter", subscribeEmail)
             // console.log("resp", resp)
             resp.message === "News Letter Subscribed" ? toast.success(resp.message) : toast.error(resp.message)
-
+            setEmail('')
         } catch (error) {
             console.log("try-catch error", error)
         }

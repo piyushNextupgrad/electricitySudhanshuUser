@@ -34,8 +34,8 @@ const Checkout = () => {
 
     const route = useRouter();
 
-    console.log("finalDate",finalDate)
-    console.log("finalSelect",finalSelect)
+    // console.log("finalDate", finalDate)
+    // console.log("finalSelect", finalSelect)
 
     useEffect(() => {
         def_values()
@@ -47,11 +47,11 @@ const Checkout = () => {
             // setDef_dte(localStorage.getItem("Elect_service_date"));
             localStorage.getItem("ElectricityId") ? setLocalUserId(true) : false
             const cartServices = JSON.parse(localStorage.getItem("Cart"))
-            // console.log("cartServices", cartServices)
+            console.log("cartServices", cartServices)
             setCartList(cartServices ? cartServices : [])
             //adding cart total here
             const total_array = []
-            cartServices ? (cartServices.filter((c) => total_array.push(c.service_cost))) : ""
+            cartServices ? (cartServices.filter((c) => total_array.push(c.service_cost * c.service_quantity))) : ""
             // console.log("total",total_array)
             let total = 0;
             total_array.map((e, index) => {
@@ -60,7 +60,7 @@ const Checkout = () => {
                 setCartTotol(total)
                 setFinalAmmt(total + 59)
             })
-
+            // console.log("total",total_array)
 
         }
 
@@ -133,7 +133,7 @@ const Checkout = () => {
                     if (resp.message === "Service Created Successfully") {
                         toast.success(resp.message)
                         localStorage.removeItem("Cart");
-                        location.reload();
+                        setTimeout(location.reload(),3000)
                     }
                     else {
                         toast.error(resp.message)
@@ -204,7 +204,7 @@ const Checkout = () => {
         setisSubmitingLoader(false)
 
     }
-    
+
     const getCurrentDateTime = () => {
         const now = new Date();
         const year = now.getFullYear();
@@ -212,10 +212,46 @@ const Checkout = () => {
         const day = String(now.getDate()).padStart(2, '0');
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
-    
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
-      };
 
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
+    const handleQuantityChange = (updated_qty, serv_id) => {
+        setisSubmitingLoader(true)
+
+        // console.log("e", updated_qty)
+        // console.log("t", serv_id)
+        if (typeof window !== 'undefined') {
+            let existing_cart = JSON.parse(localStorage.getItem("Cart"))
+            // console.log("existing_cart", existing_cart)
+            let cart = existing_cart.filter((e) => e.service_id == serv_id)
+            // console.log("filtered cart item", cart)
+            cart[0].service_quantity = updated_qty;
+            // console.log("updated cart", cart)
+            // console.log("existing",existing_cart)
+            localStorage.setItem("Cart", JSON.stringify(existing_cart))
+            location.reload()
+
+        }
+        setisSubmitingLoader(false)
+
+    }
+    const handleDateChange = (updated_date, serv_id) => {
+        console.log("updated_date",updated_date)
+        console.log("serv_id",serv_id)
+        if (typeof window !== 'undefined') {
+            let existing_cart = JSON.parse(localStorage.getItem("Cart"))
+            // console.log("existing_cart", existing_cart)
+            let cart = existing_cart.filter((e) => e.service_id == serv_id)
+            // console.log("filtered cart item", cart)
+            cart[0].service_date = updated_date;
+            // console.log("updated cart", cart)
+            // console.log("existing",existing_cart)
+            localStorage.setItem("Cart", JSON.stringify(existing_cart))
+            location.reload()
+
+        }
+
+    }
 
     return (
         <div >
@@ -407,14 +443,14 @@ const Checkout = () => {
                                     {/* <hr /> */}
                                     <h1 className="text-center">{t.service_name}</h1>
                                     <div className={style.foam_payment}>
-                                        <span>$ {t.service_cost*t.service_quantity}</span>
+                                        <span>$ {t.service_cost * t.service_quantity}</span>
                                         <span onClick={() => handleDelete(t)}><MdDelete /></span>
                                     </div>
                                     {/* { console.log("t",t.service_cost)} */}
                                     <div className={style.quantity}>
                                         <div>
                                             <label>Quantity</label>{" "}
-                                            <select id="dropdown" name="dropdown" value={t.service_quantity} onChange={(e) => { setFinalSelect(e.target.value) }}>
+                                            <select id="dropdown" name="dropdown" value={t.service_quantity} onChange={(e) => handleQuantityChange(e.target.value, t.service_id)}>
                                                 <option value="choose" >choose</option>
                                                 <option value="1" >1</option>
                                                 <option value="2" >2</option>
@@ -425,8 +461,8 @@ const Checkout = () => {
                                         </div>
                                         <div>
                                             <label>Date</label>{" "}
-                                            <input type="datetime-local" value={t.service_date} onChange={(e) => {setFinalDate(e.target.value)}} min={getCurrentDateTime()}/>
-                                            
+                                            <input type="datetime-local" value={t.service_date} onChange={(e) => handleDateChange(e.target.value,t.service_id)} min={getCurrentDateTime()} />
+
                                         </div>
                                     </div>
                                     {/* <hr/> */}
