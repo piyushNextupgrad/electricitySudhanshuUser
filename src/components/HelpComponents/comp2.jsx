@@ -51,7 +51,7 @@ const Comp2 = () => {
         const resp = await(postData("/StoreSupportTicket",ticketDetails))
         console.log("resp from server",resp)
         resp.message==="Ticket Created Successfully" ? toast.success(resp.message) : toast.error(resp.message)
-        
+        setDescription('')
 
         setisSubmitingLoader(false)
         
