@@ -32,6 +32,7 @@ const Checkout = () => {
     const [cartTotal, setCartTotol] = useState();
     const [finalAmmt, setFinalAmmt] = useState();
 
+
     const route = useRouter();
 
     // console.log("finalDate", finalDate)
@@ -47,14 +48,14 @@ const Checkout = () => {
             // setDef_dte(localStorage.getItem("Elect_service_date"));
             localStorage.getItem("ElectricityId") ? setLocalUserId(true) : false
             const cartServices = JSON.parse(localStorage.getItem("Cart"))
-            console.log("cartServices", cartServices)
+            // console.log("cartServices", cartServices)
             setCartList(cartServices ? cartServices : [])
             //adding cart total here
             const total_array = []
             cartServices ? (cartServices.filter((c) => total_array.push(c.service_cost * c.service_quantity))) : ""
             // console.log("total",total_array)
             let total = 0;
-            total_array.map((e, index) => {
+            total_array.map((e) => {
 
                 total = total + e;
                 setCartTotol(total)
@@ -133,7 +134,7 @@ const Checkout = () => {
                     if (resp.message === "Service Created Successfully") {
                         toast.success(resp.message)
                         localStorage.removeItem("Cart");
-                        setTimeout(location.reload(),3000)
+                        setTimeout(() => location.reload(), 2000)
                     }
                     else {
                         toast.error(resp.message)
@@ -236,8 +237,8 @@ const Checkout = () => {
 
     }
     const handleDateChange = (updated_date, serv_id) => {
-        console.log("updated_date",updated_date)
-        console.log("serv_id",serv_id)
+        console.log("updated_date", updated_date)
+        console.log("serv_id", serv_id)
         if (typeof window !== 'undefined') {
             let existing_cart = JSON.parse(localStorage.getItem("Cart"))
             // console.log("existing_cart", existing_cart)
@@ -461,7 +462,7 @@ const Checkout = () => {
                                         </div>
                                         <div>
                                             <label>Date</label>{" "}
-                                            <input type="datetime-local" value={t.service_date} onChange={(e) => handleDateChange(e.target.value,t.service_id)} min={getCurrentDateTime()} />
+                                            <input type="datetime-local" value={t.service_date} onChange={(e) => handleDateChange(e.target.value, t.service_id)} min={getCurrentDateTime()} />
 
                                         </div>
                                     </div>

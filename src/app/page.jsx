@@ -82,6 +82,7 @@ function Homepage() {
   const [user_name, setUser_name] = useState('')
   const [user_photo, setUser_photo] = useState(null)
   const [sliderServices, setSliderServices] = useState([])
+  const [locationSearchBox, setLocationSearchBox] = useState()
 
   const route = useRouter();
 
@@ -98,7 +99,7 @@ function Homepage() {
         setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
         setUser_name(JSON.parse(localStorage.getItem("userName")))
         let data = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("ElectricityId"))}`)
-        console.log("user details",data)
+        console.log("user details", data)
         setUser_photo(data.data[0].user_profile_photo)
       }
     } catch (error) {
@@ -217,7 +218,34 @@ function Homepage() {
     setisSubmitingLoader(false)
   }
 
+  const handleSearchServices = (event) => {
 
+    if (event.key === 'Enter') {
+      route.push("/services")
+
+    }
+  }
+
+  const handleLocationSearch = async (event) => {
+    if (event.key === 'Enter') {
+      try {
+        const resp = await getData("/GetServiceLocation")
+        let value=0
+        resp.data.map((item) => {
+          console.log("item", item)
+          
+          if (item.location_name == locationSearchBox || item.zip_code == locationSearchBox) {
+            value=1
+          }
+        }
+        )
+        value==1?toast.success("We provide services in this ares"):toast.error("We dont provide services in this area")
+      } catch (error) {
+        console.log("try-catch error", error)
+      }
+
+    }
+  }
   return (
     <div>
       {isSubmitingLoader ? (
@@ -249,9 +277,11 @@ function Homepage() {
                 <Link href="/checkout">
                   <FaShoppingCart />
                 </Link>
-                <Link href="#" onClick={() => setSmShow(true)} className="me-2">
+                {userId ? (<Link href="#" onClick={() => setSmShow(true)} className="me-2">
                   <FaUser />
-                </Link>
+                </Link>) : (<Link href="/login" className="me-2">
+                  <FaUser />
+                </Link>)}
                 <Link href="#" onClick={handleShow}>
                   <FaBars />
                 </Link>
@@ -276,12 +306,12 @@ function Homepage() {
                     <div className={style.banner_input1}>
                       {" "}
                       <MdLocationPin />
-                      <input type="text" placeholder="Current Locaction" />
+                      <input type="text" placeholder="Current Locaction" onKeyDown={handleLocationSearch} value={locationSearchBox} onChange={(e) => setLocationSearchBox(e.target.value)} />
                     </div>
                     <div className={style.banner_input2}>
                       {" "}
                       <AiOutlineSearch />
-                      <input type="text" placeholder="Search for Services" />
+                      <input type="text" placeholder="Search for Services" onKeyDown={handleSearchServices} />
                     </div>
                   </div>
                   <div className={style.banner_text_div}>
@@ -440,7 +470,7 @@ function Homepage() {
                 <>
                   <div>
                     <div className={style.userPhoto}>
-                    <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
+                      <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
                     </div>
                     <Table >
 

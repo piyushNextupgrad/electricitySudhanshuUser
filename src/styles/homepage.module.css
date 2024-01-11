@@ -334,11 +334,12 @@
 }
 .section3_div2>div>div>a:hover{
        
-       rotate: 15deg;
+       margin-left:10px;
        transition-duration: 500ms;
       
        color:#FFC72C;
 }
+
 
 
 .section4 {

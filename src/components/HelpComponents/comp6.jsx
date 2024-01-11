@@ -88,7 +88,7 @@ const Comp6 = () => {
                 try {
                     if (typeof window !== 'undefined') {
                         const user_id = localStorage.getItem("ElectricityId");
-                        console.log("user-id", user_id)
+                        // console.log("user-id", user_id)
                         // const person = {
                         //     "updId": user_id,
                         //     "name": name,

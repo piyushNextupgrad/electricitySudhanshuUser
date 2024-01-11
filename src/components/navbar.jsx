@@ -52,6 +52,7 @@ const Navbar = () => {
   const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('')
   const [user_photo, setUser_photo] = useState(null)
+  const [locationSearchBox, setLocationSearchBox] = useState()
 
 
   const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
@@ -222,8 +223,36 @@ const Navbar = () => {
 
   }
 
+  const handleSearchServices = (event) => {
 
-  
+    if (event.key === 'Enter') {
+      route.push("/services")
+
+    }
+  }
+
+  const handleLocationSearch = async (event) => {
+    if (event.key === 'Enter') {
+      try {
+        const resp = await getData("/GetServiceLocation")
+        let value=0
+        resp.data.map((item) => {
+          console.log("item", item)
+          
+          if (item.location_name == locationSearchBox || item.zip_code == locationSearchBox) {
+            value=1
+          }
+        }
+        )
+        value==1?toast.success("We provide services in this ares"):toast.error("We dont provide services in this area")
+      } catch (error) {
+        console.log("try-catch error", error)
+      }
+
+    }
+  }
+
+
 
 
   return (<>
@@ -257,21 +286,24 @@ const Navbar = () => {
                 <div className={`col-xxl-6 col-xl-6 col-lg-6 ${style.innersearch}`}>
                   {" "}
                   <MdLocationPin />
-                  <input type="text" placeholder="Current Locaction" />
+                  <input type="text" placeholder="Current Locaction" onKeyDown={handleLocationSearch} value={locationSearchBox} onChange={(e) => setLocationSearchBox(e.target.value)} />
                 </div>
                 <div className={`col-xxl-6 col-xl-6 col-lg-6 ${style.innersearch}`}>
                   {" "}
                   <AiOutlineSearch />
-                  <input type="text" placeholder="Search for Services" />
+                  <input type="text" placeholder="Search for Services" onKeyDown={handleSearchServices} />
                 </div>
               </div>  </div>
             <div className={`col-xxl-3 col-xl-3 col-lg-3 ${style.innerhomeicon}`}>
               <Link href="/checkout" >
                 <FaShoppingCart />
               </Link>
-              <Link href="#" onClick={() => setSmShow(true)} className="me-2">
+              {userId ?(<Link href="#" onClick={() => setSmShow(true)} className="me-2">
                 <FaUser />
-              </Link>
+              </Link>):(<Link href="/login" className="me-2">
+                <FaUser />
+              </Link>)}
+              
               <Link href="#" onClick={handleShow}>
                 <FaBars />
               </Link>
@@ -465,7 +497,7 @@ const Navbar = () => {
 
             <div>
               <div className={style.user}>
-                
+
                 <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
               </div>
               <Table >
@@ -488,25 +520,33 @@ const Navbar = () => {
               </Table>
               <div className="d-flex justify-content-center">
                 <Button variant="primary" onClick={handleLogout}>
-                  LogOut
+                  Sign Out
                 </Button>
               </div>
             </div>
           </>
-          ) : (<div className="d-flex justify-content-evenly">
-            <Button variant="primary" onClick={() => route.push("/login")}>
-              Login
-            </Button>
-            <Button variant="primary" onClick={() => route.push("/register")}>
-              Register
-            </Button>
-          </div>)}
+          ) : (
+            <>
+              {/* <Modal.Header closeButton>
+                <Modal.Title>Modal title</Modal.Title>
+              </Modal.Header> */}
+
+              
+                <p>You are not logged in</p>
+              
+
+              <Modal.Footer>
+                <Button variant="primary">Register</Button>
+                <Button variant="primary">Login</Button>
+              </Modal.Footer>
+            </>
+          )}
 
 
         </Modal.Body>
 
       </Modal>
-    </div>
+    </div >
   </>);
 }
 

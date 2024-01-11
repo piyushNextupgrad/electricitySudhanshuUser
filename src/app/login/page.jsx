@@ -123,6 +123,7 @@ export default function Login() {
                                                     >
                                                         Login
                                                     </Link>
+                                                    
                                                 </div>
                                                 <p className=" mt-1">
                                                     Don't have account?
@@ -137,18 +138,29 @@ export default function Login() {
                                                     >
                                                         Forgot password?
                                                     </Link>
+                                                   
+
+                                                </div>
+                                                <div className="col-12 mb-0">
+                                                    <Link
+                                                        href="/"
+                                                        className="btn btn-link box-shadow-0 px-0"
+                                                    >
+                                                        Home Page
+                                                    </Link>
+                                                   
 
                                                 </div>
                                             </div>
                                         </form>
                                         <div className="card-body social-icons border-top">
-                                            <a className="btn  btn-social btn-fb mr-2">
+                                            <a className="btn  btn-social btn-fb mr-2" href='https://www.facebook.com'>
                                                 <FaFacebookF />
                                             </a>
-                                            <a className="btn  btn-social btn-googleplus mr-2">
+                                            <a className="btn  btn-social btn-googleplus mr-2" href='https://www.youtube.com'>
                                                 <FaYoutube />
                                             </a>
-                                            <a className="btn  btn-social btn-twitter-transparant  ">
+                                            <a className="btn  btn-social btn-twitter-transparant  " href='https://www.twitter.com'>
                                                 <FaTwitter />
                                             </a>
                                         </div>

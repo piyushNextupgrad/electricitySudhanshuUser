@@ -1,8 +1,10 @@
 //ticket generate
 import style from "@/styles/HelpComponentStyle/comp2.module.css"
+
 import { useEffect, useState } from "react";
 import { Toaster, toast } from 'sonner';
 import { getData, postData } from "../../../services/services";
+import { useRouter } from "next/navigation";
 
 
 
@@ -14,9 +16,11 @@ const Comp2 = () => {
     const [unique_service_id, setUnique_service_id] = useState('');
     const [serviceName, setServiceName] = useState('')
     const [quantity, setQuantity] = useState(null);
-    const [Description,setDescription] = useState("");
-    const[serviceId,setServiceId] = useState(null)
+    const [Description, setDescription] = useState("");
+    const [serviceId, setServiceId] = useState(null)
+    
 
+    const route = useRouter()
     useEffect(() => {
         getServices()
     }, []);
@@ -24,17 +28,17 @@ const Comp2 = () => {
     const getServices = async () => {
         setisSubmitingLoader(true)
         if (typeof window !== 'undefined') {
-            const  user =JSON.parse(localStorage.getItem("ElectricityId"))
-            console.log("userId", userId)
+            const user = JSON.parse(localStorage.getItem("ElectricityId"))
+            // console.log("userId", userId)
             const resp = await getData(`/GetServiceBooking?id=${user}`)
-            console.log("resp", resp)
+            // console.log("resp", resp)
             setUserId(user)
             setService_list(resp?.data)
         }
         setisSubmitingLoader(false)
 
     }
-    const ticketSubmit = async(e) => {
+    const ticketSubmit = async (e) => {
         setisSubmitingLoader(true)
         e.preventDefault()
         // console.log("userId",userId)
@@ -42,25 +46,27 @@ const Comp2 = () => {
         // console.log("serviceID",serviceId)
         // console.log("description",Description)   
         const ticketDetails = {
-            "customer_id":userId,
-            "unique_service_id":unique_service_id,
-            "service_id":serviceId,
-            "issue_desc":Description
+            "customer_id": userId,
+            "unique_service_id": unique_service_id,
+            "service_id": serviceId,
+            "issue_desc": Description
         }
-        console.log("final data",ticketDetails)
-        const resp = await(postData("/StoreSupportTicket",ticketDetails))
-        console.log("resp from server",resp)
-        resp.message==="Ticket Created Successfully" ? toast.success(resp.message) : toast.error(resp.message)
-        setDescription('')
-
-        setisSubmitingLoader(false)
+        // console.log("final data", ticketDetails)
+        const resp = await (postData("/StoreSupportTicket", ticketDetails))
+        // console.log("resp from server", resp)
+        resp.message === "Ticket Created Successfully" ? toast.success(resp.message) : toast.error(resp.message)
         
+        setTimeout(()=>{location.reload()},2000)
+        
+        setisSubmitingLoader(false)
+
 
 
     }
+    
     const ticketSelect = (uniqueid) => {
         setisSubmitingLoader(true)
-        console.log("uniqueid", uniqueid)
+        // console.log("uniqueid", uniqueid)
         setUnique_service_id(uniqueid)
         service_list.map((item) => {
             if (item.unique_service_id == uniqueid) {
@@ -115,9 +121,9 @@ const Comp2 = () => {
                                     <input type="number" placeholder="Phone No." />
                                 </div> */}
                             </div>
-                            <textarea rows="10" cols="50" placeholder="Description" onChange={(e) =>setDescription(e.target.value)}></textarea>
+                            <textarea rows="10" cols="50" placeholder="Description" onChange={(e) => setDescription(e.target.value)}></textarea>
                             <div className={style.bttn}>
-                                <button onClick={ticketSubmit}>Submit</button>
+                            <button onClick={ticketSubmit}>Submit</button>
                             </div>
                         </form>
                     </div>

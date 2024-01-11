@@ -71,7 +71,8 @@ const ACservices = () => {
                     existingCart.push(NewServ)
                     localStorage.setItem("Cart", JSON.stringify(existingCart))
                     toast.success("Service added to Cart")
-                    setTimeout(location.reload(),3000)
+                    
+                    setTimeout(()=>{route.push("/services")},2000)
                     // else {
 
                     //     const existingCart = JSON.parse(localStorage.getItem("Cart"))
@@ -160,9 +161,9 @@ const ACservices = () => {
                         <div className={style.bttn}>
                             <Link href="#" onClick={handleCart}>Add to Cart</Link>
                         </div>
-                        <div className={style.bttn}>
+                        {/* <div className={style.bttn}>
                             <Link href="/services" >Book other Services</Link>
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
