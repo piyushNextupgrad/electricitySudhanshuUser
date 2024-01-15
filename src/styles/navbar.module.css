@@ -114,7 +114,7 @@
 }
 .sidemenu_nav>ul>li>a:hover{
     
-    color:white;
+    
     /* border-bottom:2px solid white; */
     transition-duration: 400ms;
     
@@ -129,7 +129,7 @@
     display: block;
     width: 0;
     height: 3px;
-    background: #fff;
+    background: black;
     transition: width .3s ease-in;
   }
   .sidemenu_nav>ul>li>a:hover::after {
@@ -141,10 +141,10 @@
     transition-duration: 400ms;
 }
 .sidemenu_icons>a:hover{
-        color:white;
+        
         font-size: 30px;
         /* margin-left: 5px; */
-        transition-duration: 300ms;
+        transition-duration: 100ms;
 }
 
 .sidemenu_icons>a{
@@ -161,7 +161,7 @@
     font-weight: 500;
     padding:10px;
     list-style-type: none;
-    margin:15px 0;
+    margin:40px 0;
     /* border:1px solid black; */
     
     

@@ -153,7 +153,7 @@ export default function Login() {
                                                 </div>
                                             </div>
                                         </form>
-                                        <div className="card-body social-icons border-top">
+                                        <div className="card-body social-icons border-top padding1rem">
                                             <a className="btn  btn-social btn-fb mr-2" href='https://www.facebook.com'>
                                                 <FaFacebookF />
                                             </a>

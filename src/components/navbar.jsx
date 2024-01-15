@@ -347,10 +347,10 @@ const Navbar = () => {
                 <MdKeyboardDoubleArrowRight />
                 <Link href="/services">SERVICES</Link>
               </li>
-              <li>
+              {/* <li>
                 <MdKeyboardDoubleArrowRight />
                 <Link href="/checkout">CHECKOUT</Link>
-              </li>
+              </li> */}
               <li>
                 <MdKeyboardDoubleArrowRight />
                 <Link href="/plan">PLAN</Link>

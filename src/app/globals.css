@@ -28187,3 +28187,12 @@ input[type=number] {
 	border:none !important;
 	color:black !important;
 }
+.padding1rem{
+	padding:1rem !important;
+}
+.padding1rem>a{
+	line-height: 1.5 !important;
+}
+.page{
+	background:#f3f6fd;
+}
