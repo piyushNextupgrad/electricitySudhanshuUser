@@ -149,7 +149,7 @@
 .compont{
    
     padding-top:25px;
-    
+    overflow: auto !important ;
     
     
 }

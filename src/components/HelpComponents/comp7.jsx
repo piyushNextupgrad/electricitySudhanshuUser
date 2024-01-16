@@ -50,8 +50,8 @@ const Comp7 = () => {
             ) : null}
 
             <Toaster position="top-center" richColors />
-            <div className={style.comp3} style={{ border: "1px solid black;" }}>
-                {/* {console.log(serviceHistory)} */}
+            <div className={style.comp3} >
+                
                 {serviceHistory.length > 0 ? (serviceHistory.map((t) => (
                     <div className="row">
                         <div className="col-md-3 text-center">

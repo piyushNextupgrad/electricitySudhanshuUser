@@ -136,6 +136,8 @@ const Checkout = () => {
                         toast.success(resp.message)
                         localStorage.removeItem("Cart");
                         // setTimeout(() => location.reload(), 2000)
+                        setCartTotol(0)
+                        setFinalAmmt(0)
                         setRefresh(Math.random)
                     }
                     else {
