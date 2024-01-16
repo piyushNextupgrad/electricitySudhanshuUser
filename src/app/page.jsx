@@ -55,7 +55,7 @@ import { getData } from "../../services/services";
 function Homepage() {
 
   const [show, setShow] = useState(false);
-  const login = typeof window !== 'undefined' ? JSON.parse(localStorage?.getItem("token")) : 1
+  // const login = typeof window !== 'undefined' ? JSON.parse(localStorage?.getItem("Etoken")) : 1
 
   // const [login, setLogin] = useState(localStorage.getItem("token"));
   const [smShow, setSmShow] = useState(false);
@@ -96,11 +96,12 @@ function Homepage() {
     setSliderServices(resp.data)
     try {
       if (typeof window !== 'undefined') {
-        setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
+        setUserId(JSON.parse(localStorage.getItem("UserId[C]")))
         setUser_name(JSON.parse(localStorage.getItem("userName")))
-        let data = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("ElectricityId"))}`)
+        let data = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("UserId[C]"))}`)
         console.log("user details", data)
         setUser_photo(data.data[0].user_profile_photo)
+        setUser_name(data.data[0].name)
       }
     } catch (error) {
       console.log("try-catch error", error)
@@ -108,107 +109,107 @@ function Homepage() {
 
   }
   // console.log("sliderServices",sliderServices)
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setisSubmitingLoader(true)
+  // const handleRegister = async (e) => {
+  //   e.preventDefault();
+  //   setisSubmitingLoader(true)
 
-    if (register_name == '' || register_email == '' || register_phone == '' || register_password == '' || register_city == '' || register_zip == '' || register_locality == '' || register_state == '') {
-      toast.error("All fields are required!!")
-    }
-    else if (register_phone.length < 10) {
-      toast.error("Please enter 10 digit phone number!!")
-    }
-    else if (register_zip.length !== 6) {
-      toast.error("Please enter 6 digit Zipcode!!")
-    }
-    else {
+  //   if (register_name == '' || register_email == '' || register_phone == '' || register_password == '' || register_city == '' || register_zip == '' || register_locality == '' || register_state == '') {
+  //     toast.error("All fields are required!!")
+  //   }
+  //   else if (register_phone.length < 10) {
+  //     toast.error("Please enter 10 digit phone number!!")
+  //   }
+  //   else if (register_zip.length !== 6) {
+  //     toast.error("Please enter 6 digit Zipcode!!")
+  //   }
+  //   else {
 
-      let person = {
-        "name": register_name,
-        "email": register_email,
-        "user_phno": register_phone,
-        "password": register_password,
-        "user_locality": register_locality,
-        "user_city": register_city,
-        "user_state": register_state,
-        "user_zipcode": register_zip,
-        "user_type": "Customer"
-      };
+  //     let person = {
+  //       "name": register_name,
+  //       "email": register_email,
+  //       "user_phno": register_phone,
+  //       "password": register_password,
+  //       "user_locality": register_locality,
+  //       "user_city": register_city,
+  //       "user_state": register_state,
+  //       "user_zipcode": register_zip,
+  //       "user_type": "Customer"
+  //     };
 
-      try {
-        const resp = await postData("/register", person);
-        console.log("resp", resp);
-        if (resp?.status) {
-          toast.success("Customer Registered Successfully!!");
-
-
-          // setSmShow(false);
-        }
-        else {
-          toast.error(resp?.errors?.email[0]);
-          console.log("Customer register fail error", resp?.errors);
-
-        }
+  //     try {
+  //       const resp = await postData("/register", person);
+  //       console.log("resp", resp);
+  //       if (resp?.status) {
+  //         toast.success("Customer Registered Successfully!!");
 
 
+  //         // setSmShow(false);
+  //       }
+  //       else {
+  //         toast.error(resp?.errors?.email[0]);
+  //         console.log("Customer register fail error", resp?.errors);
 
-      } catch (error) {
-        console.log("catch Error", error)
-      }
-
-
-    }
-    setisSubmitingLoader(false)
-
-
-  }
-
-  const handleLogin = async (e) => {
-
-    e.preventDefault();
-    setisSubmitingLoader(true);
-    if (email == "" || password == '') {
-      toast.error("Both fields are required!!")
-      setisSubmitingLoader(false)
-    }
-    else {
-      const login = {
-        "email": email,
-        "password": password,
-        "user_type": "Customer"
-      }
-
-      try {
-        const resp = await postData("/login", login);
-        console.log("resp Login", resp)
-        if (resp?.success) {
-          toast.success(resp?.message);
+  //       }
 
 
-          if (typeof window !== 'undefined') {
-            localStorage.setItem("token", JSON.stringify(resp?.data?.token));
-            localStorage.setItem("userName", JSON.stringify(resp?.data?.name?.name))
-          }
 
-        }
-        else {
-          toast.error(resp?.message);
+  //     } catch (error) {
+  //       console.log("catch Error", error)
+  //     }
 
-        }
-      } catch (error) {
-        console.log("try-catch error", error)
-      }
-      setisSubmitingLoader(false);
-      setSmShow(false);
-    }
-  }
+
+  //   }
+  //   setisSubmitingLoader(false)
+
+
+  // }
+
+  // const handleLogin = async (e) => {
+
+  //   e.preventDefault();
+  //   setisSubmitingLoader(true);
+  //   if (email == "" || password == '') {
+  //     toast.error("Both fields are required!!")
+  //     setisSubmitingLoader(false)
+  //   }
+  //   else {
+  //     const login = {
+  //       "email": email,
+  //       "password": password
+        
+  //     }
+
+  //     try {
+  //       const resp = await postData("/login", login);
+  //       console.log("resp Login", resp)
+  //       if (resp?.success) {
+  //         toast.success(resp?.message);
+
+
+  //         if (typeof window !== 'undefined') {
+  //           localStorage.setItem("token", JSON.stringify(resp?.data?.token));
+  //           localStorage.setItem("userName", JSON.stringify(resp?.data?.name?.name))
+  //         }
+
+  //       }
+  //       else {
+  //         toast.error(resp?.message);
+
+  //       }
+  //     } catch (error) {
+  //       console.log("try-catch error", error)
+  //     }
+  //     setisSubmitingLoader(false);
+  //     setSmShow(false);
+  //   }
+  // }
   const handleLogout = () => {
     setisSubmitingLoader(true)
     try {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem("ElectricityId")
-        localStorage.removeItem("userName")
-        localStorage.removeItem("token")
+        localStorage.removeItem("UserId[C]")
+        // localStorage.removeItem("userName")
+        localStorage.removeItem("Etoken")
       }
       location.reload();
     } catch (error) {
@@ -239,7 +240,7 @@ function Homepage() {
           }
         }
         )
-        value==1?toast.success("We provide services in this ares"):toast.error("We dont provide services in this area")
+        value==1?toast.success("We provide services in this area."):toast.error("We dont provide services in this area.")
       } catch (error) {
         console.log("try-catch error", error)
       }
@@ -331,7 +332,7 @@ function Homepage() {
 
         <div className="user_model">
           <Modal
-            size="sm"
+            // size="sm"
             show={smShow}
             onHide={() => setSmShow(false)}
             aria-labelledby="example-modal-sizes-title-sm"
@@ -582,7 +583,7 @@ function Homepage() {
                       <span>{t.service_names}</span>
                     </div>
                   </Link>
-                </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background}>
+                </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background} key={index}>
                   <Link href="/acservice?id=54" >
                     <div>
                       <Image

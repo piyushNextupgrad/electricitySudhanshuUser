@@ -31,6 +31,7 @@ const Checkout = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     const [cartTotal, setCartTotol] = useState();
     const [finalAmmt, setFinalAmmt] = useState();
+    const [refresh,setRefresh] = useState()
 
 
     const route = useRouter();
@@ -40,13 +41,13 @@ const Checkout = () => {
 
     useEffect(() => {
         def_values()
-    }, []);
+    }, [refresh]);
     const def_values = () => {
 
         if (typeof window !== 'undefined') {
             // setDef_selt(localStorage.getItem("Elect_service_qty"));
             // setDef_dte(localStorage.getItem("Elect_service_date"));
-            localStorage.getItem("ElectricityId") ? setLocalUserId(true) : false
+            localStorage.getItem("UserId[C]") ? setLocalUserId(true) : false
             const cartServices = JSON.parse(localStorage.getItem("Cart"))
             // console.log("cartServices", cartServices)
             setCartList(cartServices ? cartServices : [])
@@ -87,7 +88,7 @@ const Checkout = () => {
             console.log("udated_cart", updated_cart)
             localStorage.setItem("Cart", JSON.stringify(updated_cart));
             // window.reload();
-            location.reload();
+            setRefresh(Math.random)
             // route.refresh("/chechout")
             // route.push("/checkout")
             // route.replace(route.asPath);
@@ -105,8 +106,8 @@ const Checkout = () => {
 
         if (typeof window !== 'undefined') {
 
-            if (localStorage.getItem("ElectricityId")) {
-                const userID = JSON.parse(localStorage.getItem("ElectricityId"));
+            if (localStorage.getItem("UserId[C]")) {
+                const userID = JSON.parse(localStorage.getItem("UserId[C]"));
                 // const service_booking_details = JSON.parse(localStorage.getItem("Cart"));
                 // console.log("service_booking_details", service_booking_details)
                 console.log("cartList", cartList)
@@ -134,7 +135,8 @@ const Checkout = () => {
                     if (resp.message === "Service Created Successfully") {
                         toast.success(resp.message)
                         localStorage.removeItem("Cart");
-                        setTimeout(() => location.reload(), 2000)
+                        // setTimeout(() => location.reload(), 2000)
+                        setRefresh(Math.random)
                     }
                     else {
                         toast.error(resp.message)

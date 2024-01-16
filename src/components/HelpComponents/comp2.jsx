@@ -28,7 +28,7 @@ const Comp2 = () => {
     const getServices = async () => {
         setisSubmitingLoader(true)
         if (typeof window !== 'undefined') {
-            const user = JSON.parse(localStorage.getItem("ElectricityId"))
+            const user = JSON.parse(localStorage.getItem("UserId[C]"))
             // console.log("userId", userId)
             const resp = await getData(`/GetServiceBooking?id=${user}`)
             // console.log("resp", resp)

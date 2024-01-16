@@ -191,7 +191,7 @@
 }
 .user>img{
     width:100%;
-    height: auto;
+    min-height:200px;
     border-radius: 50%;
     border:7px solid gray;
 }

@@ -20,7 +20,7 @@ const Comp7 = () => {
         setisSubmitingLoader(true)
         try {
             if (typeof window !== 'undefined') {
-                const localUserId = JSON.parse(localStorage.getItem("ElectricityId"))
+                const localUserId = JSON.parse(localStorage.getItem("UserId[C]"))
 
                 const resp = await getData(`/GetServiceBooking?id=${localUserId}`)
                 console.log("GetServiceBooking", resp)
@@ -40,7 +40,7 @@ const Comp7 = () => {
     }
 
     return (
-        <div style={{ border: "1px solid black;" }}>
+        <div >
             {isSubmitingLoader ? (
                 <div className="overlay">
                     <div className="spinner-container">

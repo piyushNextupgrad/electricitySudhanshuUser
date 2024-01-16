@@ -72,9 +72,9 @@ const Navbar = () => {
     setisSubmitingLoader(true)
     try {
       if (typeof window !== 'undefined') {
-        localStorage.removeItem("ElectricityId")
-        localStorage.removeItem("userName")
-        localStorage.removeItem("token")
+        localStorage.removeItem("UserId[C]")
+        // localStorage.removeItem("userName")
+        localStorage.removeItem("Etoken")
       }
       location.reload();
     } catch (error) {
@@ -208,12 +208,14 @@ const Navbar = () => {
     try {
       if (typeof window !== 'undefined') {
         // const localUserId =  JSON.parse(localStorage.getItem("ElectricityId"))
-        setUserId(JSON.parse(localStorage.getItem("ElectricityId")))
-        setUserName(JSON.parse(localStorage.getItem("userName")))
+        setUserId(JSON.parse(localStorage.getItem("UserId[C]")))
+        // setUserName(JSON.parse(localStorage.getItem("userName")))
       }
-      const resp = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("ElectricityId"))}`)
+      const resp = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("UserId[C]"))}`)
       console.log("user details", resp)
       setUser_photo(resp.data[0].user_profile_photo)
+      setUserName(resp.data[0].name)
+      setEmail(resp.data[0].email)
 
     } catch (error) {
       console.log("try-catch error", error)
@@ -393,7 +395,7 @@ const Navbar = () => {
 
 
       <Modal
-        size="sm"
+        // size="sm"
         show={smShow}
         onHide={() => setSmShow(false)}
         aria-labelledby="example-modal-sizes-title-sm"
@@ -512,8 +514,8 @@ const Navbar = () => {
                   <tr>
 
 
-                    <td>User ID</td>
-                    <td>{userId}</td>
+                    <td>User Email</td>
+                    <td>{email}</td>
                   </tr>
 
                 </tbody>

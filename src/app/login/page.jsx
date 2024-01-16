@@ -34,13 +34,14 @@ export default function Login() {
         try {
             const resp = await postData("/login", login);
             console.log("resp Login",resp)
-            if (resp?.success) {
+            if (resp?.data?.name?.user_type=="Customer") {
                 toast.success(resp?.message);
-                setTimeout(route.push("/"),4500);
+                
                 if(typeof window !== 'undefined'){
-                localStorage?.setItem("token",JSON.stringify(resp?.data?.token));
-                localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))
-                localStorage?.setItem("ElectricityId",JSON.stringify(resp?.data?.name?.id))
+                localStorage?.setItem("Etoken",JSON.stringify(resp?.data?.token));
+                // localStorage?.setItem("userName",JSON.stringify(resp?.data?.name?.name))
+                localStorage?.setItem("UserId[C]",JSON.stringify(resp?.data?.name?.id))
+                setTimeout(()=>route.push("/"),1500);
             
             }
                 
@@ -48,7 +49,7 @@ export default function Login() {
                 // console.log("session",typeof(session));
             }
             else {
-                toast.error(resp?.message);
+                toast.error("Login failed [Unauthorised]");
                 
             }
         } catch (error) {

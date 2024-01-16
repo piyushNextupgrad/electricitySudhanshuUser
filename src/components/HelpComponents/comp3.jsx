@@ -21,7 +21,7 @@ const Comp3 = () => {
         try {
             if (typeof window !== 'undefined') {
                 // setLocalUserId(JSON.parse(localStorage.getItem("ElectricityId")))
-                const user_id = JSON.parse(localStorage.getItem("ElectricityId"));
+                const user_id = JSON.parse(localStorage.getItem("UserId[C]"));
                 // console.log("ElectricityId",JSON.parse(localStorage.getItem("ElectricityId")))
 
                 console.log("user_id", user_id)
