@@ -59,7 +59,7 @@ const Services = () => {
                         {getService
                             ?//conditional operator
                             getService?.map((t,index) => (
-                                <div className="col-xxl-4 col-xl-4 col-lg-4" key={t.index}>
+                                <div className="col-xxl-4 col-xl-4 col-lg-4" key={index}>
                                     <Image src="/services/icon1.png" height={100} width={100} alt="img" />
                                     <h2 onClick={() => route.push(`/acservice?id=${t.subscription_id}`)}>{t.service_names}</h2>
                                     <p>{t.service_des} </p>

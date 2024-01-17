@@ -97,7 +97,7 @@ const Comp6 = () => {
                 formData.append('user_profile_photo', profile_photo);
                 formData.append('user_type', 'Customer');
                 
-                const resp = await axios.post("https://nextupgrad.us/electricity/api/UpdateUser", formData)
+                const resp = await axios.post("https://53c50cd527.nxcli.io/electricity/api/UpdateUser", formData)
                 console.log("update user resp", resp)
                 resp.data.message === "User Updated Successfully" ? toast.success(resp.data.message) : toast.error(resp.data.message)
 
@@ -141,7 +141,7 @@ const Comp6 = () => {
 
 
             <div className={style.profilepic}>
-                <Image src={current_photo === null ? "/dummy.jpg" : `https://nextupgrad.us/electricity/public/images/profile_photo/${current_photo}`} height={200} width={200} alt='img' />
+                <Image src={current_photo === null ? "/dummy.jpg" : `https://53c50cd527.nxcli.io/electricity/public/images/profile_photo/${current_photo}`} height={200} width={200} alt='img' />
             </div>
             <Form>
                 <Row className="mb-3">

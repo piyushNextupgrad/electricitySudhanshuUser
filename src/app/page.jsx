@@ -102,6 +102,7 @@ function Homepage() {
         console.log("user details", data)
         setUser_photo(data.data[0].user_profile_photo)
         setUser_name(data.data[0].name)
+        setEmail(data.data[0].email)
       }
     } catch (error) {
       console.log("try-catch error", error)
@@ -471,7 +472,7 @@ function Homepage() {
                 <>
                   <div>
                     <div className={style.userPhoto}>
-                      <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
+                      <Image src={user_photo === null ? '/dummy.jpg' : `https://53c50cd527.nxcli.io/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
                     </div>
                     <Table >
 
@@ -485,8 +486,8 @@ function Homepage() {
                         <tr>
 
 
-                          <td>User ID</td>
-                          <td>{userId}</td>
+                          <td>User Email</td>
+                          <td>{email}</td>
                         </tr>
 
                       </tbody>
@@ -583,7 +584,7 @@ function Homepage() {
                       <span>{t.service_names}</span>
                     </div>
                   </Link>
-                </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background} key={index}>
+                </SwiperSlide>)) : (<SwiperSlide className={style.slider2_background} >
                   <Link href="/acservice?id=54" >
                     <div>
                       <Image
@@ -692,17 +693,18 @@ function Homepage() {
           </div>
         </div>
       </section>
-      <section className={style.section3}>
-        <div className="">
+      <section className={style.section3} style={{border:"3px solid red"}}>
+        <div className="" >
 
-          <div className="container-fluid">
-            <div className="row align-items-center">
-              <div className={`${style.section3_div1} col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12`}>
+          <div className="container-fluid" >
+            <div className="row align-items-center" >
+              <div className={`${style.section3_div1} col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12`} >
                 <Image
                   src="/homepage/couple.png"
                   height={766}
                   width={640}
                   alt="img"
+                  
                 />
               </div>
               <div

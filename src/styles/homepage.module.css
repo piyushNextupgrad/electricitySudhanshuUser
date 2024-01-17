@@ -783,7 +783,7 @@
 
     }
     .section3_div1>img{
-        width:100%;
+        width:100% !important;
         height:auto;
     }
     .section3_div1{

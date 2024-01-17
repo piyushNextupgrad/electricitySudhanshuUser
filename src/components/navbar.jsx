@@ -500,7 +500,7 @@ const Navbar = () => {
             <div>
               <div className={style.user}>
 
-                <Image src={user_photo === null ? '/dummy.jpg' : `https://nextupgrad.us/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
+                <Image src={user_photo === null ? '/dummy.jpg' : `https://53c50cd527.nxcli.io/electricity/public/images/profile_photo/${user_photo}`} height={50} width={50} alt="img" />
               </div>
               <Table >
 
