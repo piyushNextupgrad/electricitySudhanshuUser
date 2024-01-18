@@ -92,17 +92,19 @@ function Homepage() {
 
   const getServices = async () => {
     const resp = await getData("/GetService")
-    console.log("getServices", resp.data);
+    // console.log("getServices", resp.data);
     setSliderServices(resp.data)
     try {
       if (typeof window !== 'undefined') {
-        setUserId(JSON.parse(localStorage.getItem("UserId[C]")))
-        setUser_name(JSON.parse(localStorage.getItem("userName")))
-        let data = await getData(`/GetAllUser?id=${JSON.parse(localStorage.getItem("UserId[C]"))}`)
-        console.log("user details", data)
-        setUser_photo(data.data[0].user_profile_photo)
-        setUser_name(data.data[0].name)
-        setEmail(data.data[0].email)
+        const userId = localStorage.getItem("UserId[C]");
+        // console.log("userid",userId)
+        setUserId(userId)
+        // setUser_name(JSON.parse(localStorage.getItem("userName")))
+        let data = await getData(`/GetAllUser?id=${userId}`)
+        // console.log("user details", data)
+        setUser_photo(data.data[0]?.user_profile_photo)
+        setUser_name(data.data[0]?.name)
+        setEmail(data.data[0]?.email)
       }
     } catch (error) {
       console.log("try-catch error", error)
@@ -693,22 +695,22 @@ function Homepage() {
           </div>
         </div>
       </section>
-      <section className={style.section3} style={{border:"3px solid red"}}>
+      <section className={style.section3} >
         <div className="" >
 
           <div className="container-fluid" >
             <div className="row align-items-center" >
-              <div className={`${style.section3_div1} col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-12`} >
+              <div className={`${style.section3_div1} col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12`} >
                 <Image
                   src="/homepage/couple.png"
                   height={766}
                   width={640}
                   alt="img"
-                  
+                  style={{width:"100%"}}
                 />
               </div>
               <div
-                className={`${style.section3_div2} col-xxl-6 col-xl-6 col-lg-4 col-12`}
+                className={`${style.section3_div2} col-xxl-6 col-xl-6 col-lg-6 col-md-12 col-12` } 
               >
                 <h1>
                   Sit at Home

@@ -31,7 +31,7 @@ const Checkout = () => {
     const [isSubmitingLoader, setisSubmitingLoader] = useState(false);
     const [cartTotal, setCartTotol] = useState();
     const [finalAmmt, setFinalAmmt] = useState();
-    const [refresh,setRefresh] = useState()
+    const [refresh, setRefresh] = useState()
 
 
     const route = useRouter();
@@ -107,47 +107,60 @@ const Checkout = () => {
         if (typeof window !== 'undefined') {
 
             if (localStorage.getItem("UserId[C]")) {
-                const userID = JSON.parse(localStorage.getItem("UserId[C]"));
-                // const service_booking_details = JSON.parse(localStorage.getItem("Cart"));
-                // console.log("service_booking_details", service_booking_details)
-                console.log("cartList", cartList)
-                if (cartList.length > 0) {
-                    const services_object = [];
-                    cartList.filter((e) => {
-                        const single_details = {
-                            "service_id": parseInt(e.service_id),
-                            "customer_id": userID,
-                            "qty": parseInt(e.service_quantity),
-                            "service_book_date": getFormatedDate(Date.now(), "YYYY-MM-DD hh:mm:ss"),
-                            "service_avail_date": getFormatedDate(e.service_date, "YYYY-MM-DD hh:mm:ss")
-                        }
-                        services_object.push(single_details)
-                    })
-                    // console.log("single_details",single_details)
-                    // console.log("services_object",services_object)
-                    const final_object = {
-                        "serivce_data": services_object
-                    }
 
-                    console.log("final_object", final_object)
-                    const resp = await postData("/StoreServiceBooking", final_object)
-                    console.log("resp", resp)
-                    if (resp.message === "Service Created Successfully") {
-                        toast.success(resp.message)
-                        localStorage.removeItem("Cart");
-                        // setTimeout(() => location.reload(), 2000)
-                        setCartTotol(0)
-                        setFinalAmmt(0)
-                        setRefresh(Math.random)
+                const userID = JSON.parse(localStorage.getItem("UserId[C]"));
+                //checking user address and phone no[start]
+                const userDetails = await getData(`/GetAllUser?id=${userID}`)
+                console.log("userDetails",userDetails)
+                if (userDetails.data[0].user_locality != null && userDetails.data[0].user_phno != null) {
+                    if (cartList.length > 0) {
+                        const services_object = [];
+                        cartList.filter((e) => {
+                            const single_details = {
+                                "service_id": parseInt(e.service_id),
+                                "customer_id": userID,
+                                "qty": parseInt(e.service_quantity),
+                                "service_book_date": getFormatedDate(Date.now(), "YYYY-MM-DD hh:mm:ss"),
+                                "service_avail_date": getFormatedDate(e.service_date, "YYYY-MM-DD hh:mm:ss")
+                            }
+                            services_object.push(single_details)
+                        })
+                        // console.log("single_details",single_details)
+                        // console.log("services_object",services_object)
+                        const final_object = {
+                            "serivce_data": services_object
+                        }
+    
+                        console.log("final_object", final_object)
+                        const resp = await postData("/StoreServiceBooking", final_object)
+                        console.log("resp", resp)
+                        if (resp.message === "Service Created Successfully") {
+                            toast.success(resp.message)
+                            localStorage.removeItem("Cart");
+                            // setTimeout(() => location.reload(), 2000)
+                            setCartTotol(0)
+                            setFinalAmmt(0)
+                            setRefresh(Math.random)
+                        }
+                        else {
+                            toast.error(resp.message)
+                        }
+    
                     }
                     else {
-                        toast.error(resp.message)
+                        toast.error("Cart is empty...")
                     }
+                 }
+                else { 
+                    toast.error("Plese provide your address and phone number.")
 
+                    setTimeout(()=>route.push("/help"),2000)
                 }
-                else {
-                    toast.error("Cart is empty...")
-                }
+                // checking user address and phone no[end]
+
+
+
+               
 
 
 
