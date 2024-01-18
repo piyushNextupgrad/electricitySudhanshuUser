@@ -21,6 +21,14 @@ const Services = () => {
 
 
     const route = useRouter();
+
+    useEffect(() => {
+        get_services()
+
+    }, []);
+
+    // const logo_array = ["/services/icon1.png", "/services/icon2.png", "/services/icon3.png", "/services/icon4.png", "/services/icon5.png", "/services/icon6.png"];
+
     const get_services = async () => {
         const resp = await getData("/GetService")
         console.log("get_services", resp)
@@ -29,10 +37,7 @@ const Services = () => {
         console.log("GetService", getService)
     }
 
-    useEffect(() => {
-        get_services()
 
-    }, []);
 
 
     return (
@@ -58,11 +63,15 @@ const Services = () => {
                     <div className="row align-items-center">
                         {getService
                             ?//conditional operator
-                            getService?.map((t,index) => (
+                            getService?.map((t, index) => (
                                 <div className="col-xxl-4 col-xl-4 col-lg-4" key={index}>
-                                    <Image src="/services/icon1.png" height={100} width={100} alt="img" />
+                                    
+                                   
+                                    
+                                    <Image src="/services/icon4.png" height={100} width={100} alt="img" />
                                     <h2 onClick={() => route.push(`/acservice?id=${t.subscription_id}`)}>{t.service_names}</h2>
                                     <p>{t.service_des} </p>
+                                  
                                 </div>))
                             :
                             (<div className="col-xxl-4 col-xl-4 col-lg-4">

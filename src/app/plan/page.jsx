@@ -29,20 +29,24 @@ const Plan = () => {
   const getPlan = async () => {
     setisSubmitingLoader(true)
     try {
+      if (typeof window !== 'undefined') {
+        
+        setUserID(localStorage.getItem("UserId[C]"))
+      }
+      // geting plans
       const resp = await getData("/GetSubscription");
       console.log("plan resp", resp);
       resp.data[0] !== undefined ? setPlan1(resp.data[0]) : setEmpty_plan1("d-none");
       resp.data[1] !== undefined ? setPlan2(resp.data[1]) : setEmpty_plan2("d-none");
       resp.data[2] !== undefined ? setPlan3(resp.data[2]) : setEmpty_plan3("d-none");
-      if (typeof window !== 'undefined') {
-        setUserID(JSON.parse(localStorage.getItem("ElectricityId")))
-      }
+    
     } catch (error) {
       console.log("try-catch error", error);
     }
     setisSubmitingLoader(false);
   }
   const PlanPurchase = async (planID) => {
+
     setisSubmitingLoader(true)
 
     // console.log("planID",planID)
@@ -71,6 +75,7 @@ const Plan = () => {
   // console.log("plan2",plan2)
   // console.log("plan3",plan3)
 
+  
   return (
     <div >
       {isSubmitingLoader ? (
@@ -124,6 +129,7 @@ const Plan = () => {
 
 
                 </ul>
+                {console.log("userid",userID)}
                 {userID ? (<><Link href="#" onClick={() => PlanPurchase(plan2.id)}>Start Now <FaChevronRight /></Link></>) : (<><Link href="/login">Login<FaChevronRight /></Link></>)}
               </div>
             </div>

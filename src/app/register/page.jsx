@@ -72,6 +72,9 @@ export default function Ragister() {
                 const resp = await postData("/register", person);
                 console.log("resp", resp);
                 if (resp?.status) {
+                    if (typeof window !== 'undefined'){
+                        localStorage.setItem("UserId[C]",resp.id)
+                    }
                     toast.success("Customer Registered Successfully!!");
                     setTimeout(route.push("/"), 4500)
                 }
@@ -80,17 +83,11 @@ export default function Ragister() {
                     console.log("Customer register fail error", resp?.errors);
 
                 }
-
-
-
             } catch (error) {
                 console.log("catch Error", error)
             }
-
-
         }
         setisSubmitingLoader(false)
-
     }
 
     return (

@@ -90,6 +90,8 @@ function Homepage() {
     getServices()
   }, []);
 
+  // const slider_images=["/homepage/ac.png","/homepage/carpainter.png","/homepage/electric.png","/homepage/invertor.png","/homepage/plumber.png"]
+
   const getServices = async () => {
     const resp = await getData("/GetService")
     // console.log("getServices", resp.data);
